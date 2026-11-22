@@ -266,7 +266,8 @@
         "examples/",
         ".queuebox/board.json",
         "LICENSE",
-        ".queuebox/.gitignore"
+        ".queuebox/.gitignore",
+        "docs/"
       ],
       "docs": [
         "README.md"

@@ -1,7 +1,7 @@
 <!-- dte:A1,B6,B7 -->
 # The page
 
-Rules the board's page keeps. Layout and look details live in the README and `ui/styles.css`; the words for its parts are in `specs/glossary.md`. Tests: `npm run smoke` (`scripts/smoke.js`) drives the demo board and fails on a console error; no rule below has a test of its own yet.
+Rules the board's page keeps. Layout and look details live in `docs/reference.md` and `ui/styles.css`; the words for its parts are in `specs/glossary.md`. Tests: `npm run smoke` (`scripts/smoke.js`) drives the demo board and fails on a console error; no rule below has a test of its own yet.
 
 - **Actions are particular buttons:** an act sits on an icon or labeled button; a row, tile list or other large block is never itself the click target for an act.
 - **Open items are always on the map** (author, T27): every lens shows each block's open bugs, tasks and calls
