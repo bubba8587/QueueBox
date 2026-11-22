@@ -164,6 +164,7 @@ function setBoard(board, events) {
   ctx.live = reduce(board, ctx.events);
   ctx.map.build(board);
   setText($('board-name'), board.name);
+  ctx.paintMenuBar?.();
   document.title = `${board.name} QueueBox`;
   computeView();
   render();
@@ -628,6 +629,103 @@ const tools = appTools({
   ],
 });
 $('app-tools').replaceWith(tools.el);
+// The menu bar, after Solenoid's (T77): a thin accent strip over the top bar. Its first menu is the board's own, named
+// after the repository; the rest gather the page's commands, each run the way its own button or key runs it.
+(function menuBar() {
+  const bar = $('menubar');
+  if (!bar) return;
+  const press = (sel) => document.querySelector(sel)?.click();
+  const key = (k, mods = {}) => document.dispatchEvent(new KeyboardEvent('keydown', { key: k, bubbles: true, ctrlKey: !!mods.ctrl, shiftKey: !!mods.shift }));
+  const lensItem = (lens, label) => ({ label, checked: () => ctx.lens === lens, run: () => press(`#lens button[data-lens="${lens}"]`) });
+  const folded = () => $('timeline').classList.contains('folded');
+  const menus = () => [
+    {
+      label: ctx.board?.name || 'Board',
+      items: [
+        { label: 'Start an Agent', run: () => press('.win.upnext .win-head .btn') },
+        { label: 'New Item…', shortcut: 'N', run: () => press('#new-item') },
+        { label: 'Items', checked: () => document.body.classList.contains('docked') && !inspector.id, run: () => inspector.toggleList() },
+        { sep: true },
+        { label: 'Settings…', shortcut: 'Ctrl+,', run: () => showSettings() },
+      ],
+    },
+    {
+      label: 'Edit',
+      items: [
+        { label: 'Undo Layout', shortcut: 'Ctrl+Z', run: () => key('z', { ctrl: true }) },
+        { label: 'Redo Layout', shortcut: 'Ctrl+Shift+Z', run: () => key('z', { ctrl: true, shift: true }) },
+        { sep: true },
+        { label: 'Find a Block or File', shortcut: '/', run: () => $('search').focus() },
+      ],
+    },
+    {
+      label: 'View',
+      items: [
+        lensItem('work', 'Work'),
+        lensItem('heat', 'Heat'),
+        lensItem('changes', 'Changes'),
+        { sep: true },
+        { label: 'Active Blocks Only', checked: () => !!ctx.activeOnly, run: () => setActiveOnly(!ctx.activeOnly) },
+        { label: 'Timeline', checked: () => !folded(), run: () => press('.tl-fold') },
+        { sep: true },
+        { label: 'Fit the Map', run: () => press('.map-fit') },
+        { label: 'Zoom In', run: () => press('.map-zoom[aria-label="Zoom in"]') },
+        { label: 'Zoom Out', run: () => press('.map-zoom[aria-label="Zoom out"]') },
+        { label: 'Tidy', shortcut: 'T', run: () => press('.map-tidy') },
+      ],
+    },
+    {
+      label: 'Help',
+      items: [{ label: 'QueueBox Help', run: () => openHelp(bar.querySelector('.menubar-top[data-i="3"]')) }],
+    },
+  ];
+  let open = null;
+  const close = () => {
+    open = null;
+    paint();
+  };
+  function paint() {
+    const list = menus();
+    setHtml(bar, list.map((m, i) => `<div class="menubar-item"><button type="button" class="menubar-top${open === i ? ' open' : ''}" data-i="${i}" aria-haspopup="menu" aria-expanded="${open === i}">${esc(m.label)}</button>${open === i ? `<div class="menubar-drop" role="menu">${m.items.map((it, j) => (it.sep ? '<div class="menubar-sep"></div>' : `<button type="button" role="menuitem" class="menubar-opt" data-j="${j}"><span class="menubar-check">${it.checked?.() ? '✓' : ''}</span><span class="menubar-label">${esc(it.label)}</span>${it.shortcut ? `<span class="menubar-key">${esc(it.shortcut)}</span>` : ''}</button>`)).join('')}</div>` : ''}</div>`).join(''));
+    if (open !== null) bar.querySelector('.menubar-opt')?.focus();
+  }
+  bar.addEventListener('click', (e) => {
+    const top = e.target.closest('.menubar-top');
+    if (top) {
+      const i = Number(top.dataset.i);
+      open = open === i ? null : i;
+      return paint();
+    }
+    const opt = e.target.closest('.menubar-opt');
+    if (!opt || open === null) return;
+    const it = menus()[open].items[Number(opt.dataset.j)];
+    close();
+    it?.run();
+  });
+  // With a menu open, pointing at another title opens that one instead.
+  bar.addEventListener('pointerover', (e) => {
+    const top = e.target.closest('.menubar-top');
+    if (top && open !== null && Number(top.dataset.i) !== open) {
+      open = Number(top.dataset.i);
+      paint();
+    }
+  });
+  bar.addEventListener('keydown', (e) => {
+    if (open === null || (e.key !== 'ArrowDown' && e.key !== 'ArrowUp')) return;
+    e.preventDefault();
+    const opts = [...bar.querySelectorAll('.menubar-opt')];
+    const i = opts.indexOf(document.activeElement);
+    opts[(i + (e.key === 'ArrowDown' ? 1 : opts.length - 1)) % opts.length]?.focus();
+  });
+  document.addEventListener('pointerdown', (e) => open !== null && !bar.contains(e.target) && close(), true);
+  escapeLayer(ESC.menu, () => open !== null, () => {
+    const i = open;
+    close();
+    bar.querySelector(`.menubar-top[data-i="${i}"]`)?.focus();
+  });
+  ctx.paintMenuBar = () => open === null && paint();
+  paint();
+})();
 appThemeStore.subscribe(() => render());
 
 // Active only: the map keeps the blocks with something going on (held, queued, edited lately, failing, in a branch).
