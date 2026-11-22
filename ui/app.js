@@ -469,8 +469,11 @@ function paintTop() {
 }
 
 // One strip: each alert a chip that opens what it's about. Questions live in the inbox, so they aren't repeated here.
+// An alert dismissed with its x stays dismissed in this browser (T82); alerts still go after three hours on their own.
+const alertKey = (a) => `${a.kind}|${a.block || ''}|${a.agent || ''}|${a.ts}`;
+const dismissed = new Set(storageGet('queuebox.dismissed', []));
 function paintAlerts() {
-  const al = ctx.alertList.filter((a) => a.kind !== 'question');
+  const al = ctx.alertList.filter((a) => a.kind !== 'question' && !dismissed.has(alertKey(a)));
   const now = ctx.viewNow;
   const strip = $('alerts');
   const room = matchMedia('(max-width: 860px)').matches ? 2 : 3;
@@ -478,7 +481,7 @@ function paintAlerts() {
   const away = ctx.away && !ctx.replayTs ? awayLine(ctx.away.since) : '';
   const rows = shown.map((a) => {
     const kind = a.severity === 'high' ? 'high' : 'warn';
-    return `<div class="alert ${kind}" role="button" tabindex="0" data-alert-block="${esc(a.block || '')}" data-alert-agent="${esc(a.agent || '')}" data-alert-kind="${esc(a.kind)}"><i class="${kind === 'high' ? 'dot-danger' : 'dot-warn'}"></i><span class="txt" title="${esc(a.text)}">${esc(a.text)}</span>${timer(a.ts, {}, now)}</div>`;
+    return `<div class="alert ${kind}" role="button" tabindex="0" data-alert-block="${esc(a.block || '')}" data-alert-agent="${esc(a.agent || '')}" data-alert-kind="${esc(a.kind)}"><i class="${kind === 'high' ? 'dot-danger' : 'dot-warn'}"></i><span class="txt" title="${esc(a.text)}">${esc(a.text)}</span>${timer(a.ts, {}, now)}<button class="icon-btn" type="button" data-alert-dismiss="${esc(alertKey(a))}" aria-label="Dismiss: ${esc(a.text)}" title="Dismiss">${icon('close')}</button></div>`;
   });
   if (al.length > room) rows.push(`<button class="more" type="button" data-alert-more>${ctx.alertsOpen ? 'Fewer' : `+${al.length - room}`}</button>`);
   if (away) rows.unshift(`<div class="alert away"><i class="dot-muted"></i><span class="txt" title="${esc(away)}">${esc(away)}</span><button class="btn sm" type="button" data-away-replay>Replay</button><button class="icon-btn" type="button" data-away-close aria-label="Dismiss">${icon('close')}</button></div>`);
@@ -525,6 +528,14 @@ $('alerts').addEventListener('click', (e) => {
   }
   if (e.target.closest('[data-away-close]')) {
     ctx.away = null;
+    return render();
+  }
+  const gone = e.target.closest('[data-alert-dismiss]');
+  if (gone) {
+    dismissed.add(gone.dataset.alertDismiss);
+    // Only the last day's are kept: older alerts have long gone by themselves.
+    const day = Date.now() - 24 * 3600_000;
+    storageSet('queuebox.dismissed', [...dismissed].filter((k) => Number(k.split('|').pop()) > day));
     return render();
   }
   if (e.target.closest('[data-alert-more]')) {
