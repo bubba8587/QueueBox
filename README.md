@@ -11,11 +11,10 @@ QueueBox is an alpha: it works, its formats still change, and it has one board's
 You need Node 20 or newer and git. Claude Code is optional: any agent that can run a command can take part, and Claude Code sessions join the board on their own.
 
 ```
-git clone https://github.com/bubba8587/QueueBox ~/queuebox
-~/queuebox/install.sh   # puts `qb` on your PATH (~/.local/bin)
+curl -fsSL https://raw.githubusercontent.com/bubba8587/QueueBox/main/install.sh | sh
 ```
 
-`git pull` in that folder updates it. Nothing is installed into your repositories but their board, `.queuebox/board.json`.
+That clones QueueBox into `~/.local/share/queuebox` and puts `qb` on your PATH (`~/.local/bin`); run it again to update. From a clone of your own, `./install.sh` links that one instead. Nothing is installed into your repositories but their board, `.queuebox/board.json`.
 
 ## Quick start
 

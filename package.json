@@ -4,11 +4,33 @@
   "private": true,
   "type": "module",
   "description": "A live map of a repository's blocks of work: agents reserve blocks, people see who is doing what.",
-  "bin": { "qb": "cli.js" },
+  "keywords": [
+    "agents",
+    "claude-code",
+    "coordination",
+    "multi-agent",
+    "worktrees",
+    "board",
+    "cli"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bubba8587/QueueBox.git"
+  },
+  "homepage": "https://github.com/bubba8587/QueueBox#readme",
+  "bugs": {
+    "url": "https://github.com/bubba8587/QueueBox/issues"
+  },
+  "bin": {
+    "qb": "cli.js"
+  },
   "scripts": {
     "serve": "node cli.js serve --open",
     "test": "node --test test/*.test.js",
     "smoke": "node scripts/smoke.js"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }
