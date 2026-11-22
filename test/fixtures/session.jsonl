@@ -1,0 +1,841 @@
+{"id":"mwrm166u-juhj","ts":1795338237846,"by":"cc-7f3a91c2","type":"agent.join","agent":{"id":"cc-7f3a91c2","name":"Heron","kind":"Claude Code","where":"agent-1","worktree":"/work/queuebox-agent-1"},"task":""}
+{"id":"mwrm1z2g-a18h","ts":1795338275272,"by":"cc-7f3a91c2","type":"block.reserve","block":"docs","intent":"Work on Docs and config"}
+{"id":"mwrm1z2h-xc0j","ts":1795338275273,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"Work on Docs and config","doing":"Reading README.md"}
+{"id":"mwrm1z2j-oc06","ts":1795338275275,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrm2t6u-skws","ts":1795338314310,"by":"cc-7f3a91c2","type":"touch","files":[".gitignore"],"op":"edit","add":25,"del":2}
+{"id":"mwrm3i08-rsv6","ts":1795338346472,"by":"cc-7f3a91c2","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":21,"del":0}
+{"id":"mwrm3i09-owmq","ts":1795338346473,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing .queuebox/.gitignore"}
+{"id":"mwrm4q0z-8lkz","ts":1795338403523,"by":"cc-7f3a91c2","type":"touch","files":[".gitignore"],"op":"edit","add":39,"del":1}
+{"id":"mwrm4q10-vozk","ts":1795338403524,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing .gitignore"}
+{"id":"mwrm5ekq-dc1f","ts":1795338435338,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"edit","add":1,"del":11}
+{"id":"mwrm5ekr-x4vy","ts":1795338435339,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing README.md"}
+{"id":"mwrm6t9m-fcru","ts":1795338501034,"by":"cc-7f3a91c2","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":26,"del":15}
+{"id":"mwrm83ws-82yv","ts":1795338561484,"by":"cc-7f3a91c2","type":"touch","files":[".gitignore"],"op":"edit","add":41,"del":6}
+{"id":"mwrm9knk-p0wm","ts":1795338629840,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"edit","add":7,"del":10}
+{"id":"mwrm9knl-3qq1","ts":1795338629841,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing README.md"}
+{"id":"mwrmbzx2-b7fr","ts":1795338742934,"by":"cc-7f3a91c2","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":8,"del":0}
+{"id":"mwrmeqo7-72wt","ts":1795338870919,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/docs.test.ts"}
+{"id":"mwrmeqo8-gllm","ts":1795338870920,"by":"cc-7f3a91c2","type":"test","ok":true,"summary":"32 passed in docs.test.ts","blocks":["docs"]}
+{"id":"mwrmg56q-wr1h","ts":1795338936386,"by":"cc-7f3a91c2","type":"block.release","block":"docs","outcome":"landed","note":""}
+{"id":"mwrmg56s-smt6","ts":1795338936388,"by":"cc-7f3a91c2","type":"agent.status","status":"review","doing":"Committed: Work on Docs and config"}
+{"id":"mwrmg56t-htkp","ts":1795338936389,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"27500a6407cd8bff5ddcebb54c5c09937ae40970"}
+{"id":"mwrmi1l7-gxb4","ts":1795339025035,"by":"system","type":"merge.landed","worktree":"agent-1","commit":"27500a6407cd8bff5ddcebb54c5c09937ae40970"}
+{"id":"mwrmigq9-lus4","ts":1795339044657,"by":"cc-7f3a91c2","type":"block.reserve","block":"hooks","intent":"Work on Hooks"}
+{"id":"mwrmigqa-3k3g","ts":1795339044658,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"Work on Hooks","doing":"Reading README.md"}
+{"id":"mwrmigqc-6ygc","ts":1795339044660,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrmj49f-mi3k","ts":1795339075155,"by":"cc-7f3a91c2","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":67,"del":0}
+{"id":"mwrmjrts-os5z","ts":1795339105696,"by":"cc-7f3a91c2","type":"item.add","item":{"kind":"question","title":"This changes what two saved seeds show. Go ahead?","block":"hooks","id":"Q1"}}
+{"id":"mwrmoa01-2px8","ts":1795339315873,"by":"human","type":"item.update","item":"Q1","status":"done","answer":"Small patch now, file the clean change as a task."}
+{"id":"mwrmpoo3-s3k3","ts":1795339381539,"by":"cc-7f3a91c2","type":"msg.read","ids":["mwrmoa01-2px8"]}
+{"id":"mwrmqd8p-1l9m","ts":1795339413385,"by":"cc-7f3a91c2","type":"touch","files":["hooks/install.js"],"op":"edit","add":64,"del":23}
+{"id":"mwrmsoll-zjo7","ts":1795339521417,"by":"cc-7f3a91c2","type":"touch","files":["hooks/install.js"],"op":"edit","add":1,"del":2}
+{"id":"mwrmthvi-8d9t","ts":1795339559358,"by":"cx-2b8e44d0","type":"agent.join","agent":{"id":"cx-2b8e44d0","name":"Basalt","kind":"Codex","where":"agent-2","worktree":"/work/queuebox-agent-2"},"task":""}
+{"id":"mwrmtx6p-qhkx","ts":1795339579201,"by":"cc-7f3a91c2","type":"item.add","item":{"kind":"bug","title":"Empty input answers 0 where the spec says blank","block":"hooks","detail":"Found while working nearby.","id":"B1"}}
+{"id":"mwrmu9fc-x0js","ts":1795339595064,"by":"cx-2b8e44d0","type":"block.reserve","block":"shell","intent":"Work on Page shell"}
+{"id":"mwrmu9fd-romz","ts":1795339595065,"by":"cx-2b8e44d0","type":"agent.status","status":"working","task":"Work on Page shell","doing":"Reading README.md"}
+{"id":"mwrmu9ff-gxcn","ts":1795339595067,"by":"cx-2b8e44d0","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrmus4h-snd8","ts":1795339619297,"by":"cc-7f3a91c2","type":"touch","files":["hooks/install.js"],"op":"edit","add":31,"del":34}
+{"id":"mwrmva85-xy3o","ts":1795339642757,"by":"cx-2b8e44d0","type":"touch","files":["ui/favicon.js"],"op":"edit","add":9,"del":6}
+{"id":"mwrmvpka-q3lg","ts":1795339662634,"by":"cc-7f3a91c2","type":"touch","files":["hooks/lines.js"],"op":"edit","add":9,"del":11}
+{"id":"mwrmvpkb-qa47","ts":1795339662635,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing hooks/lines.js"}
+{"id":"mwrmwgiv-pg4q","ts":1795339697575,"by":"cc-7f3a91c2","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":3,"del":12}
+{"id":"mwrmwgiw-36ye","ts":1795339697576,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing hooks/claude-code.js"}
+{"id":"mwrmwraw-l5h8","ts":1795339711544,"by":"cx-2b8e44d0","type":"touch","files":["ui/fonts/Allo-OFL.txt"],"op":"edit","add":70,"del":7}
+{"id":"mwrmwrax-ht1e","ts":1795339711545,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/fonts/Allo-OFL.txt"}
+{"id":"mwrmxxxb-zovx","ts":1795339766783,"by":"cc-7f3a91c2","type":"touch","files":["hooks/lines.js"],"op":"edit","add":1,"del":0}
+{"id":"mwrmye9l-vfal","ts":1795339787961,"by":"cx-2b8e44d0","type":"touch","files":["ui/newitem.js"],"op":"edit","add":1,"del":31}
+{"id":"mwrmz5f0-dan6","ts":1795339823148,"by":"cc-7f3a91c2","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":23,"del":0}
+{"id":"mwrn09vv-65n7","ts":1795339875595,"by":"cc-7f3a91c2","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":17,"del":13}
+{"id":"mwrn09vw-ka1b","ts":1795339875596,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing hooks/claude-code.js"}
+{"id":"mwrn09vv-qmjf","ts":1795339875597,"by":"cx-2b8e44d0","type":"touch","files":["ui/dom.js"],"op":"edit","add":3,"del":12}
+{"id":"mwrn09vw-f3lh","ts":1795339875598,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/dom.js"}
+{"id":"mwrn0xa2-9itf","ts":1795339905914,"by":"cc-7f3a91c2","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":65,"del":11}
+{"id":"mwrn1s30-878f","ts":1795339945836,"by":"cx-2b8e44d0","type":"touch","files":["ui/source.js"],"op":"edit","add":33,"del":18}
+{"id":"mwrn1s31-tnyl","ts":1795339945837,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/source.js"}
+{"id":"mwrn28fm-8u4o","ts":1795339967026,"by":"cc-7f3a91c2","type":"touch","files":["hooks/lines.js"],"op":"edit","add":8,"del":11}
+{"id":"mwrn373q-79cj","ts":1795340011958,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/hooks.test.ts"}
+{"id":"mwrn373r-pooj","ts":1795340011959,"by":"cc-7f3a91c2","type":"test","ok":true,"summary":"39 passed in hooks.test.ts","blocks":["hooks"]}
+{"id":"mwrn4c17-wfse","ts":1795340065003,"by":"cc-7f3a91c2","type":"block.release","block":"hooks","outcome":"landed","note":""}
+{"id":"mwrn4c19-2rx6","ts":1795340065005,"by":"cc-7f3a91c2","type":"agent.status","status":"review","doing":"Committed: Work on Hooks"}
+{"id":"mwrn4c1a-pgga","ts":1795340065006,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"18f89e9ec10ea4f2fef216c8878abbb864f81df4"}
+{"id":"mwrn4pmc-4d8x","ts":1795340082612,"by":"cx-2b8e44d0","type":"touch","files":["ui/favicon.js"],"op":"edit","add":3,"del":0}
+{"id":"mwrn621h-uh2n","ts":1795340145365,"by":"system","type":"merge.landed","worktree":"agent-1","commit":"18f89e9ec10ea4f2fef216c8878abbb864f81df4"}
+{"id":"mwrn6dmo-7446","ts":1795340160384,"by":"cc-7f3a91c2","type":"block.reserve","block":"hooks","intent":"Empty input answers 0 where the spec says blank"}
+{"id":"mwrn6dmp-n654","ts":1795340160385,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"Empty input answers 0 where the spec says blank","doing":"Reading README.md"}
+{"id":"mwrn6dmq-qv5j","ts":1795340160386,"by":"cc-7f3a91c2","type":"item.update","item":"B1","status":"doing"}
+{"id":"mwrn6dmr-jmfb","ts":1795340160387,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrn6dmo-yupg","ts":1795340160388,"by":"cx-2b8e44d0","type":"touch","op":"run","cmd":"npx vitest run tests/graph/shell.test.ts"}
+{"id":"mwrn6dmp-mmjc","ts":1795340160389,"by":"cx-2b8e44d0","type":"test","ok":true,"summary":"26 passed in shell.test.ts","blocks":["shell"]}
+{"id":"mwrn7112-a7e0","ts":1795340190710,"by":"cc-7f3a91c2","type":"touch","files":["hooks/install.js"],"op":"edit","add":21,"del":2}
+{"id":"mwrn7113-so89","ts":1795340190711,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing hooks/install.js"}
+{"id":"mwrn7jrt-lfqp","ts":1795340215001,"by":"cx-2b8e44d0","type":"block.release","block":"shell","outcome":"landed","note":""}
+{"id":"mwrn7jrv-eci1","ts":1795340215003,"by":"cx-2b8e44d0","type":"agent.status","status":"review","doing":"Committed: Work on Page shell"}
+{"id":"mwrn7jrw-shag","ts":1795340215004,"by":"cx-2b8e44d0","type":"merge.ready","worktree":"agent-2","branch":"agent-2","commit":"c5427ee389755d9eb892bcfcb92f97b22539baa7"}
+{"id":"mwrn832v-9y7r","ts":1795340240023,"by":"cc-7f3a91c2","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":48,"del":12}
+{"id":"mwrn832w-3scc","ts":1795340240024,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing hooks/claude-code.js"}
+{"id":"mwrn8m6q-1qkf","ts":1795340264786,"by":"cc-7f3a91c2","type":"agent.status","status":"waiting","doing":"Wants to edit vite.config.ts"}
+{"id":"mwrna3tp-7k21","ts":1795340334301,"by":"cx-2b8e44d0","type":"block.reserve","block":"adapters","intent":"Work on Adapters"}
+{"id":"mwrna3tq-542y","ts":1795340334302,"by":"cx-2b8e44d0","type":"agent.status","status":"working","task":"Work on Adapters","doing":"Reading README.md"}
+{"id":"mwrna3ts-j9y5","ts":1795340334304,"by":"cx-2b8e44d0","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrnbix7-xht4","ts":1795340400523,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":7,"del":28}
+{"id":"mwrnbix8-fjkm","ts":1795340400524,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing adapters/markdown-checklist.js"}
+{"id":"mwrnc8km-aif6","ts":1795340433766,"by":"cc-7f3a91c2","type":"agent.status","status":"working","doing":"Allowed, carrying on"}
+{"id":"mwrncloy-wm3f","ts":1795340450770,"by":"cc-7f3a91c2","type":"touch","files":["hooks/lines.js"],"op":"edit","add":6,"del":29}
+{"id":"mwrncloy-42fa","ts":1795340450771,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":19,"del":33}
+{"id":"mwrneoy0-5vrn","ts":1795340548296,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":1,"del":0}
+{"id":"mwrnfkky-ra8s","ts":1795340589298,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":1,"del":20}
+{"id":"mwrnfkkz-xb2h","ts":1795340589299,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing adapters/markdown-checklist.js"}
+{"id":"mwrnfw5z-lku2","ts":1795340604311,"by":"cc-7f3a91c2","type":"touch","files":["hooks/install.js"],"op":"edit","add":13,"del":10}
+{"id":"mwrnfw60-ionu","ts":1795340604312,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing hooks/install.js"}
+{"id":"mwrngses-5yui","ts":1795340646100,"by":"cc-7f3a91c2","type":"touch","files":["hooks/lines.js"],"op":"edit","add":26,"del":27}
+{"id":"mwrngset-btp1","ts":1795340646101,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing hooks/lines.js"}
+{"id":"mwrnh7ib-ct4s","ts":1795340665667,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":20,"del":11}
+{"id":"mwrnh7ib-3d4f","ts":1795340665668,"by":"system","type":"merge.landed","worktree":"agent-2","commit":"c5427ee389755d9eb892bcfcb92f97b22539baa7"}
+{"id":"mwrniaxh-csnb","ts":1795340716757,"by":"cc-7f3a91c2","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":2,"del":0}
+{"id":"mwrnit61-hyjg","ts":1795340740393,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":3,"del":11}
+{"id":"mwrnji42-znr1","ts":1795340772722,"by":"cc-7f3a91c2","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":3,"del":17}
+{"id":"mwrnji43-jf2t","ts":1795340772723,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing hooks/claude-code.js"}
+{"id":"mwrnk817-pzse","ts":1795340806315,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":22,"del":13}
+{"id":"mwrnk818-ojg9","ts":1795340806316,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing adapters/markdown-checklist.js"}
+{"id":"mwrnkqyb-an92","ts":1795340830835,"by":"cc-7f3a91c2","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":1,"del":14}
+{"id":"mwrnlekv-e5gn","ts":1795340861455,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":16,"del":10}
+{"id":"mwrnlekv-ls74","ts":1795340861456,"by":"gm-c41d07aa","type":"agent.join","agent":{"id":"gm-c41d07aa","name":"Juniper","kind":"Gemini CLI","where":"agent-3","worktree":"/work/queuebox-agent-3"},"task":""}
+{"id":"mwrnlvt2-cqat","ts":1795340883782,"by":"cc-7f3a91c2","type":"touch","files":["hooks/lines.js"],"op":"edit","add":31,"del":9}
+{"id":"mwrnmc0s-n4ql","ts":1795340904796,"by":"gm-c41d07aa","type":"block.reserve","block":"docs","intent":"Work on Docs and config"}
+{"id":"mwrnmc0t-ra2c","ts":1795340904797,"by":"gm-c41d07aa","type":"agent.status","status":"working","task":"Work on Docs and config","doing":"Reading README.md"}
+{"id":"mwrnmc0v-5wlk","ts":1795340904799,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrnmund-ct74","ts":1795340928937,"by":"cx-2b8e44d0","type":"touch","files":["hooks/lines.js"],"op":"edit","add":14,"del":1}
+{"id":"mwrnn9p8-sd0q","ts":1795340948444,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":37,"del":2}
+{"id":"mwrnntf5-2moz","ts":1795340974001,"by":"cc-7f3a91c2","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":23,"del":5}
+{"id":"mwrnntf6-ju44","ts":1795340974002,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing hooks/claude-code.js"}
+{"id":"mwrnorhn-qhg0","ts":1795341018155,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":5,"del":3}
+{"id":"mwrnorho-nc1u","ts":1795341018156,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .queuebox/.gitignore"}
+{"id":"mwrnpnah-zx78","ts":1795341059369,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":1,"del":6}
+{"id":"mwrnpnah-esla","ts":1795341059370,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":1,"del":24}
+{"id":"mwrnpnai-0zxe","ts":1795341059371,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .queuebox/.gitignore"}
+{"id":"mwrnq5v4-vm33","ts":1795341083440,"by":"cc-7f3a91c2","type":"touch","files":["hooks/install.js"],"op":"edit","add":1,"del":19}
+{"id":"mwrnq5v5-1jmp","ts":1795341083441,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing hooks/install.js"}
+{"id":"mwrnq5v4-6ozl","ts":1795341083442,"by":"gm-c41d07aa","type":"touch","files":[".gitignore"],"op":"edit","add":35,"del":9}
+{"id":"mwrnq5v5-2bn2","ts":1795341083443,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .gitignore"}
+{"id":"mwrnr4gm-9bfv","ts":1795341128278,"by":"cx-2b8e44d0","type":"block.reserve","block":"cli","intent":"touches Adapters"}
+{"id":"mwrnr4gm-1xz6","ts":1795341128279,"by":"gm-c41d07aa","type":"touch","files":[".gitignore"],"op":"edit","add":34,"del":1}
+{"id":"mwrnr4gn-b1um","ts":1795341128280,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .gitignore"}
+{"id":"mwrnrk49-lsff","ts":1795341148569,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/hooks.test.ts"}
+{"id":"mwrnrk4a-3mor","ts":1795341148570,"by":"cc-7f3a91c2","type":"test","ok":true,"summary":"61 passed in hooks.test.ts","blocks":["hooks"]}
+{"id":"mwrns24z-uuq6","ts":1795341171923,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":46,"del":31}
+{"id":"mwrns250-zl8g","ts":1795341171924,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing adapters/markdown-checklist.js"}
+{"id":"mwrnsm4w-3isc","ts":1795341197840,"by":"cc-7f3a91c2","type":"block.release","block":"hooks","outcome":"landed","note":""}
+{"id":"mwrnsm4x-zhkn","ts":1795341197841,"by":"cc-7f3a91c2","type":"item.update","item":"B1","status":"done"}
+{"id":"mwrnsm4y-hq2p","ts":1795341197842,"by":"cc-7f3a91c2","type":"agent.status","status":"review","doing":"Committed: B1: Empty input answers 0 where the spec says blank"}
+{"id":"mwrnsm4z-s1fg","ts":1795341197843,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"07219d70de4a3488196262325018459cbc937760"}
+{"id":"mwrnt426-s3ug","ts":1795341221070,"by":"cx-2b8e44d0","type":"touch","op":"run","cmd":"npx vitest run tests/graph/adapters.test.ts"}
+{"id":"mwrnt427-vfj8","ts":1795341221071,"by":"cx-2b8e44d0","type":"test","ok":true,"summary":"65 passed in adapters.test.ts","blocks":["adapters","cli"]}
+{"id":"mwrnt426-oc87","ts":1795341221072,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"edit","add":8,"del":10}
+{"id":"mwrnty8x-3c8c","ts":1795341260193,"by":"cx-2b8e44d0","type":"block.release","block":"adapters","outcome":"landed","note":""}
+{"id":"mwrnty8x-6akq","ts":1795341260194,"by":"cx-2b8e44d0","type":"block.release","block":"cli","outcome":"landed","note":""}
+{"id":"mwrnty8z-wzrg","ts":1795341260195,"by":"cx-2b8e44d0","type":"agent.status","status":"review","doing":"Committed: touches Adapters"}
+{"id":"mwrnty90-wxiq","ts":1795341260196,"by":"cx-2b8e44d0","type":"merge.ready","worktree":"agent-2","branch":"agent-2","commit":"2e7ada89f55b69001b6332a1e19e70d29bda93cc"}
+{"id":"mwrnty8x-8u9n","ts":1795341260197,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":13,"del":2}
+{"id":"mwrnush3-htbz","ts":1795341299367,"by":"cc-7f3a91c2","type":"block.reserve","block":"theme","intent":"Work on Theme kit"}
+{"id":"mwrnush4-3hsb","ts":1795341299368,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"Work on Theme kit","doing":"Reading README.md"}
+{"id":"mwrnush6-i3fe","ts":1795341299370,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrnvmxi-10pr","ts":1795341338838,"by":"cc-7f3a91c2","type":"touch","files":["ui/theme/core/appTheme.js"],"op":"edit","add":30,"del":8}
+{"id":"mwrnvmxj-qvss","ts":1795341338839,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/theme/core/appTheme.js"}
+{"id":"mwrnvmxi-ep5k","ts":1795341338840,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/docs.test.ts"}
+{"id":"mwrnvmxj-u2ph","ts":1795341338841,"by":"gm-c41d07aa","type":"test","ok":true,"summary":"16 passed in docs.test.ts","blocks":["docs"]}
+{"id":"mwrnw38a-26jx","ts":1795341359962,"by":"gm-c41d07aa","type":"block.release","block":"docs","outcome":"landed","note":""}
+{"id":"mwrnw38c-62b8","ts":1795341359964,"by":"gm-c41d07aa","type":"agent.status","status":"review","doing":"Committed: Work on Docs and config"}
+{"id":"mwrnw38d-1sye","ts":1795341359965,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"c248d2ed1f26182870f6b115fa16a0f2663bb9e4"}
+{"id":"mwrnwd1c-85op","ts":1795341372672,"by":"cx-2b8e44d0","type":"block.reserve","block":"tests","intent":"Work on Tests and scripts"}
+{"id":"mwrnwd1d-brvp","ts":1795341372673,"by":"cx-2b8e44d0","type":"agent.status","status":"working","task":"Work on Tests and scripts","doing":"Reading README.md"}
+{"id":"mwrnwd1f-qb0y","ts":1795341372675,"by":"cx-2b8e44d0","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrnwosj-wrwb","ts":1795341387907,"by":"cc-7f3a91c2","type":"touch","files":["ui/theme/core/appTheme.js"],"op":"edit","add":28,"del":4}
+{"id":"mwrnwosk-7fhq","ts":1795341387908,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/theme/core/appTheme.js"}
+{"id":"mwrnxgkp-i0zl","ts":1795341423913,"by":"cx-2b8e44d0","type":"touch","files":["scripts/smoke.js"],"op":"edit","add":42,"del":31}
+{"id":"mwrnxy8a-xdv1","ts":1795341446794,"by":"cc-7f3a91c2","type":"touch","files":["ui/theme/index.js"],"op":"edit","add":4,"del":29}
+{"id":"mwrnyi5c-azws","ts":1795341472608,"by":"cx-2b8e44d0","type":"touch","files":["scripts/smoke.js"],"op":"edit","add":2,"del":20}
+{"id":"mwrnyi5d-2jy0","ts":1795341472609,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing scripts/smoke.js"}
+{"id":"mwrnyi5c-4t3j","ts":1795341472610,"by":"gm-c41d07aa","type":"block.reserve","block":"decisions","intent":"Work on Decision tree"}
+{"id":"mwrnyi5d-svmu","ts":1795341472611,"by":"gm-c41d07aa","type":"agent.status","status":"working","task":"Work on Decision tree","doing":"Reading CLAUDE.md"}
+{"id":"mwrnyi5f-o7gn","ts":1795341472612,"by":"gm-c41d07aa","type":"touch","files":["CLAUDE.md"],"op":"read"}
+{"id":"mwrnze8m-h0v0","ts":1795341514198,"by":"cc-7f3a91c2","type":"touch","files":["ui/theme/core/palette.js"],"op":"edit","add":24,"del":34}
+{"id":"mwrnze8m-jasj","ts":1795341514199,"by":"gm-c41d07aa","type":"touch","files":["decisions/B/B3.md"],"op":"edit","add":1,"del":5}
+{"id":"mwro093m-alwo","ts":1795341554194,"by":"cx-2b8e44d0","type":"touch","files":["test/daemon.test.js"],"op":"edit","add":55,"del":24}
+{"id":"mwro093n-qq9e","ts":1795341554195,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing test/daemon.test.js"}
+{"id":"mwro093m-3fiz","ts":1795341554196,"by":"gm-c41d07aa","type":"touch","files":[".dtecoverage"],"op":"edit","add":5,"del":10}
+{"id":"mwro093n-u0tz","ts":1795341554197,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .dtecoverage"}
+{"id":"mwro0q2e-byjk","ts":1795341576182,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/theme.test.ts"}
+{"id":"mwro0q2f-gb2g","ts":1795341576183,"by":"cc-7f3a91c2","type":"test","ok":true,"summary":"45 passed in theme.test.ts","blocks":["theme"]}
+{"id":"mwro0q2e-y30y","ts":1795341576184,"by":"gm-c41d07aa","type":"touch","files":["decisions/B/B8.md"],"op":"edit","add":21,"del":20}
+{"id":"mwro1vmt-jeps","ts":1795341630053,"by":"cx-2b8e44d0","type":"touch","files":["test/core.test.js"],"op":"edit","add":3,"del":2}
+{"id":"mwro1vmu-848s","ts":1795341630054,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing test/core.test.js"}
+{"id":"mwro1vmt-kto0","ts":1795341630055,"by":"gm-c41d07aa","type":"touch","files":[".dteignore"],"op":"edit","add":20,"del":24}
+{"id":"mwro1vmu-2pts","ts":1795341630056,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .dteignore"}
+{"id":"mwro1vmt-lb6k","ts":1795341630057,"by":"system","type":"merge.landed","worktree":"agent-1","commit":"35dea3b037da8e2ecbbf66cc45c4dfd0876537aa"}
+{"id":"mwro2604-tmcz","ts":1795341643492,"by":"cc-7f3a91c2","type":"block.release","block":"theme","outcome":"landed","note":""}
+{"id":"mwro2606-ycja","ts":1795341643494,"by":"cc-7f3a91c2","type":"agent.status","status":"review","doing":"Committed: Work on Theme kit"}
+{"id":"mwro2607-7nl7","ts":1795341643495,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"35dea3b037da8e2ecbbf66cc45c4dfd0876537aa"}
+{"id":"mwro2j3a-1l0f","ts":1795341660454,"by":"gm-c41d07aa","type":"touch","files":["decisions/A/A2.md"],"op":"edit","add":23,"del":10}
+{"id":"mwro2j3b-l5qm","ts":1795341660455,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing decisions/A/A2.md"}
+{"id":"mwro3ulz-kxkz","ts":1795341722039,"by":"cx-2b8e44d0","type":"touch","op":"run","cmd":"npx vitest run test/core.test.js"}
+{"id":"mwro3um0-shak","ts":1795341722040,"by":"cx-2b8e44d0","type":"test","ok":true,"summary":"36 passed in core.test.js","blocks":["tests"]}
+{"id":"mwro3ulz-raet","ts":1795341722041,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/decisions.test.ts"}
+{"id":"mwro3um0-d1eu","ts":1795341722042,"by":"gm-c41d07aa","type":"test","ok":true,"summary":"12 passed in decisions.test.ts","blocks":["decisions"]}
+{"id":"mwro4d3r-c21s","ts":1795341746007,"by":"cc-7f3a91c2","type":"block.reserve","block":"shell","intent":"Work on Page shell"}
+{"id":"mwro4d3s-mf24","ts":1795341746008,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"Work on Page shell","doing":"Reading README.md"}
+{"id":"mwro4d3u-vmwa","ts":1795341746010,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwro4d3r-y1nm","ts":1795341746011,"by":"gm-c41d07aa","type":"block.release","block":"decisions","outcome":"landed","note":""}
+{"id":"mwro4d3t-ouj5","ts":1795341746012,"by":"gm-c41d07aa","type":"agent.status","status":"review","doing":"Committed: Work on Decision tree"}
+{"id":"mwro4d3u-2wzd","ts":1795341746013,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"d01efebccea1276c1814a0f4af30d1291d11d50c"}
+{"id":"mwro4phc-0fwh","ts":1795341762048,"by":"cx-2b8e44d0","type":"block.release","block":"tests","outcome":"landed","note":""}
+{"id":"mwro4phe-1i5p","ts":1795341762050,"by":"cx-2b8e44d0","type":"agent.status","status":"review","doing":"Committed: Work on Tests and scripts"}
+{"id":"mwro4phf-wr5a","ts":1795341762051,"by":"cx-2b8e44d0","type":"merge.ready","worktree":"agent-2","branch":"agent-2","commit":"bd6356661802cbdbf903fd3d11fcefcaf13aadfc"}
+{"id":"mwro51cw-pvfa","ts":1795341777440,"by":"cc-7f3a91c2","type":"touch","files":["ui/styles.css"],"op":"edit","add":5,"del":15}
+{"id":"mwro51cx-bouo","ts":1795341777441,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/styles.css"}
+{"id":"mwro5pke-ix0x","ts":1795341808814,"by":"cc-7f3a91c2","type":"touch","files":["ui/sim.js"],"op":"edit","add":1,"del":4}
+{"id":"mwro5pkf-p27i","ts":1795341808815,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/sim.js"}
+{"id":"mwro5pke-2850","ts":1795341808816,"by":"gm-c41d07aa","type":"block.reserve","block":"model","intent":"Work on Model and fold"}
+{"id":"mwro5pkf-gad7","ts":1795341808817,"by":"gm-c41d07aa","type":"agent.status","status":"working","task":"Work on Model and fold","doing":"Reading README.md"}
+{"id":"mwro5pkh-7qpd","ts":1795341808818,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwro6o3p-iivn","ts":1795341853573,"by":"cc-7f3a91c2","type":"touch","files":["ui/source.js"],"op":"edit","add":4,"del":10}
+{"id":"mwro6o3q-519h","ts":1795341853574,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/source.js"}
+{"id":"mwro6o3p-ai95","ts":1795341853575,"by":"gm-c41d07aa","type":"touch","files":["core/board-ops.js"],"op":"edit","add":8,"del":19}
+{"id":"mwro6o3q-cq2q","ts":1795341853576,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing core/board-ops.js"}
+{"id":"mwro7gxf-cc4p","ts":1795341890931,"by":"gm-c41d07aa","type":"touch","files":["core/resolve.js"],"op":"edit","add":65,"del":6}
+{"id":"mwro7gxg-cjnw","ts":1795341890932,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing core/resolve.js"}
+{"id":"mwro7xfc-j2p3","ts":1795341912312,"by":"cc-7f3a91c2","type":"touch","files":["ui/sim.js"],"op":"edit","add":15,"del":7}
+{"id":"mwro7xfd-mcpb","ts":1795341912313,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/sim.js"}
+{"id":"mwro8a33-4mw0","ts":1795341928719,"by":"cx-2b8e44d0","type":"block.reserve","block":"adapters","intent":"Work on Adapters"}
+{"id":"mwro8a34-mws6","ts":1795341928720,"by":"cx-2b8e44d0","type":"agent.status","status":"working","task":"Work on Adapters","doing":"Reading README.md"}
+{"id":"mwro8a36-09t0","ts":1795341928722,"by":"cx-2b8e44d0","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwro93x6-edea","ts":1795341967386,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":52,"del":23}
+{"id":"mwro93x7-m75l","ts":1795341967387,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing adapters/markdown-checklist.js"}
+{"id":"mwro93x6-9aol","ts":1795341967388,"by":"gm-c41d07aa","type":"block.reserve","block":"store","intent":"touches Model and fold"}
+{"id":"mwro9jrp-la9c","ts":1795341987925,"by":"cc-7f3a91c2","type":"block.reserve","block":"side","intent":"touches Page shell"}
+{"id":"mwro9jrp-lrla","ts":1795341987926,"by":"cx-2b8e44d0","type":"merge.ready","worktree":"agent-2","branch":"agent-2","commit":"fce1b0827a3095cb8ebab30bf0720dadda811b0a","note":"rebased"}
+{"id":"mwroaal2-xkf2","ts":1795342022678,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":37,"del":7}
+{"id":"mwroaal2-l19e","ts":1795342022679,"by":"gm-c41d07aa","type":"touch","files":["core/model.js"],"op":"edit","add":1,"del":1}
+{"id":"mwrob2z8-d3z8","ts":1795342059476,"by":"cx-2b8e44d0","type":"block.reserve","block":"cli","intent":"touches Adapters"}
+{"id":"mwrobhmg-d7tb","ts":1795342078456,"by":"cc-7f3a91c2","type":"touch","files":["ui/fonts/Allo-OFL.txt"],"op":"edit","add":11,"del":9}
+{"id":"mwrobsc0-qpnb","ts":1795342092336,"by":"gm-c41d07aa","type":"touch","files":["core/ptyrun.py"],"op":"edit","add":49,"del":10}
+{"id":"mwrobsc1-4u8w","ts":1795342092337,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing core/ptyrun.py"}
+{"id":"mwroc67m-10oq","ts":1795342110322,"by":"cx-2b8e44d0","type":"item.add","item":{"kind":"bug","title":"A date column reads as text after a filter","block":"adapters","detail":"Found while working nearby.","id":"B2"}}
+{"id":"mwroc67m-49vw","ts":1795342110323,"by":"wt-agent-4","type":"agent.join","agent":{"id":"wt-agent-4","name":"Wren","kind":"Aider","where":"agent-4","worktree":"/work/queuebox-agent-4"},"task":""}
+{"id":"mwrockj6-tl05","ts":1795342128882,"by":"cc-7f3a91c2","type":"touch","files":["ui/index.html"],"op":"edit","add":4,"del":12}
+{"id":"mwrockj7-uuu0","ts":1795342128883,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/index.html"}
+{"id":"mwrockj6-jyhm","ts":1795342128884,"by":"gm-c41d07aa","type":"touch","files":["core/ptyrun.py"],"op":"edit","add":8,"del":9}
+{"id":"mwrockj7-aoml","ts":1795342128885,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing core/ptyrun.py"}
+{"id":"mwrocwb4-kgrt","ts":1795342144144,"by":"wt-agent-4","type":"block.reserve","block":"hooks","intent":"Work on Hooks"}
+{"id":"mwrocwb5-45ys","ts":1795342144145,"by":"wt-agent-4","type":"agent.status","status":"working","task":"Work on Hooks","doing":"Reading README.md"}
+{"id":"mwrocwb7-alox","ts":1795342144147,"by":"wt-agent-4","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrodetw-ecvx","ts":1795342168148,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":25,"del":26}
+{"id":"mwrodetw-hhjj","ts":1795342168149,"by":"gm-c41d07aa","type":"touch","files":["core/glob.js"],"op":"edit","add":36,"del":0}
+{"id":"mwrodetx-b7ix","ts":1795342168150,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing core/glob.js"}
+{"id":"mwrodvlt-fl1b","ts":1795342189889,"by":"cc-7f3a91c2","type":"item.add","item":{"kind":"bug","title":"Unit drops off when the column is sorted","block":"shell","detail":"Found while working nearby.","id":"B3"}}
+{"id":"mwroe9g1-80sv","ts":1795342207825,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/model.test.ts"}
+{"id":"mwroe9g2-uc8u","ts":1795342207826,"by":"gm-c41d07aa","type":"test","ok":false,"summary":"1 failed in model.test.ts","blocks":["model","store"]}
+{"id":"mwroe9g3-cbm6","ts":1795342207827,"by":"gm-c41d07aa","type":"agent.status","doing":"Fixing the failing test"}
+{"id":"mwroeoj0-nwwb","ts":1795342227372,"by":"cc-7f3a91c2","type":"touch","files":["ui/worktrees.js"],"op":"edit","add":53,"del":26}
+{"id":"mwroeoj1-fqib","ts":1795342227373,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/worktrees.js"}
+{"id":"mwroeoj0-8gvm","ts":1795342227374,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":64,"del":7}
+{"id":"mwrof2tt-6n9j","ts":1795342245905,"by":"gm-c41d07aa","type":"item.add","item":{"kind":"bug","title":"Error chip shows the wrong card name","block":"model","detail":"Found while working nearby.","id":"B4"}}
+{"id":"mwrofjl6-pvpv","ts":1795342267626,"by":"cc-7f3a91c2","type":"touch","files":["ui/newitem.js"],"op":"edit","add":9,"del":0}
+{"id":"mwrofjl7-7mj2","ts":1795342267627,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/newitem.js"}
+{"id":"mwrofwbw-cojq","ts":1795342284140,"by":"cx-2b8e44d0","type":"touch","files":["qb"],"op":"edit","add":10,"del":0}
+{"id":"mwrog7qi-3ho4","ts":1795342298922,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/shell.test.ts"}
+{"id":"mwrog7qj-w9ri","ts":1795342298923,"by":"cc-7f3a91c2","type":"test","ok":true,"summary":"40 passed in shell.test.ts","blocks":["shell","side"]}
+{"id":"mwrog7qi-y6ch","ts":1795342298924,"by":"gm-c41d07aa","type":"item.add","item":{"kind":"bug","title":"Undo after a paste leaves a stale cable","block":"model","detail":"Found while working nearby.","id":"B5"}}
+{"id":"mwrogl5p-mnhx","ts":1795342316317,"by":"wt-agent-4","type":"touch","files":["hooks/install.js"],"op":"edit","add":30,"del":4}
+{"id":"mwroh04m-5pdh","ts":1795342335718,"by":"cc-7f3a91c2","type":"block.release","block":"shell","outcome":"landed","note":""}
+{"id":"mwroh04m-ckg1","ts":1795342335719,"by":"cc-7f3a91c2","type":"block.release","block":"side","outcome":"landed","note":""}
+{"id":"mwroh04o-csxd","ts":1795342335720,"by":"cc-7f3a91c2","type":"agent.status","status":"review","doing":"Committed: touches Page shell"}
+{"id":"mwroh04p-gi30","ts":1795342335721,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"94218bd42d19ea3c46bdc39bd4ce1e90024d9f5a"}
+{"id":"mwroh04m-zt0b","ts":1795342335722,"by":"cx-2b8e44d0","type":"item.add","item":{"kind":"question","title":"This changes what two saved seeds show. Go ahead?","block":"adapters","id":"Q2"}}
+{"id":"mwroh04m-jvqp","ts":1795342335723,"by":"gm-c41d07aa","type":"touch","files":["server.js"],"op":"edit","add":12,"del":7}
+{"id":"mwroia31-u3wb","ts":1795342395277,"by":"wt-agent-4","type":"touch","files":["hooks/lines.js"],"op":"edit","add":5,"del":23}
+{"id":"mwroia31-f371","ts":1795342395278,"by":"system","type":"merge.landed","worktree":"agent-2","commit":"fce1b0827a3095cb8ebab30bf0720dadda811b0a"}
+{"id":"mwroiktb-eph1","ts":1795342409183,"by":"gm-c41d07aa","type":"touch","files":["core/glob.js"],"op":"edit","add":57,"del":0}
+{"id":"mwroiktc-j1y1","ts":1795342409184,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing core/glob.js"}
+{"id":"mwrojnpo-ez03","ts":1795342459596,"by":"gm-c41d07aa","type":"touch","files":["core/resolve.js"],"op":"edit","add":45,"del":12}
+{"id":"mwrojnpp-qbn0","ts":1795342459597,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing core/resolve.js"}
+{"id":"mwrokl1r-h6nn","ts":1795342502799,"by":"cc-7f3a91c2","type":"block.reserve","block":"shell","intent":"Unit drops off when the column is sorted"}
+{"id":"mwrokl1s-nfm0","ts":1795342502800,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"Unit drops off when the column is sorted","doing":"Reading README.md"}
+{"id":"mwrokl1t-ryuw","ts":1795342502801,"by":"cc-7f3a91c2","type":"item.update","item":"B3","status":"doing"}
+{"id":"mwrokl1u-p00c","ts":1795342502802,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrokl1r-e7c1","ts":1795342502803,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/model.test.ts"}
+{"id":"mwrokl1s-738b","ts":1795342502804,"by":"gm-c41d07aa","type":"test","ok":true,"summary":"24 passed in model.test.ts","blocks":["model","store"]}
+{"id":"mwrolitq-kqt7","ts":1795342546574,"by":"gm-c41d07aa","type":"block.release","block":"model","outcome":"landed","note":""}
+{"id":"mwrolitq-mhft","ts":1795342546575,"by":"gm-c41d07aa","type":"block.release","block":"store","outcome":"landed","note":""}
+{"id":"mwrolits-o54x","ts":1795342546576,"by":"gm-c41d07aa","type":"agent.status","status":"review","doing":"Committed: touches Model and fold"}
+{"id":"mwrolitt-upk1","ts":1795342546577,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"26ed333eed671366434ee157df7530aa46bea6bd"}
+{"id":"mwrolitq-7zhk","ts":1795342546578,"by":"wt-agent-4","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":25,"del":0}
+{"id":"mwromp8q-h314","ts":1795342601546,"by":"cc-7f3a91c2","type":"touch","files":["ui/styles.css"],"op":"edit","add":3,"del":0}
+{"id":"mwromp8q-z99v","ts":1795342601547,"by":"wt-agent-4","type":"touch","files":["qb"],"op":"edit","add":12,"del":4}
+{"id":"mwron2de-vrvg","ts":1795342618562,"by":"gm-c41d07aa","type":"block.reserve","block":"model","intent":"Undo after a paste leaves a stale cable"}
+{"id":"mwron2df-c9lt","ts":1795342618563,"by":"gm-c41d07aa","type":"agent.status","status":"working","task":"Undo after a paste leaves a stale cable","doing":"Reading README.md"}
+{"id":"mwron2dg-9xie","ts":1795342618564,"by":"gm-c41d07aa","type":"item.update","item":"B5","status":"doing"}
+{"id":"mwron2dh-cupe","ts":1795342618565,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwronuv2-e7nm","ts":1795342655486,"by":"cc-7f3a91c2","type":"touch","files":["ui/newitem.js"],"op":"edit","add":31,"del":30}
+{"id":"mwronuv2-4t9q","ts":1795342655487,"by":"gm-c41d07aa","type":"touch","files":["core/model.js"],"op":"edit","add":2,"del":8}
+{"id":"mwronuv2-exm4","ts":1795342655488,"by":"human","type":"item.update","item":"Q2","status":"done","answer":"Go ahead, refreeze the seeds."}
+{"id":"mwrooo3p-e35u","ts":1795342693381,"by":"cx-2b8e44d0","type":"touch","files":["cli.js"],"op":"edit","add":32,"del":15}
+{"id":"mwrop2x2-smbt","ts":1795342712582,"by":"cc-7f3a91c2","type":"touch","files":["ui/newitem.js"],"op":"edit","add":1,"del":3}
+{"id":"mwrop2x3-vdef","ts":1795342712583,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/newitem.js"}
+{"id":"mwropppu-6lb7","ts":1795342742130,"by":"wt-agent-4","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":6,"del":31}
+{"id":"mwropppv-oxtj","ts":1795342742131,"by":"wt-agent-4","type":"agent.status","doing":"Editing hooks/claude-code.js"}
+{"id":"mwroq621-5vqy","ts":1795342763305,"by":"cc-7f3a91c2","type":"touch","files":["ui/app.js"],"op":"edit","add":1,"del":15}
+{"id":"mwroq622-j078","ts":1795342763306,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/app.js"}
+{"id":"mwroq621-dx1c","ts":1795342763307,"by":"gm-c41d07aa","type":"touch","files":["core/model.js"],"op":"edit","add":12,"del":10}
+{"id":"mwroq622-zmrm","ts":1795342763308,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing core/model.js"}
+{"id":"mwroq621-6qsl","ts":1795342763309,"by":"system","type":"merge.landed","worktree":"agent-3","commit":"26ed333eed671366434ee157df7530aa46bea6bd"}
+{"id":"mwrorxae-qy29","ts":1795342845254,"by":"gm-c41d07aa","type":"touch","files":["core/board-ops.js"],"op":"edit","add":63,"del":27}
+{"id":"mwros6x3-s285","ts":1795342857735,"by":"cc-7f3a91c2","type":"block.reserve","block":"theme","intent":"touches Page shell"}
+{"id":"mwros6x3-nxb4","ts":1795342857736,"by":"wt-agent-4","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":1,"del":33}
+{"id":"mwros6x4-t8c4","ts":1795342857737,"by":"wt-agent-4","type":"agent.status","doing":"Editing hooks/claude-code.js"}
+{"id":"mwrosyez-0939","ts":1795342893371,"by":"cc-7f3a91c2","type":"touch","files":["ui/fonts/AlloVariable.woff2"],"op":"edit","add":16,"del":0}
+{"id":"mwrosyez-tbp0","ts":1795342893372,"by":"cx-2b8e44d0","type":"msg.read","ids":["mwronuv2-exm4"]}
+{"id":"mwrosyez-088j","ts":1795342893373,"by":"gm-c41d07aa","type":"touch","files":["core/model.js"],"op":"edit","add":9,"del":32}
+{"id":"mwrotasg-4545","ts":1795342909408,"by":"cx-2b8e44d0","type":"touch","files":["cli.js"],"op":"edit","add":22,"del":23}
+{"id":"mwrotrbq-b6iv","ts":1795342930838,"by":"cc-7f3a91c2","type":"touch","files":["ui/fonts/AlloVariable.woff2"],"op":"edit","add":12,"del":4}
+{"id":"mwrotrbq-4m50","ts":1795342930839,"by":"gm-c41d07aa","type":"touch","files":["core/board-ops.js"],"op":"edit","add":27,"del":0}
+{"id":"mwrotrbr-vu2n","ts":1795342930840,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing core/board-ops.js"}
+{"id":"mwrou0zc-deko","ts":1795342943352,"by":"wt-agent-4","type":"touch","files":["hooks/install.js"],"op":"edit","add":3,"del":7}
+{"id":"mwrov4jn-y368","ts":1795342994627,"by":"cc-7f3a91c2","type":"touch","files":["ui/sim.js"],"op":"edit","add":23,"del":0}
+{"id":"mwrov4jo-wruk","ts":1795342994628,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/sim.js"}
+{"id":"mwrov4jn-ywsx","ts":1795342994629,"by":"cx-2b8e44d0","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":1,"del":28}
+{"id":"mwrov4jo-6gof","ts":1795342994630,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing adapters/markdown-checklist.js"}
+{"id":"mwrov4jn-mdcr","ts":1795342994631,"by":"gm-c41d07aa","type":"touch","files":["core/board-ops.js"],"op":"edit","add":47,"del":6}
+{"id":"mwrow6iy-o5kj","ts":1795343043850,"by":"cc-7f3a91c2","type":"touch","files":["ui/app.js"],"op":"edit","add":2,"del":0}
+{"id":"mwrow6iy-tfwr","ts":1795343043851,"by":"cx-2b8e44d0","type":"touch","op":"run","cmd":"npx vitest run tests/graph/adapters.test.ts"}
+{"id":"mwrow6iz-rasl","ts":1795343043852,"by":"cx-2b8e44d0","type":"test","ok":true,"summary":"31 passed in adapters.test.ts","blocks":["adapters","cli"]}
+{"id":"mwrowhox-nk02","ts":1795343058321,"by":"gm-c41d07aa","type":"touch","files":["core/glob.js"],"op":"edit","add":10,"del":2}
+{"id":"mwrowzd7-awz8","ts":1795343081227,"by":"system","type":"merge.landed","worktree":"agent-1","commit":"94218bd42d19ea3c46bdc39bd4ce1e90024d9f5a"}
+{"id":"mwrox8nv-0gko","ts":1795343093275,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/shell.test.ts"}
+{"id":"mwrox8nw-fzlb","ts":1795343093276,"by":"cc-7f3a91c2","type":"test","ok":true,"summary":"17 passed in shell.test.ts","blocks":["shell","theme"]}
+{"id":"mwrox8nv-cwno","ts":1795343093277,"by":"wt-agent-4","type":"touch","files":["hooks/install.js"],"op":"edit","add":2,"del":10}
+{"id":"mwroxphq-m20x","ts":1795343115086,"by":"cx-2b8e44d0","type":"block.release","block":"adapters","outcome":"landed","note":""}
+{"id":"mwroxphq-7cm3","ts":1795343115087,"by":"cx-2b8e44d0","type":"block.release","block":"cli","outcome":"landed","note":""}
+{"id":"mwroxphs-bdh3","ts":1795343115088,"by":"cx-2b8e44d0","type":"agent.status","status":"review","doing":"Committed: touches Adapters"}
+{"id":"mwroxpht-9v1v","ts":1795343115089,"by":"cx-2b8e44d0","type":"merge.ready","worktree":"agent-2","branch":"agent-2","commit":"2291efaa6d3a8e97bb3211405858a1c2d5ba1088"}
+{"id":"mwroxphq-flgy","ts":1795343115090,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/model.test.ts"}
+{"id":"mwroxphr-ds3j","ts":1795343115091,"by":"gm-c41d07aa","type":"test","ok":true,"summary":"28 passed in model.test.ts","blocks":["model"]}
+{"id":"mwroy39d-o69e","ts":1795343132929,"by":"cc-7f3a91c2","type":"block.release","block":"shell","outcome":"landed","note":""}
+{"id":"mwroy39d-z47q","ts":1795343132930,"by":"cc-7f3a91c2","type":"block.release","block":"theme","outcome":"landed","note":""}
+{"id":"mwroy39e-7li2","ts":1795343132931,"by":"cc-7f3a91c2","type":"item.update","item":"B3","status":"done"}
+{"id":"mwroy39f-b5bm","ts":1795343132932,"by":"cc-7f3a91c2","type":"agent.status","status":"review","doing":"Committed: touches Page shell"}
+{"id":"mwroy39g-q3sw","ts":1795343132933,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"d4a39ce9cd055f35c3a7c4d0ce993d6109131841"}
+{"id":"mwroyn86-tfh7","ts":1795343158806,"by":"gm-c41d07aa","type":"block.release","block":"model","outcome":"landed","note":""}
+{"id":"mwroyn87-kp3s","ts":1795343158807,"by":"gm-c41d07aa","type":"item.update","item":"B5","status":"done"}
+{"id":"mwroyn88-m5t4","ts":1795343158808,"by":"gm-c41d07aa","type":"agent.status","status":"review","doing":"Committed: B5: Undo after a paste leaves a stale cable"}
+{"id":"mwroyn89-qh22","ts":1795343158809,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"19147fd1e03417ad514e0c12f29c373c5f631c10"}
+{"id":"mwrozoer-jk7h","ts":1795343206995,"by":"wt-agent-4","type":"touch","files":["hooks/install.js"],"op":"edit","add":7,"del":0}
+{"id":"mwrp0gl1-ouiz","ts":1795343243509,"by":"wt-agent-4","type":"touch","files":["hooks/lines.js"],"op":"edit","add":7,"del":0}
+{"id":"mwrp15xo-frbj","ts":1795343276364,"by":"cc-7f3a91c2","type":"block.reserve","block":"model","intent":"Error chip shows the wrong card name"}
+{"id":"mwrp15xp-6oh0","ts":1795343276365,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"Error chip shows the wrong card name","doing":"Reading README.md"}
+{"id":"mwrp15xq-rxmc","ts":1795343276366,"by":"cc-7f3a91c2","type":"item.update","item":"B4","status":"doing"}
+{"id":"mwrp15xr-5vwu","ts":1795343276367,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrp15xo-6pnd","ts":1795343276368,"by":"gm-c41d07aa","type":"block.reserve","block":"adapters","intent":"A date column reads as text after a filter"}
+{"id":"mwrp15xp-4pcr","ts":1795343276369,"by":"gm-c41d07aa","type":"agent.status","status":"working","task":"A date column reads as text after a filter","doing":"Reading README.md"}
+{"id":"mwrp15xq-qjdt","ts":1795343276370,"by":"gm-c41d07aa","type":"item.update","item":"B2","status":"doing"}
+{"id":"mwrp15xr-me9m","ts":1795343276371,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrp1igz-qf7e","ts":1795343292611,"by":"cx-2b8e44d0","type":"block.reserve","block":"side","intent":"Work on Side column"}
+{"id":"mwrp1ih0-6995","ts":1795343292612,"by":"cx-2b8e44d0","type":"agent.status","status":"working","task":"Work on Side column","doing":"Reading README.md"}
+{"id":"mwrp1ih2-zw1i","ts":1795343292614,"by":"cx-2b8e44d0","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrp1yn3-tmhu","ts":1795343313567,"by":"gm-c41d07aa","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":60,"del":15}
+{"id":"mwrp1yn4-sk3y","ts":1795343313568,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing adapters/markdown-checklist.js"}
+{"id":"mwrp2g68-73dr","ts":1795343336288,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":3,"del":18}
+{"id":"mwrp2g69-fkul","ts":1795343336289,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing core/resolve.js"}
+{"id":"mwrp2g68-jg7g","ts":1795343336290,"by":"cx-2b8e44d0","type":"touch","files":["ui/worktrees.js"],"op":"edit","add":5,"del":14}
+{"id":"mwrp2g69-sa8c","ts":1795343336291,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/worktrees.js"}
+{"id":"mwrp2g68-ij0w","ts":1795343336292,"by":"wt-agent-4","type":"touch","op":"run","cmd":"npx vitest run tests/graph/hooks.test.ts"}
+{"id":"mwrp2g69-ypeh","ts":1795343336293,"by":"wt-agent-4","type":"test","ok":true,"summary":"31 passed in hooks.test.ts","blocks":["hooks"]}
+{"id":"mwrp3acm-a9cw","ts":1795343375398,"by":"cc-7f3a91c2","type":"touch","files":["core/glob.js"],"op":"edit","add":60,"del":17}
+{"id":"mwrp3acm-2pr7","ts":1795343375399,"by":"wt-agent-4","type":"block.release","block":"hooks","outcome":"landed","note":""}
+{"id":"mwrp3aco-hwj2","ts":1795343375400,"by":"wt-agent-4","type":"agent.status","status":"review","doing":"Committed: Work on Hooks"}
+{"id":"mwrp3acp-u26n","ts":1795343375401,"by":"wt-agent-4","type":"merge.ready","worktree":"agent-4","branch":"agent-4","commit":"7c4649df40287e7909a8d072d121bdaf567e0983"}
+{"id":"mwrp4416-0cjn","ts":1795343413866,"by":"cx-2b8e44d0","type":"touch","files":["ui/windows.js"],"op":"edit","add":15,"del":13}
+{"id":"mwrp4dqw-sgld","ts":1795343426456,"by":"cc-7f3a91c2","type":"block.reserve","block":"git","intent":"touches Model and fold"}
+{"id":"mwrp4dqw-4aci","ts":1795343426457,"by":"gm-c41d07aa","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":28,"del":4}
+{"id":"mwrp4dqx-hy7g","ts":1795343426458,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing adapters/markdown-checklist.js"}
+{"id":"mwrp4vhc-tmmx","ts":1795343449440,"by":"cc-7f3a91c2","type":"touch","files":["core/board-ops.js"],"op":"edit","add":23,"del":1}
+{"id":"mwrp4vhd-ly3z","ts":1795343449441,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing core/board-ops.js"}
+{"id":"mwrp5oho-yscc","ts":1795343487036,"by":"cx-2b8e44d0","type":"block.reserve","block":"shell","intent":"touches Side column"}
+{"id":"mwrp620w-w9at","ts":1795343504576,"by":"gm-c41d07aa","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":7,"del":3}
+{"id":"mwrp620x-hnii","ts":1795343504577,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing adapters/markdown-checklist.js"}
+{"id":"mwrp6u9u-gxod","ts":1795343541186,"by":"cc-7f3a91c2","type":"touch","files":["core/merges.js"],"op":"edit","add":1,"del":7}
+{"id":"mwrp7jm9-ot2q","ts":1795343574033,"by":"cx-2b8e44d0","type":"item.add","item":{"kind":"bug","title":"Empty input answers 0 where the spec says blank","block":"side","detail":"Found while working nearby.","id":"B6"}}
+{"id":"mwrp7jm9-j0oy","ts":1795343574034,"by":"gm-c41d07aa","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":1,"del":24}
+{"id":"mwrp7jma-kt2h","ts":1795343574035,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing adapters/markdown-checklist.js"}
+{"id":"mwrp7ve1-12tb","ts":1795343589289,"by":"wt-agent-4","type":"block.reserve","block":"tests","intent":"Work on Tests and scripts"}
+{"id":"mwrp7ve2-6dvm","ts":1795343589290,"by":"wt-agent-4","type":"agent.status","status":"working","task":"Work on Tests and scripts","doing":"Reading README.md"}
+{"id":"mwrp7ve4-y53w","ts":1795343589292,"by":"wt-agent-4","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrp8eo1-ycb8","ts":1795343614273,"by":"cx-2b8e44d0","type":"touch","files":["ui/index.html"],"op":"edit","add":23,"del":0}
+{"id":"mwrp8eo1-g5mz","ts":1795343614274,"by":"gm-c41d07aa","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":26,"del":2}
+{"id":"mwrp8oqz-oyw5","ts":1795343627339,"by":"cx-2b8e44d0","type":"merge.ready","worktree":"agent-2","branch":"agent-2","commit":"2cdff9604a507d209b9b1b4de2257eada2224073","note":"rebased"}
+{"id":"mwrp98kj-9za3","ts":1795343653027,"by":"gm-c41d07aa","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":12,"del":0}
+{"id":"mwrp98kj-05w9","ts":1795343653028,"by":"wt-agent-4","type":"touch","files":["scripts/smoke.js"],"op":"edit","add":1,"del":9}
+{"id":"mwrp98kk-wnks","ts":1795343653029,"by":"wt-agent-4","type":"agent.status","doing":"Editing scripts/smoke.js"}
+{"id":"mwrp9lyw-g0jw","ts":1795343670392,"by":"cc-7f3a91c2","type":"touch","files":["core/glob.js"],"op":"edit","add":1,"del":4}
+{"id":"mwrpafel-97s0","ts":1795343708541,"by":"cc-7f3a91c2","type":"touch","files":["core/glob.js"],"op":"edit","add":6,"del":0}
+{"id":"mwrpafem-2mk4","ts":1795343708542,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing core/glob.js"}
+{"id":"mwrpafel-m2rn","ts":1795343708543,"by":"cx-2b8e44d0","type":"touch","files":["ui/timeline.js"],"op":"edit","add":25,"del":31}
+{"id":"mwrpafem-2pbw","ts":1795343708544,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/timeline.js"}
+{"id":"mwrpafel-ra00","ts":1795343708545,"by":"gm-c41d07aa","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":14,"del":1}
+{"id":"mwrpafem-v8m6","ts":1795343708546,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing adapters/markdown-checklist.js"}
+{"id":"mwrpafel-57k8","ts":1795343708547,"by":"wt-agent-4","type":"item.add","item":{"kind":"question","title":"Should this follow Excel here, or keep our answer and note the divergence?","block":"tests","id":"Q3"}}
+{"id":"mwrpbncx-2umw","ts":1795343765505,"by":"cc-7f3a91c2","type":"touch","files":["core/glob.js"],"op":"edit","add":1,"del":4}
+{"id":"mwrpbncx-71fe","ts":1795343765506,"by":"gm-c41d07aa","type":"touch","files":["adapters/markdown-checklist.js"],"op":"edit","add":8,"del":15}
+{"id":"mwrpcn48-9bka","ts":1795343811848,"by":"cc-7f3a91c2","type":"item.add","item":{"kind":"bug","title":"Undo after a paste leaves a stale cable","block":"model","detail":"Found while working nearby.","id":"B7"}}
+{"id":"mwrpcn48-92of","ts":1795343811849,"by":"cx-2b8e44d0","type":"touch","files":["ui/popover.js"],"op":"edit","add":49,"del":0}
+{"id":"mwrpcn49-mh9g","ts":1795343811850,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/popover.js"}
+{"id":"mwrpcn48-5ikc","ts":1795343811851,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/adapters.test.ts"}
+{"id":"mwrpcn49-wngt","ts":1795343811852,"by":"gm-c41d07aa","type":"test","ok":true,"summary":"26 passed in adapters.test.ts","blocks":["adapters"]}
+{"id":"mwrpd50l-tlyg","ts":1795343835045,"by":"gm-c41d07aa","type":"block.release","block":"adapters","outcome":"landed","note":""}
+{"id":"mwrpd50m-bkyy","ts":1795343835046,"by":"gm-c41d07aa","type":"item.update","item":"B2","status":"done"}
+{"id":"mwrpd50n-fovb","ts":1795343835047,"by":"gm-c41d07aa","type":"agent.status","status":"review","doing":"Committed: B2: A date column reads as text after a filter"}
+{"id":"mwrpd50o-k4j0","ts":1795343835048,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"905f087f9b7b7a841ae95797d4a59e3b7f6ba73e"}
+{"id":"mwrpdk7s-x3fn","ts":1795343854744,"by":"cc-7f3a91c2","type":"touch","files":["core/worktrees.js"],"op":"edit","add":13,"del":22}
+{"id":"mwrpeb7h-4dkf","ts":1795343889725,"by":"cx-2b8e44d0","type":"touch","files":["ui/dom.js"],"op":"edit","add":13,"del":0}
+{"id":"mwrpeb7i-ayfi","ts":1795343889726,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/dom.js"}
+{"id":"mwrpf65d-nmqb","ts":1795343929825,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/model.test.ts"}
+{"id":"mwrpf65e-e6cy","ts":1795343929826,"by":"cc-7f3a91c2","type":"test","ok":true,"summary":"66 passed in model.test.ts","blocks":["model","git"]}
+{"id":"mwrpf65d-c31e","ts":1795343929827,"by":"human","type":"item.update","item":"Q3","status":"done","answer":"Clean change. Pre-alpha, break freely."}
+{"id":"mwrpfxp0-ske4","ts":1795343965524,"by":"cc-7f3a91c2","type":"block.release","block":"model","outcome":"landed","note":""}
+{"id":"mwrpfxp0-ask5","ts":1795343965525,"by":"cc-7f3a91c2","type":"block.release","block":"git","outcome":"landed","note":""}
+{"id":"mwrpfxp1-gbjm","ts":1795343965526,"by":"cc-7f3a91c2","type":"item.update","item":"B4","status":"done"}
+{"id":"mwrpfxp2-dvmq","ts":1795343965527,"by":"cc-7f3a91c2","type":"agent.status","status":"review","doing":"Committed: touches Model and fold"}
+{"id":"mwrpfxp3-44qs","ts":1795343965528,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"c70a97d12306f1d8250715e308508921167a36dd"}
+{"id":"mwrpfxp0-5nyy","ts":1795343965529,"by":"wt-agent-4","type":"touch","files":["test/core.test.js"],"op":"edit","add":2,"del":33}
+{"id":"mwrpggw5-fplh","ts":1795343990405,"by":"cx-2b8e44d0","type":"touch","files":["ui/sim.js"],"op":"edit","add":20,"del":22}
+{"id":"mwrphd3d-10u3","ts":1795344032137,"by":"human","type":"block.queue","block":"model","note":"Undo after a paste leaves a stale cable"}
+{"id":"mwrphtin-6vjf","ts":1795344053423,"by":"wt-agent-4","type":"msg.read","ids":["mwrpf65d-c31e"]}
+{"id":"mwrpi3hm-nq6y","ts":1795344066346,"by":"cc-7f3a91c2","type":"block.reserve","block":"model","intent":"Undo after a paste leaves a stale cable"}
+{"id":"mwrpi3hn-h7ta","ts":1795344066347,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"Undo after a paste leaves a stale cable","doing":"Reading README.md"}
+{"id":"mwrpi3ho-z2hh","ts":1795344066348,"by":"cc-7f3a91c2","type":"item.update","item":"B7","status":"doing"}
+{"id":"mwrpi3hp-d7q5","ts":1795344066349,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrpinuk-nls2","ts":1795344092732,"by":"cx-2b8e44d0","type":"touch","files":["ui/styles.css"],"op":"edit","add":27,"del":23}
+{"id":"mwrpinul-qu6z","ts":1795344092733,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/styles.css"}
+{"id":"mwrpinuk-ut2l","ts":1795344092734,"by":"gm-c41d07aa","type":"block.reserve","block":"docs","intent":"Work on Docs and config"}
+{"id":"mwrpinul-f9b9","ts":1795344092735,"by":"gm-c41d07aa","type":"agent.status","status":"working","task":"Work on Docs and config","doing":"Reading README.md"}
+{"id":"mwrpinun-32r3","ts":1795344092736,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrpinuk-7jmw","ts":1795344092737,"by":"wt-agent-4","type":"touch","files":["test/daemon.test.js"],"op":"edit","add":1,"del":9}
+{"id":"mwrpj788-f7av","ts":1795344117848,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":46,"del":3}
+{"id":"mwrpj789-8uto","ts":1795344117849,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .queuebox/.gitignore"}
+{"id":"mwrpjnm5-6k41","ts":1795344139085,"by":"cc-7f3a91c2","type":"item.add","item":{"kind":"bug","title":"Empty input answers 0 where the spec says blank","block":"model","detail":"Found while working nearby.","id":"B8"}}
+{"id":"mwrpjnm5-siev","ts":1795344139086,"by":"gm-c41d07aa","type":"touch","files":[".gitignore"],"op":"edit","add":1,"del":2}
+{"id":"mwrpk09g-jeor","ts":1795344155476,"by":"cx-2b8e44d0","type":"touch","files":["ui/inspector.js"],"op":"edit","add":1,"del":26}
+{"id":"mwrpkcb6-ig8d","ts":1795344171090,"by":"wt-agent-4","type":"touch","files":["scripts/init.js"],"op":"edit","add":15,"del":0}
+{"id":"mwrpkolk-f0um","ts":1795344187016,"by":"cc-7f3a91c2","type":"touch","files":["core/board-ops.js"],"op":"edit","add":3,"del":5}
+{"id":"mwrpkoll-tdb2","ts":1795344187017,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing core/board-ops.js"}
+{"id":"mwrpkolk-qjh4","ts":1795344187018,"by":"gm-c41d07aa","type":"item.add","item":{"kind":"question","title":"The spec and the code disagree on this case. Which one wins?","block":"docs","id":"Q4"}}
+{"id":"mwrpl8cn-mhl3","ts":1795344212615,"by":"cx-2b8e44d0","type":"item.add","item":{"kind":"bug","title":"Popup scroll jumps after a resize","block":"side","detail":"Found while working nearby.","id":"B9"}}
+{"id":"mwrpl8cn-gibe","ts":1795344212616,"by":"wt-agent-4","type":"touch","files":["core/resolve.js"],"op":"edit","add":47,"del":1}
+{"id":"mwrplk7w-zrk6","ts":1795344227996,"by":"system","type":"merge.landed","worktree":"agent-2","commit":"2cdff9604a507d209b9b1b4de2257eada2224073"}
+{"id":"mwrplxwq-rb1u","ts":1795344245738,"by":"cc-7f3a91c2","type":"touch","files":["core/model.js"],"op":"edit","add":1,"del":24}
+{"id":"mwrpmomv-4unk","ts":1795344280375,"by":"cx-2b8e44d0","type":"item.add","item":{"kind":"bug","title":"Tooltip clips at the right edge on a phone","block":"side","detail":"Found while working nearby.","id":"B10"}}
+{"id":"mwrpnkvo-74nz","ts":1795344322164,"by":"wt-agent-4","type":"touch","files":["scripts/smoke.js"],"op":"edit","add":16,"del":26}
+{"id":"mwrpoet3-k8io","ts":1795344360951,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":4,"del":10}
+{"id":"mwrposff-peem","ts":1795344378603,"by":"wt-agent-4","type":"block.reserve","block":"decisions","intent":"touches Tests and scripts"}
+{"id":"mwrpp6ki-ipp9","ts":1795344396930,"by":"cx-2b8e44d0","type":"touch","files":["ui/timeline.js"],"op":"edit","add":1,"del":8}
+{"id":"mwrpp6ki-nl29","ts":1795344396931,"by":"human","type":"item.update","item":"Q4","status":"done","answer":"Small patch now, file the clean change as a task."}
+{"id":"mwrppxe4-56al","ts":1795344431692,"by":"cc-7f3a91c2","type":"touch","files":["core/board-ops.js"],"op":"edit","add":14,"del":0}
+{"id":"mwrppxe4-ahk5","ts":1795344431693,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":55,"del":9}
+{"id":"mwrppxe5-whtb","ts":1795344431694,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .queuebox/.gitignore"}
+{"id":"mwrpqek9-asj1","ts":1795344453945,"by":"cx-2b8e44d0","type":"touch","files":["ui/inspector.js"],"op":"edit","add":32,"del":0}
+{"id":"mwrpqeka-uo9g","ts":1795344453946,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/inspector.js"}
+{"id":"mwrpqek9-yfkg","ts":1795344453947,"by":"wt-agent-4","type":"touch","files":["scripts/smoke.js"],"op":"edit","add":18,"del":0}
+{"id":"mwrpqeka-77n4","ts":1795344453948,"by":"wt-agent-4","type":"agent.status","doing":"Editing scripts/smoke.js"}
+{"id":"mwrpqsuy-f3v9","ts":1795344472474,"by":"gm-c41d07aa","type":"msg.read","ids":["mwrpp6ki-nl29"]}
+{"id":"mwrprb2a-lpxk","ts":1795344496066,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":66,"del":2}
+{"id":"mwrprb2a-1if5","ts":1795344496067,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"edit","add":7,"del":22}
+{"id":"mwrprb2b-o3ws","ts":1795344496068,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing README.md"}
+{"id":"mwrprp2w-8iw1","ts":1795344514232,"by":"cx-2b8e44d0","type":"touch","files":["ui/source.js"],"op":"edit","add":62,"del":9}
+{"id":"mwrprp2w-zg53","ts":1795344514233,"by":"wt-agent-4","type":"touch","op":"run","cmd":"npx vitest run test/core.test.js"}
+{"id":"mwrprp2x-fka0","ts":1795344514234,"by":"wt-agent-4","type":"test","ok":true,"summary":"62 passed in core.test.js","blocks":["tests","decisions"]}
+{"id":"mwrps1y5-7765","ts":1795344530909,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"edit","add":12,"del":16}
+{"id":"mwrps1y6-wran","ts":1795344530910,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing README.md"}
+{"id":"mwrpsv1l-pe3s","ts":1795344568617,"by":"wt-agent-4","type":"block.release","block":"tests","outcome":"landed","note":""}
+{"id":"mwrpsv1l-t094","ts":1795344568618,"by":"wt-agent-4","type":"block.release","block":"decisions","outcome":"landed","note":""}
+{"id":"mwrpsv1n-gsqu","ts":1795344568619,"by":"wt-agent-4","type":"agent.status","status":"review","doing":"Committed: touches Tests and scripts"}
+{"id":"mwrpsv1o-7wcq","ts":1795344568620,"by":"wt-agent-4","type":"merge.ready","worktree":"agent-4","branch":"agent-4","commit":"73e690afd5b9335c1031be9389b86d365507489f"}
+{"id":"mwrpt7mn-j872","ts":1795344584927,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/model.test.ts"}
+{"id":"mwrpt7mo-99uw","ts":1795344584928,"by":"cc-7f3a91c2","type":"test","ok":false,"summary":"1 failed in model.test.ts","blocks":["model"]}
+{"id":"mwrpt7mp-qx8g","ts":1795344584929,"by":"cc-7f3a91c2","type":"agent.status","doing":"Fixing the failing test"}
+{"id":"mwrpt7mn-11ta","ts":1795344584930,"by":"system","type":"merge.landed","worktree":"agent-1","commit":"c70a97d12306f1d8250715e308508921167a36dd"}
+{"id":"mwrptmnc-d6cg","ts":1795344604392,"by":"cx-2b8e44d0","type":"touch","op":"run","cmd":"npx vitest run tests/graph/side.test.ts"}
+{"id":"mwrptmnd-2qoo","ts":1795344604393,"by":"cx-2b8e44d0","type":"test","ok":false,"summary":"1 failed in side.test.ts","blocks":["side","shell"]}
+{"id":"mwrptmne-ihmp","ts":1795344604394,"by":"cx-2b8e44d0","type":"agent.status","doing":"Fixing the failing test"}
+{"id":"mwrptmnc-i8sv","ts":1795344604395,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":1,"del":5}
+{"id":"mwrptyz6-tros","ts":1795344620370,"by":"cc-7f3a91c2","type":"touch","files":["core/board-ops.js"],"op":"edit","add":1,"del":5}
+{"id":"mwrptyz7-hkj3","ts":1795344620371,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing core/board-ops.js"}
+{"id":"mwrpumbp-o8ht","ts":1795344650629,"by":"cx-2b8e44d0","type":"touch","files":["ui/worktrees.js"],"op":"edit","add":1,"del":0}
+{"id":"mwrpuzqv-fftu","ts":1795344668023,"by":"cc-7f3a91c2","type":"touch","files":["core/board-ops.js"],"op":"edit","add":6,"del":2}
+{"id":"mwrpuzqv-si1i","ts":1795344668024,"by":"gm-c41d07aa","type":"block.reserve","block":"decisions","intent":"touches Docs and config"}
+{"id":"mwrpvp25-f481","ts":1795344700829,"by":"cx-2b8e44d0","type":"item.add","item":{"kind":"bug","title":"Empty input answers 0 where the spec says blank","block":"side","detail":"Found while working nearby.","id":"B11"}}
+{"id":"mwrpw0sy-8qxa","ts":1795344716050,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":70,"del":21}
+{"id":"mwrpw0sy-jmlj","ts":1795344716051,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":11,"del":0}
+{"id":"mwrpw0sz-i1p9","ts":1795344716052,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .queuebox/.gitignore"}
+{"id":"mwrpwgrt-2egs","ts":1795344736745,"by":"gm-c41d07aa","type":"item.add","item":{"kind":"bug","title":"Popup scroll jumps after a resize","block":"docs","detail":"Found while working nearby.","id":"B12"}}
+{"id":"mwrpwgrt-kvxk","ts":1795344736746,"by":"wt-agent-4","type":"block.reserve","block":"store","intent":"Work on Store and server"}
+{"id":"mwrpwgru-x46x","ts":1795344736747,"by":"wt-agent-4","type":"agent.status","status":"working","task":"Work on Store and server","doing":"Reading README.md"}
+{"id":"mwrpwgrw-qi2j","ts":1795344736748,"by":"wt-agent-4","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrpx7gu-f34b","ts":1795344771342,"by":"cc-7f3a91c2","type":"touch","files":["core/glob.js"],"op":"edit","add":14,"del":5}
+{"id":"mwrpx7gu-xxiy","ts":1795344771343,"by":"cx-2b8e44d0","type":"item.add","item":{"kind":"bug","title":"A date column reads as text after a filter","block":"side","detail":"Found while working nearby.","id":"B13"}}
+{"id":"mwrpx7gu-35qs","ts":1795344771344,"by":"gm-c41d07aa","type":"touch","files":[".gitignore"],"op":"edit","add":46,"del":0}
+{"id":"mwrpxh78-3csr","ts":1795344783956,"by":"wt-agent-4","type":"item.add","item":{"kind":"bug","title":"Unit drops off when the column is sorted","block":"store","detail":"Found while working nearby.","id":"B14"}}
+{"id":"mwrpy07c-ys99","ts":1795344808584,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/model.test.ts"}
+{"id":"mwrpy07d-wim9","ts":1795344808585,"by":"cc-7f3a91c2","type":"test","ok":false,"summary":"1 failed in model.test.ts","blocks":["model"]}
+{"id":"mwrpy07e-v4cc","ts":1795344808586,"by":"cc-7f3a91c2","type":"agent.status","doing":"Fixing the failing test"}
+{"id":"mwrpye4n-qqvw","ts":1795344826631,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"edit","add":9,"del":20}
+{"id":"mwrpyqf8-1mls","ts":1795344842564,"by":"cx-2b8e44d0","type":"item.add","item":{"kind":"question","title":"Should this follow Excel here, or keep our answer and note the divergence?","block":"side","id":"Q5"}}
+{"id":"mwrpz1gu-7d94","ts":1795344856878,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":27,"del":29}
+{"id":"mwrpz1gu-bik7","ts":1795344856879,"by":"wt-agent-4","type":"item.add","item":{"kind":"bug","title":"Tooltip clips at the right edge on a phone","block":"store","detail":"Found while working nearby.","id":"B15"}}
+{"id":"mwrpzi4s-8bah","ts":1795344878476,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":36,"del":5}
+{"id":"mwrpzvvz-cyjd","ts":1795344896303,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":3,"del":0}
+{"id":"mwrq0e0y-oit3","ts":1795344919810,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/docs.test.ts"}
+{"id":"mwrq0e0z-fg6s","ts":1795344919811,"by":"gm-c41d07aa","type":"test","ok":false,"summary":"1 failed in docs.test.ts","blocks":["docs","decisions"]}
+{"id":"mwrq0e10-c1nq","ts":1795344919812,"by":"gm-c41d07aa","type":"agent.status","doing":"Fixing the failing test"}
+{"id":"mwrq0e0y-7zho","ts":1795344919813,"by":"wt-agent-4","type":"touch","files":["core/store.js"],"op":"edit","add":27,"del":0}
+{"id":"mwrq0e0z-axtp","ts":1795344919814,"by":"wt-agent-4","type":"agent.status","doing":"Editing core/store.js"}
+{"id":"mwrq1328-memt","ts":1795344952256,"by":"cc-7f3a91c2","type":"touch","files":["core/glob.js"],"op":"edit","add":14,"del":16}
+{"id":"mwrq1328-mib7","ts":1795344952257,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"edit","add":1,"del":24}
+{"id":"mwrq1vo3-x2h3","ts":1795344989331,"by":"gm-c41d07aa","type":"touch","files":["decisions/A/A2.md"],"op":"edit","add":3,"del":0}
+{"id":"mwrq1vo4-w89n","ts":1795344989332,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing decisions/A/A2.md"}
+{"id":"mwrq1vo3-cp4n","ts":1795344989333,"by":"wt-agent-4","type":"block.reserve","block":"git","intent":"touches Store and server"}
+{"id":"mwrq32ma-esen","ts":1795345044994,"by":"human","type":"item.update","item":"Q5","status":"done","answer":"The spec wins. Fix the code."}
+{"id":"mwrq3jlf-0lzx","ts":1795345066995,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/model.test.ts"}
+{"id":"mwrq3jlg-bimn","ts":1795345066996,"by":"cc-7f3a91c2","type":"test","ok":true,"summary":"55 passed in model.test.ts","blocks":["model"]}
+{"id":"mwrq3jlf-pld4","ts":1795345066997,"by":"cx-2b8e44d0","type":"item.add","item":{"kind":"question","title":"Should this follow Excel here, or keep our answer and note the divergence?","block":"side","id":"Q6"}}
+{"id":"mwrq3jlf-fdi7","ts":1795345066998,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/docs.test.ts"}
+{"id":"mwrq3jlg-697v","ts":1795345066999,"by":"gm-c41d07aa","type":"test","ok":true,"summary":"13 passed in docs.test.ts","blocks":["docs","decisions"]}
+{"id":"mwrq3jlf-se2d","ts":1795345067000,"by":"wt-agent-4","type":"touch","files":["core/store.js"],"op":"edit","add":27,"del":8}
+{"id":"mwrq3jlg-khbc","ts":1795345067001,"by":"wt-agent-4","type":"agent.status","doing":"Editing core/store.js"}
+{"id":"mwrq3zz5-v4l6","ts":1795345088225,"by":"gm-c41d07aa","type":"block.release","block":"docs","outcome":"landed","note":""}
+{"id":"mwrq3zz5-x787","ts":1795345088226,"by":"gm-c41d07aa","type":"block.release","block":"decisions","outcome":"landed","note":""}
+{"id":"mwrq3zz7-ftvv","ts":1795345088227,"by":"gm-c41d07aa","type":"agent.status","status":"review","doing":"Committed: touches Docs and config"}
+{"id":"mwrq3zz8-ueo2","ts":1795345088228,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"e5299980249133b766fbb5da96234b7fb941983f"}
+{"id":"mwrq4cdk-1xwi","ts":1795345104296,"by":"cc-7f3a91c2","type":"block.release","block":"model","outcome":"landed","note":""}
+{"id":"mwrq4cdl-hlns","ts":1795345104297,"by":"cc-7f3a91c2","type":"item.update","item":"B7","status":"done"}
+{"id":"mwrq4cdm-5rei","ts":1795345104298,"by":"cc-7f3a91c2","type":"agent.status","status":"review","doing":"Committed: B7: Undo after a paste leaves a stale cable"}
+{"id":"mwrq4cdn-kvrf","ts":1795345104299,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"9c22c83375be96f181fa2808eb89a4e0fd889133"}
+{"id":"mwrq4w2p-oide","ts":1795345129825,"by":"cx-2b8e44d0","type":"msg.read","ids":["mwrq32ma-esen"]}
+{"id":"mwrq59z9-3ja4","ts":1795345147845,"by":"wt-agent-4","type":"touch","files":["core/daemon.js"],"op":"edit","add":42,"del":0}
+{"id":"mwrq59za-uwop","ts":1795345147846,"by":"wt-agent-4","type":"agent.status","doing":"Editing core/daemon.js"}
+{"id":"mwrq59z9-bud6","ts":1795345147847,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"dc843eabde02b7bc8452db433fb11f199f95dd9d","note":"rebased"}
+{"id":"mwrq634f-7dkm","ts":1795345185615,"by":"human","type":"block.queue","block":"model","note":"Empty input answers 0 where the spec says blank"}
+{"id":"mwrq6jmv-ovdg","ts":1795345207015,"by":"cc-7f3a91c2","type":"block.reserve","block":"model","intent":"Empty input answers 0 where the spec says blank"}
+{"id":"mwrq6jmw-segf","ts":1795345207016,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"Empty input answers 0 where the spec says blank","doing":"Reading README.md"}
+{"id":"mwrq6jmy-mxsh","ts":1795345207018,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrq6x3v-kssb","ts":1795345224475,"by":"wt-agent-4","type":"touch","files":["ui/windows.js"],"op":"edit","add":38,"del":12}
+{"id":"mwrq7c73-3gu5","ts":1795345244031,"by":"cc-7f3a91c2","type":"touch","files":["core/model.js"],"op":"edit","add":40,"del":1}
+{"id":"mwrq7c74-nt46","ts":1795345244032,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing core/model.js"}
+{"id":"mwrq7lxy-8mv1","ts":1795345256662,"by":"gm-c41d07aa","type":"block.reserve","block":"docs","intent":"Popup scroll jumps after a resize"}
+{"id":"mwrq7lxz-4je9","ts":1795345256663,"by":"gm-c41d07aa","type":"agent.status","status":"working","task":"Popup scroll jumps after a resize","doing":"Reading README.md"}
+{"id":"mwrq7ly0-c30w","ts":1795345256664,"by":"gm-c41d07aa","type":"item.update","item":"B12","status":"doing"}
+{"id":"mwrq7ly1-yr5z","ts":1795345256665,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrq85ug-ylg9","ts":1795345282456,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":24,"del":20}
+{"id":"mwrq85uh-067m","ts":1795345282457,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .queuebox/.gitignore"}
+{"id":"mwrq8kks-p06n","ts":1795345301548,"by":"cc-7f3a91c2","type":"touch","files":["core/board-ops.js"],"op":"edit","add":14,"del":1}
+{"id":"mwrq8kks-9q5m","ts":1795345301549,"by":"wt-agent-4","type":"touch","files":["core/merges.js"],"op":"edit","add":52,"del":0}
+{"id":"mwrq8wu9-oxg4","ts":1795345317441,"by":"human","type":"item.update","item":"Q6","status":"done","answer":"Go ahead, refreeze the seeds."}
+{"id":"mwrq9qgi-oe36","ts":1795345355826,"by":"cx-2b8e44d0","type":"msg.read","ids":["mwrq8wu9-oxg4"]}
+{"id":"mwrqa5zc-p1lr","ts":1795345375944,"by":"cc-7f3a91c2","type":"touch","files":["core/model.js"],"op":"edit","add":54,"del":0}
+{"id":"mwrqa5zc-45tl","ts":1795345375945,"by":"cx-2b8e44d0","type":"touch","files":["ui/timeline.js"],"op":"edit","add":2,"del":0}
+{"id":"mwrqa5zc-heaf","ts":1795345375946,"by":"gm-c41d07aa","type":"block.reserve","block":"decisions","intent":"touches Docs and config"}
+{"id":"mwrqb87u-297m","ts":1795345425498,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":67,"del":8}
+{"id":"mwrqb87v-hvlj","ts":1795345425499,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing core/resolve.js"}
+{"id":"mwrqb87u-j4pm","ts":1795345425500,"by":"gm-c41d07aa","type":"touch","files":["decisions/A/A2.md"],"op":"edit","add":25,"del":1}
+{"id":"mwrqb87v-4cgo","ts":1795345425501,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing decisions/A/A2.md"}
+{"id":"mwrqb87u-o82l","ts":1795345425502,"by":"wt-agent-4","type":"touch","op":"run","cmd":"npx vitest run tests/graph/store.test.ts"}
+{"id":"mwrqb87v-16od","ts":1795345425503,"by":"wt-agent-4","type":"test","ok":false,"summary":"1 failed in store.test.ts","blocks":["store","git"]}
+{"id":"mwrqb87w-21mn","ts":1795345425504,"by":"wt-agent-4","type":"agent.status","doing":"Fixing the failing test"}
+{"id":"mwrqce4o-r7lm","ts":1795345479816,"by":"cc-7f3a91c2","type":"touch","files":["core/board-ops.js"],"op":"edit","add":29,"del":15}
+{"id":"mwrqce4o-k6kn","ts":1795345479817,"by":"cx-2b8e44d0","type":"touch","files":["ui/newitem.js"],"op":"edit","add":60,"del":2}
+{"id":"mwrqce4p-8lxu","ts":1795345479818,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/newitem.js"}
+{"id":"mwrqce4o-hhc7","ts":1795345479819,"by":"gm-c41d07aa","type":"touch","files":[".gitignore"],"op":"edit","add":49,"del":2}
+{"id":"mwrqd5fy-sx47","ts":1795345515214,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"edit","add":2,"del":11}
+{"id":"mwrqd5fz-u52s","ts":1795345515215,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing README.md"}
+{"id":"mwrqd5fy-16um","ts":1795345515216,"by":"wt-agent-4","type":"touch","files":["core/daemon.js"],"op":"edit","add":17,"del":28}
+{"id":"mwrqd5fz-zaba","ts":1795345515217,"by":"wt-agent-4","type":"agent.status","doing":"Editing core/daemon.js"}
+{"id":"mwrqdya9-d8et","ts":1795345552593,"by":"cx-2b8e44d0","type":"touch","op":"run","cmd":"npx vitest run tests/graph/side.test.ts"}
+{"id":"mwrqdyaa-uzcv","ts":1795345552594,"by":"cx-2b8e44d0","type":"test","ok":true,"summary":"53 passed in side.test.ts","blocks":["side","shell"]}
+{"id":"mwrqefnm-1ekz","ts":1795345575106,"by":"cc-7f3a91c2","type":"touch","files":["core/glob.js"],"op":"edit","add":58,"del":13}
+{"id":"mwrqefnn-gvwn","ts":1795345575107,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing core/glob.js"}
+{"id":"mwrqerwy-e6t3","ts":1795345590994,"by":"cx-2b8e44d0","type":"block.release","block":"side","outcome":"landed","note":""}
+{"id":"mwrqerwy-c18m","ts":1795345590995,"by":"cx-2b8e44d0","type":"block.release","block":"shell","outcome":"landed","note":""}
+{"id":"mwrqerx0-iixb","ts":1795345590996,"by":"cx-2b8e44d0","type":"agent.status","status":"review","doing":"Committed: touches Side column"}
+{"id":"mwrqerx1-1pds","ts":1795345590997,"by":"cx-2b8e44d0","type":"merge.ready","worktree":"agent-2","branch":"agent-2","commit":"3b47028568cd029d5a9a27a50929697d2cc8dd57"}
+{"id":"mwrqerwy-h3pz","ts":1795345590998,"by":"gm-c41d07aa","type":"touch","files":["decisions/B/B1.md"],"op":"edit","add":18,"del":4}
+{"id":"mwrqerwy-gq5s","ts":1795345590999,"by":"wt-agent-4","type":"touch","files":["core/ptyrun.py"],"op":"edit","add":22,"del":2}
+{"id":"mwrqf8qq-nzbs","ts":1795345612802,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":27,"del":2}
+{"id":"mwrqfjhc-cwxk","ts":1795345626720,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":1,"del":13}
+{"id":"mwrqfjhc-l9w0","ts":1795345626721,"by":"system","type":"merge.landed","worktree":"agent-3","commit":"dc843eabde02b7bc8452db433fb11f199f95dd9d"}
+{"id":"mwrqgb6k-ex43","ts":1795345662620,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":12,"del":5}
+{"id":"mwrqgb6k-y8np","ts":1795345662621,"by":"wt-agent-4","type":"touch","op":"run","cmd":"npx vitest run tests/graph/store.test.ts"}
+{"id":"mwrqgb6l-kmkk","ts":1795345662622,"by":"wt-agent-4","type":"test","ok":true,"summary":"30 passed in store.test.ts","blocks":["store","git"]}
+{"id":"mwrqh50u-tgkg","ts":1795345701294,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":7,"del":8}
+{"id":"mwrqh50v-v5p3","ts":1795345701295,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing core/resolve.js"}
+{"id":"mwrqh50u-xs0l","ts":1795345701296,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":37,"del":2}
+{"id":"mwrqh50u-19qc","ts":1795345701297,"by":"wt-agent-4","type":"block.release","block":"store","outcome":"landed","note":""}
+{"id":"mwrqh50u-6vqf","ts":1795345701298,"by":"wt-agent-4","type":"block.release","block":"git","outcome":"landed","note":""}
+{"id":"mwrqh50w-issd","ts":1795345701299,"by":"wt-agent-4","type":"agent.status","status":"review","doing":"Committed: touches Store and server"}
+{"id":"mwrqh50x-qxg7","ts":1795345701300,"by":"wt-agent-4","type":"merge.ready","worktree":"agent-4","branch":"agent-4","commit":"c96ab83735550b3062bba82bb6c2962d4a44880e"}
+{"id":"mwrqhvb2-65qr","ts":1795345735358,"by":"cx-2b8e44d0","type":"block.reserve","block":"side","intent":"Tooltip clips at the right edge on a phone"}
+{"id":"mwrqhvb3-mt7k","ts":1795345735359,"by":"cx-2b8e44d0","type":"agent.status","status":"working","task":"Tooltip clips at the right edge on a phone","doing":"Reading README.md"}
+{"id":"mwrqhvb4-nipe","ts":1795345735360,"by":"cx-2b8e44d0","type":"item.update","item":"B10","status":"doing"}
+{"id":"mwrqhvb5-jn7c","ts":1795345735361,"by":"cx-2b8e44d0","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrqhvb2-k1m1","ts":1795345735362,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"edit","add":3,"del":2}
+{"id":"mwrqi5ev-k6gh","ts":1795345748455,"by":"human","type":"block.queue","block":"store","note":"Tooltip clips at the right edge on a phone"}
+{"id":"mwrqijkb-qrq8","ts":1795345766795,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":6,"del":2}
+{"id":"mwrqijkc-zr8b","ts":1795345766796,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing core/resolve.js"}
+{"id":"mwrqiwfk-dtk5","ts":1795345783472,"by":"cx-2b8e44d0","type":"touch","files":["ui/windows.js"],"op":"edit","add":50,"del":0}
+{"id":"mwrqjfol-82a5","ts":1795345808421,"by":"cc-7f3a91c2","type":"touch","files":["core/model.js"],"op":"edit","add":47,"del":27}
+{"id":"mwrqjpga-hs8x","ts":1795345821082,"by":"cx-2b8e44d0","type":"touch","files":["ui/worktrees.js"],"op":"edit","add":45,"del":11}
+{"id":"mwrqjpga-7xan","ts":1795345821083,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/docs.test.ts"}
+{"id":"mwrqjpgb-tnub","ts":1795345821084,"by":"gm-c41d07aa","type":"test","ok":true,"summary":"12 passed in docs.test.ts","blocks":["docs","decisions"]}
+{"id":"mwrqjyt5-3ugy","ts":1795345833209,"by":"wt-agent-4","type":"block.reserve","block":"store","intent":"Tooltip clips at the right edge on a phone"}
+{"id":"mwrqjyt6-ondi","ts":1795345833210,"by":"wt-agent-4","type":"agent.status","status":"working","task":"Tooltip clips at the right edge on a phone","doing":"Reading README.md"}
+{"id":"mwrqjyt8-fppt","ts":1795345833212,"by":"wt-agent-4","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrqkh6e-l18b","ts":1795345857014,"by":"cx-2b8e44d0","type":"touch","files":["ui/timeline.js"],"op":"edit","add":68,"del":8}
+{"id":"mwrql16h-f6mu","ts":1795345882937,"by":"gm-c41d07aa","type":"block.release","block":"docs","outcome":"landed","note":""}
+{"id":"mwrql16h-rsk7","ts":1795345882938,"by":"gm-c41d07aa","type":"block.release","block":"decisions","outcome":"landed","note":""}
+{"id":"mwrql16i-7fkn","ts":1795345882939,"by":"gm-c41d07aa","type":"item.update","item":"B12","status":"done"}
+{"id":"mwrql16j-5hcp","ts":1795345882940,"by":"gm-c41d07aa","type":"agent.status","status":"review","doing":"Committed: touches Docs and config"}
+{"id":"mwrql16k-tiwt","ts":1795345882941,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"b7ca4319db08d76c68267995c0e894db4f5c4cf5"}
+{"id":"mwrql16h-rgip","ts":1795345882942,"by":"wt-agent-4","type":"touch","files":["core/ptyrun.py"],"op":"edit","add":9,"del":1}
+{"id":"mwrqlhq4-b3gl","ts":1795345904380,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":6,"del":11}
+{"id":"mwrqm174-oje8","ts":1795345929616,"by":"cx-2b8e44d0","type":"touch","files":["ui/inspector.js"],"op":"edit","add":4,"del":1}
+{"id":"mwrqmv1s-6f4e","ts":1795345968304,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/model.test.ts"}
+{"id":"mwrqmv1t-w6av","ts":1795345968305,"by":"cc-7f3a91c2","type":"test","ok":true,"summary":"32 passed in model.test.ts","blocks":["model"]}
+{"id":"mwrqn7po-dpd1","ts":1795345984716,"by":"wt-agent-4","type":"touch","files":["core/identity.js"],"op":"edit","add":1,"del":2}
+{"id":"mwrqnp99-312a","ts":1795346007453,"by":"cx-2b8e44d0","type":"touch","files":["ui/timeline.js"],"op":"edit","add":19,"del":4}
+{"id":"mwrqnp9a-te32","ts":1795346007454,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/timeline.js"}
+{"id":"mwrqo8yj-7qe5","ts":1795346032987,"by":"gm-c41d07aa","type":"block.reserve","block":"docs","intent":"Work on Docs and config"}
+{"id":"mwrqo8yk-uhg9","ts":1795346032988,"by":"gm-c41d07aa","type":"agent.status","status":"working","task":"Work on Docs and config","doing":"Reading README.md"}
+{"id":"mwrqo8ym-wegy","ts":1795346032990,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrqo8yj-8w4v","ts":1795346032991,"by":"wt-agent-4","type":"item.add","item":{"kind":"bug","title":"Popup scroll jumps after a resize","block":"store","detail":"Found while working nearby.","id":"B16"}}
+{"id":"mwrqopbn-1nle","ts":1795346054195,"by":"cc-7f3a91c2","type":"block.release","block":"model","outcome":"landed","note":""}
+{"id":"mwrqopbp-jcrg","ts":1795346054197,"by":"cc-7f3a91c2","type":"agent.status","status":"review","doing":"Committed: Empty input answers 0 where the spec says blank"}
+{"id":"mwrqopbq-m7ro","ts":1795346054198,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"6aea5518c7f58ea5a651e0640675258f253a8370"}
+{"id":"mwrqp7a2-b2p5","ts":1795346077466,"by":"cx-2b8e44d0","type":"touch","files":["ui/worktrees.js"],"op":"edit","add":8,"del":27}
+{"id":"mwrqp7a3-k1yx","ts":1795346077467,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/worktrees.js"}
+{"id":"mwrqp7a2-470n","ts":1795346077468,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":66,"del":2}
+{"id":"mwrqp7a3-588k","ts":1795346077469,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .queuebox/.gitignore"}
+{"id":"mwrqpjxs-3ow9","ts":1795346093872,"by":"wt-agent-4","type":"touch","files":["core/launch.js"],"op":"edit","add":24,"del":1}
+{"id":"mwrqpjxt-jnc0","ts":1795346093873,"by":"wt-agent-4","type":"agent.status","doing":"Editing core/launch.js"}
+{"id":"mwrqpjxs-2chh","ts":1795346093874,"by":"wt-agent-4","type":"merge.ready","worktree":"agent-4","branch":"agent-4","commit":"f5b9e783192d9b82ec5b298a9240c84d7503a174","note":"rebased"}
+{"id":"mwrqptf5-o9fq","ts":1795346106161,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":29,"del":0}
+{"id":"mwrqptf5-4d78","ts":1795346106162,"by":"human","type":"block.queue","block":"model","note":"Empty input answers 0 where the spec says blank"}
+{"id":"mwrqr058-q4g1","ts":1795346161532,"by":"cx-2b8e44d0","type":"touch","files":["ui/inspector.js"],"op":"edit","add":5,"del":2}
+{"id":"mwrqrfjv-kxp8","ts":1795346181499,"by":"cc-7f3a91c2","type":"block.reserve","block":"model","intent":"Empty input answers 0 where the spec says blank"}
+{"id":"mwrqrfjw-a5oq","ts":1795346181500,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"Empty input answers 0 where the spec says blank","doing":"Reading README.md"}
+{"id":"mwrqrfjy-agf9","ts":1795346181502,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrqrfjv-ki9u","ts":1795346181503,"by":"gm-c41d07aa","type":"touch","files":[".gitignore"],"op":"edit","add":7,"del":22}
+{"id":"mwrqrfjw-cffn","ts":1795346181504,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing .gitignore"}
+{"id":"mwrqsbn5-3tjj","ts":1795346223089,"by":"cc-7f3a91c2","type":"touch","files":["core/glob.js"],"op":"edit","add":63,"del":13}
+{"id":"mwrqsbn5-ig9v","ts":1795346223090,"by":"cx-2b8e44d0","type":"touch","files":["ui/popover.js"],"op":"edit","add":29,"del":1}
+{"id":"mwrqsbn6-jy0l","ts":1795346223091,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/popover.js"}
+{"id":"mwrqt3k8-01ep","ts":1795346259272,"by":"cc-7f3a91c2","type":"block.reserve","block":"git","intent":"touches Model and fold"}
+{"id":"mwrqt3k8-i0jp","ts":1795346259273,"by":"cx-2b8e44d0","type":"touch","files":["ui/popover.js"],"op":"edit","add":11,"del":21}
+{"id":"mwrqt3k9-sk03","ts":1795346259274,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/popover.js"}
+{"id":"mwrqt3k8-pusq","ts":1795346259275,"by":"gm-c41d07aa","type":"touch","files":[".queuebox/.gitignore"],"op":"edit","add":58,"del":1}
+{"id":"mwrqtzzg-3mqc","ts":1795346301292,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/docs.test.ts"}
+{"id":"mwrqtzzh-w2o6","ts":1795346301293,"by":"gm-c41d07aa","type":"test","ok":true,"summary":"57 passed in docs.test.ts","blocks":["docs"]}
+{"id":"mwrqup63-0ly1","ts":1795346333931,"by":"cc-7f3a91c2","type":"touch","files":["core/glob.js"],"op":"edit","add":15,"del":10}
+{"id":"mwrqup63-2usu","ts":1795346333932,"by":"gm-c41d07aa","type":"block.release","block":"docs","outcome":"landed","note":""}
+{"id":"mwrqup65-lmog","ts":1795346333933,"by":"gm-c41d07aa","type":"agent.status","status":"review","doing":"Committed: Work on Docs and config"}
+{"id":"mwrqup66-81pi","ts":1795346333934,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"e196a3e5170a8bc48d7f255b18c9b09291626711"}
+{"id":"mwrqvgc3-jtvm","ts":1795346369139,"by":"cc-7f3a91c2","type":"touch","files":["core/model.js"],"op":"edit","add":1,"del":1}
+{"id":"mwrqvgc3-n58j","ts":1795346369140,"by":"cx-2b8e44d0","type":"touch","files":["ui/popover.js"],"op":"edit","add":39,"del":12}
+{"id":"mwrqvgc4-sc0o","ts":1795346369141,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/popover.js"}
+{"id":"mwrqx5uh-lluc","ts":1795346448857,"by":"cx-2b8e44d0","type":"touch","files":["ui/worktrees.js"],"op":"edit","add":1,"del":21}
+{"id":"mwrqxf57-yzed","ts":1795346460907,"by":"cc-7f3a91c2","type":"touch","files":["core/worktrees.js"],"op":"edit","add":8,"del":27}
+{"id":"mwrqxf58-3h7j","ts":1795346460908,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing core/worktrees.js"}
+{"id":"mwrqxtzn-x2m9","ts":1795346480147,"by":"gm-c41d07aa","type":"block.reserve","block":"hooks","intent":"Work on Hooks"}
+{"id":"mwrqxtzo-hbj3","ts":1795346480148,"by":"gm-c41d07aa","type":"agent.status","status":"working","task":"Work on Hooks","doing":"Reading README.md"}
+{"id":"mwrqxtzq-kb8q","ts":1795346480150,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrqxtzn-rs3f","ts":1795346480151,"by":"system","type":"merge.landed","worktree":"agent-4","commit":"f5b9e783192d9b82ec5b298a9240c84d7503a174"}
+{"id":"mwrqys68-bwo6","ts":1795346524448,"by":"cc-7f3a91c2","type":"touch","files":["core/resolve.js"],"op":"edit","add":8,"del":15}
+{"id":"mwrqz28u-oyu1","ts":1795346537502,"by":"cx-2b8e44d0","type":"block.reserve","block":"map","intent":"touches Side column"}
+{"id":"mwrqz28u-5pa9","ts":1795346537503,"by":"gm-c41d07aa","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":4,"del":34}
+{"id":"mwrqzh9x-za4t","ts":1795346556981,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/model.test.ts"}
+{"id":"mwrqzh9y-0bkq","ts":1795346556982,"by":"cc-7f3a91c2","type":"test","ok":false,"summary":"1 failed in model.test.ts","blocks":["model","git"]}
+{"id":"mwrqzh9z-awho","ts":1795346556983,"by":"cc-7f3a91c2","type":"agent.status","doing":"Fixing the failing test"}
+{"id":"mwrr0bd5-1lnm","ts":1795346595977,"by":"cc-7f3a91c2","type":"touch","files":["core/model.js"],"op":"edit","add":10,"del":14}
+{"id":"mwrr0bd5-pvzm","ts":1795346595978,"by":"gm-c41d07aa","type":"touch","files":["hooks/lines.js"],"op":"edit","add":1,"del":2}
+{"id":"mwrr0bd6-zadu","ts":1795346595979,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing hooks/lines.js"}
+{"id":"mwrr0nan-t38k","ts":1795346611439,"by":"cx-2b8e44d0","type":"touch","files":["ui/timeline.js"],"op":"edit","add":23,"del":0}
+{"id":"mwrr0nao-khtl","ts":1795346611440,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/timeline.js"}
+{"id":"mwrr143v-r33x","ts":1795346633227,"by":"gm-c41d07aa","type":"touch","files":["hooks/install.js"],"op":"edit","add":2,"del":7}
+{"id":"mwrr1v5i-x282","ts":1795346668278,"by":"cc-7f3a91c2","type":"touch","files":["core/worktrees.js"],"op":"edit","add":1,"del":1}
+{"id":"mwrr1v5i-lyyd","ts":1795346668279,"by":"cx-2b8e44d0","type":"touch","op":"run","cmd":"npx vitest run tests/graph/side.test.ts"}
+{"id":"mwrr1v5j-9lzp","ts":1795346668280,"by":"cx-2b8e44d0","type":"test","ok":true,"summary":"16 passed in side.test.ts","blocks":["side","map"]}
+{"id":"mwrr2e16-0ep8","ts":1795346692746,"by":"gm-c41d07aa","type":"item.add","item":{"kind":"bug","title":"Tooltip clips at the right edge on a phone","block":"hooks","detail":"Found while working nearby.","id":"B17"}}
+{"id":"mwrr3486-mr82","ts":1795346726694,"by":"gm-c41d07aa","type":"touch","files":["hooks/lines.js"],"op":"edit","add":3,"del":5}
+{"id":"mwrr3g2d-6so3","ts":1795346742037,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/model.test.ts"}
+{"id":"mwrr3g2e-52n5","ts":1795346742038,"by":"cc-7f3a91c2","type":"test","ok":true,"summary":"65 passed in model.test.ts","blocks":["model","git"]}
+{"id":"mwrr3g2d-411d","ts":1795346742039,"by":"cx-2b8e44d0","type":"block.release","block":"side","outcome":"landed","note":""}
+{"id":"mwrr3g2d-c5cc","ts":1795346742040,"by":"cx-2b8e44d0","type":"block.release","block":"map","outcome":"landed","note":""}
+{"id":"mwrr3g2e-pptt","ts":1795346742041,"by":"cx-2b8e44d0","type":"item.update","item":"B10","status":"done"}
+{"id":"mwrr3g2f-09vz","ts":1795346742042,"by":"cx-2b8e44d0","type":"agent.status","status":"review","doing":"Committed: touches Side column"}
+{"id":"mwrr3g2g-ef3j","ts":1795346742043,"by":"cx-2b8e44d0","type":"merge.ready","worktree":"agent-2","branch":"agent-2","commit":"ef6e8ed055060e943e43bcabccfcb40ad5b5af25"}
+{"id":"mwrr44ud-3xq9","ts":1795346774149,"by":"cc-7f3a91c2","type":"block.release","block":"model","outcome":"landed","note":""}
+{"id":"mwrr44ud-ccjf","ts":1795346774150,"by":"cc-7f3a91c2","type":"block.release","block":"git","outcome":"landed","note":""}
+{"id":"mwrr44uf-c4zt","ts":1795346774151,"by":"cc-7f3a91c2","type":"agent.status","status":"review","doing":"Committed: touches Model and fold"}
+{"id":"mwrr44ug-vmoa","ts":1795346774152,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"eb9bd2981e5c0688865c4d10e7c3aff90f81f9a2"}
+{"id":"mwrr44ud-pcbx","ts":1795346774153,"by":"gm-c41d07aa","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":13,"del":11}
+{"id":"mwrr44ud-kz9q","ts":1795346774154,"by":"human","type":"block.queue","block":"side","note":"Popup scroll jumps after a resize"}
+{"id":"mwrr4w7u-k4si","ts":1795346809626,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/hooks.test.ts"}
+{"id":"mwrr4w7v-b2cg","ts":1795346809627,"by":"gm-c41d07aa","type":"test","ok":false,"summary":"1 failed in hooks.test.ts","blocks":["hooks"]}
+{"id":"mwrr4w7w-4664","ts":1795346809628,"by":"gm-c41d07aa","type":"agent.status","doing":"Fixing the failing test"}
+{"id":"mwrr5kwr-7b1k","ts":1795346841627,"by":"gm-c41d07aa","type":"touch","files":["hooks/install.js"],"op":"edit","add":5,"del":24}
+{"id":"mwrr6fdt-4lnv","ts":1795346881121,"by":"gm-c41d07aa","type":"touch","files":["hooks/lines.js"],"op":"edit","add":2,"del":31}
+{"id":"mwrr6fdu-9vgl","ts":1795346881122,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing hooks/lines.js"}
+{"id":"mwrr7ebs-bpis","ts":1795346926408,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/hooks.test.ts"}
+{"id":"mwrr7ebt-5u7n","ts":1795346926409,"by":"gm-c41d07aa","type":"test","ok":true,"summary":"53 passed in hooks.test.ts","blocks":["hooks"]}
+{"id":"mwrr7px1-p1c6","ts":1795346941429,"by":"cc-7f3a91c2","type":"block.reserve","block":"side","intent":"Popup scroll jumps after a resize"}
+{"id":"mwrr7px2-w1bb","ts":1795346941430,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"Popup scroll jumps after a resize","doing":"Reading README.md"}
+{"id":"mwrr7px4-pa50","ts":1795346941432,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrr7px1-l4nk","ts":1795346941433,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"32dcf5c484a0f60e472395f305e98208ba8078ec","note":"rebased"}
+{"id":"mwrr88d1-06mm","ts":1795346965333,"by":"gm-c41d07aa","type":"block.release","block":"hooks","outcome":"landed","note":""}
+{"id":"mwrr88d3-y4ay","ts":1795346965335,"by":"gm-c41d07aa","type":"agent.status","status":"review","doing":"Committed: Work on Hooks"}
+{"id":"mwrr88d4-zvjk","ts":1795346965336,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"c93b0a1c6a2837611e6a18fbecf775db99db0188"}
+{"id":"mwrr8j6i-tuf3","ts":1795346979354,"by":"cx-2b8e44d0","type":"block.reserve","block":"model","intent":"Empty input answers 0 where the spec says blank"}
+{"id":"mwrr8j6j-edi6","ts":1795346979355,"by":"cx-2b8e44d0","type":"agent.status","status":"working","task":"Empty input answers 0 where the spec says blank","doing":"Reading README.md"}
+{"id":"mwrr8j6k-gibv","ts":1795346979356,"by":"cx-2b8e44d0","type":"item.update","item":"B8","status":"doing"}
+{"id":"mwrr8j6l-riu6","ts":1795346979357,"by":"cx-2b8e44d0","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrr9204-5dk6","ts":1795347003748,"by":"cc-7f3a91c2","type":"touch","files":["ui/windows.js"],"op":"edit","add":62,"del":20}
+{"id":"mwrr9205-2a78","ts":1795347003749,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/windows.js"}
+{"id":"mwrr9lk2-a4ev","ts":1795347029090,"by":"cx-2b8e44d0","type":"touch","files":["core/board-ops.js"],"op":"edit","add":33,"del":5}
+{"id":"mwrr9lk3-fxm9","ts":1795347029091,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing core/board-ops.js"}
+{"id":"mwrra57y-p9vw","ts":1795347054574,"by":"cc-7f3a91c2","type":"touch","files":["ui/worktrees.js"],"op":"edit","add":45,"del":4}
+{"id":"mwrragm3-mv8o","ts":1795347069339,"by":"cx-2b8e44d0","type":"touch","files":["core/resolve.js"],"op":"edit","add":10,"del":5}
+{"id":"mwrrbfdz-3a5o","ts":1795347114407,"by":"gm-c41d07aa","type":"block.reserve","block":"hooks","intent":"Tooltip clips at the right edge on a phone"}
+{"id":"mwrrbfe0-f03d","ts":1795347114408,"by":"gm-c41d07aa","type":"agent.status","status":"working","task":"Tooltip clips at the right edge on a phone","doing":"Reading README.md"}
+{"id":"mwrrbfe1-j25c","ts":1795347114409,"by":"gm-c41d07aa","type":"item.update","item":"B17","status":"doing"}
+{"id":"mwrrbfe2-3rtb","ts":1795347114410,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrrbutt-hanz","ts":1795347134417,"by":"cx-2b8e44d0","type":"touch","files":["core/resolve.js"],"op":"edit","add":2,"del":20}
+{"id":"mwrrbutu-o53y","ts":1795347134418,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing core/resolve.js"}
+{"id":"mwrrcab2-5o6l","ts":1795347154478,"by":"cc-7f3a91c2","type":"touch","files":["ui/inspector.js"],"op":"edit","add":42,"del":8}
+{"id":"mwrrcab3-5xth","ts":1795347154479,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/inspector.js"}
+{"id":"mwrrcma8-9nbd","ts":1795347170000,"by":"gm-c41d07aa","type":"touch","files":["hooks/install.js"],"op":"edit","add":49,"del":19}
+{"id":"mwrrdbtg-grb9","ts":1795347203092,"by":"cx-2b8e44d0","type":"block.reserve","block":"git","intent":"touches Model and fold"}
+{"id":"mwrrdv2g-pr2f","ts":1795347228040,"by":"gm-c41d07aa","type":"touch","files":["hooks/lines.js"],"op":"edit","add":9,"del":3}
+{"id":"mwrrdv2h-f2u8","ts":1795347228041,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing hooks/lines.js"}
+{"id":"mwrree7u-tz4f","ts":1795347252858,"by":"cx-2b8e44d0","type":"touch","files":["core/board-ops.js"],"op":"edit","add":12,"del":11}
+{"id":"mwrree7u-rjen","ts":1795347252859,"by":"system","type":"merge.landed","worktree":"agent-1","commit":"32dcf5c484a0f60e472395f305e98208ba8078ec"}
+{"id":"mwrrevr8-dgsk","ts":1795347275588,"by":"cc-7f3a91c2","type":"touch","files":["ui/windows.js"],"op":"edit","add":2,"del":12}
+{"id":"mwrrevr8-6nnq","ts":1795347275589,"by":"gm-c41d07aa","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":30,"del":27}
+{"id":"mwrrevr9-in3u","ts":1795347275590,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing hooks/claude-code.js"}
+{"id":"mwrrf6aa-pmur","ts":1795347289234,"by":"cx-2b8e44d0","type":"touch","files":["ui/windows.js"],"op":"edit","add":20,"del":0}
+{"id":"mwrrg0wd-vfwm","ts":1795347328909,"by":"cc-7f3a91c2","type":"item.add","item":{"kind":"question","title":"Is a breaking rename fine here, or does a seed depend on the old name?","block":"side","id":"Q7"}}
+{"id":"mwrrg0wd-g9tl","ts":1795347328910,"by":"gm-c41d07aa","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":64,"del":25}
+{"id":"mwrrggd6-gfyp","ts":1795347348954,"by":"cx-2b8e44d0","type":"touch","files":["core/merges.js"],"op":"edit","add":47,"del":1}
+{"id":"mwrrh04i-58j5","ts":1795347374562,"by":"cx-2b8e44d0","type":"touch","op":"run","cmd":"npx vitest run tests/graph/model.test.ts"}
+{"id":"mwrrh04j-mz45","ts":1795347374563,"by":"cx-2b8e44d0","type":"test","ok":true,"summary":"35 passed in model.test.ts","blocks":["model","git"]}
+{"id":"mwrrh04i-v1tv","ts":1795347374564,"by":"gm-c41d07aa","type":"touch","files":["hooks/lines.js"],"op":"edit","add":4,"del":29}
+{"id":"mwrri93k-cl7e","ts":1795347432848,"by":"cx-2b8e44d0","type":"block.release","block":"model","outcome":"landed","note":""}
+{"id":"mwrri93k-yjee","ts":1795347432849,"by":"cx-2b8e44d0","type":"block.release","block":"git","outcome":"landed","note":""}
+{"id":"mwrri93l-5pdb","ts":1795347432850,"by":"cx-2b8e44d0","type":"item.update","item":"B8","status":"done"}
+{"id":"mwrri93m-8nkr","ts":1795347432851,"by":"cx-2b8e44d0","type":"agent.status","status":"review","doing":"Committed: touches Model and fold"}
+{"id":"mwrri93n-zqs8","ts":1795347432852,"by":"cx-2b8e44d0","type":"merge.ready","worktree":"agent-2","branch":"agent-2","commit":"9cbe2febe0122cd5cacd91e4b54814df2fce0688"}
+{"id":"mwrriqyk-pujg","ts":1795347455996,"by":"gm-c41d07aa","type":"touch","files":["hooks/lines.js"],"op":"edit","add":14,"del":0}
+{"id":"mwrriqyl-krtt","ts":1795347455997,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing hooks/lines.js"}
+{"id":"mwrrk8rh-hirf","ts":1795347525725,"by":"gm-c41d07aa","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":26,"del":12}
+{"id":"mwrrk8ri-4sir","ts":1795347525726,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing hooks/claude-code.js"}
+{"id":"mwrrlxsz-z6xg","ts":1795347604835,"by":"cx-2b8e44d0","type":"block.reserve","block":"shell","intent":"Work on Page shell"}
+{"id":"mwrrlxt0-azs2","ts":1795347604836,"by":"cx-2b8e44d0","type":"agent.status","status":"working","task":"Work on Page shell","doing":"Reading README.md"}
+{"id":"mwrrlxt2-igvl","ts":1795347604838,"by":"cx-2b8e44d0","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrrlxsz-wq60","ts":1795347604839,"by":"gm-c41d07aa","type":"agent.status","status":"waiting","doing":"Wants to edit vite.config.ts"}
+{"id":"mwrrn27d-lh7s","ts":1795347657193,"by":"cx-2b8e44d0","type":"merge.ready","worktree":"agent-2","branch":"agent-2","commit":"e242ea20500c9cbe8a1011d0fe5abb0d7b9c3e4c","note":"rebased"}
+{"id":"mwrro0e2-274i","ts":1795347701498,"by":"gm-c41d07aa","type":"agent.status","status":"working","doing":"Allowed, carrying on"}
+{"id":"mwrro0e2-obu8","ts":1795347701499,"by":"human","type":"item.update","item":"Q7","status":"done","answer":"Go ahead, refreeze the seeds."}
+{"id":"mwrrobth-zttl","ts":1795347716309,"by":"cx-2b8e44d0","type":"touch","files":["ui/app.js"],"op":"edit","add":3,"del":2}
+{"id":"mwrrobti-359y","ts":1795347716310,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/app.js"}
+{"id":"mwrrobth-n93w","ts":1795347716311,"by":"gm-c41d07aa","type":"item.add","item":{"kind":"question","title":"This changes what two saved seeds show. Go ahead?","block":"hooks","id":"Q8"}}
+{"id":"mwrrordk-sljp","ts":1795347736472,"by":"cc-7f3a91c2","type":"msg.read","ids":["mwrro0e2-obu8"]}
+{"id":"mwrrpxn8-953d","ts":1795347791252,"by":"cc-7f3a91c2","type":"touch","files":["ui/windows.js"],"op":"edit","add":12,"del":16}
+{"id":"mwrrpxn9-gat3","ts":1795347791253,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/windows.js"}
+{"id":"mwrrq7fl-d68z","ts":1795347803937,"by":"cx-2b8e44d0","type":"touch","files":["ui/sim.js"],"op":"edit","add":50,"del":5}
+{"id":"mwrrq7fm-cb2t","ts":1795347803938,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/sim.js"}
+{"id":"mwrrqo79-473k","ts":1795347825669,"by":"cc-7f3a91c2","type":"touch","files":["ui/popover.js"],"op":"edit","add":25,"del":32}
+{"id":"mwrrqo7a-l2vw","ts":1795347825670,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/popover.js"}
+{"id":"mwrrr6hg-6u1m","ts":1795347849364,"by":"cc-7f3a91c2","type":"touch","op":"run","cmd":"npx vitest run tests/graph/side.test.ts"}
+{"id":"mwrrr6hh-tgoc","ts":1795347849365,"by":"cc-7f3a91c2","type":"test","ok":true,"summary":"67 passed in side.test.ts","blocks":["side"]}
+{"id":"mwrrrsy4-vhqm","ts":1795347878476,"by":"cc-7f3a91c2","type":"block.release","block":"side","outcome":"landed","note":""}
+{"id":"mwrrrsy6-43l8","ts":1795347878478,"by":"cc-7f3a91c2","type":"agent.status","status":"review","doing":"Committed: Popup scroll jumps after a resize"}
+{"id":"mwrrrsy7-j21z","ts":1795347878479,"by":"cc-7f3a91c2","type":"merge.ready","worktree":"agent-1","branch":"agent-1","commit":"1cf17d8ed6d5fb8ab3adc1bfdfdb9c7f43b22498"}
+{"id":"mwrrrsy4-puvs","ts":1795347878480,"by":"cx-2b8e44d0","type":"touch","files":["ui/dom.js"],"op":"edit","add":26,"del":20}
+{"id":"mwrrsx0w-k8kb","ts":1795347930416,"by":"human","type":"item.update","item":"Q8","status":"done","answer":"Follow Excel, and note it in excel-divergences."}
+{"id":"mwrrtf9m-2vfd","ts":1795347954058,"by":"gm-c41d07aa","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":35,"del":0}
+{"id":"mwrrtz5m-ub2o","ts":1795347979834,"by":"cx-2b8e44d0","type":"touch","files":["ui/sim.js"],"op":"edit","add":47,"del":4}
+{"id":"mwrrtz5n-e0f5","ts":1795347979835,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing ui/sim.js"}
+{"id":"mwrrtz5m-fxlc","ts":1795347979836,"by":"system","type":"merge.landed","worktree":"agent-2","commit":"e242ea20500c9cbe8a1011d0fe5abb0d7b9c3e4c"}
+{"id":"mwrruge5-2anx","ts":1795348002173,"by":"gm-c41d07aa","type":"msg.read","ids":["mwrrsx0w-k8kb"]}
+{"id":"mwrruzht-5nos","ts":1795348026929,"by":"cx-2b8e44d0","type":"touch","files":["ui/fonts/Allo-OFL.txt"],"op":"edit","add":68,"del":16}
+{"id":"mwrrvsvc-kqza","ts":1795348065000,"by":"cc-7f3a91c2","type":"block.reserve","block":"side","intent":"A date column reads as text after a filter"}
+{"id":"mwrrvsvd-fh4w","ts":1795348065001,"by":"cc-7f3a91c2","type":"agent.status","status":"working","task":"A date column reads as text after a filter","doing":"Reading README.md"}
+{"id":"mwrrvsve-0fxx","ts":1795348065002,"by":"cc-7f3a91c2","type":"item.update","item":"B13","status":"doing"}
+{"id":"mwrrvsvf-jdkl","ts":1795348065003,"by":"cc-7f3a91c2","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrrvsvc-c6dx","ts":1795348065004,"by":"cx-2b8e44d0","type":"item.add","item":{"kind":"question","title":"Is a breaking rename fine here, or does a seed depend on the old name?","block":"shell","id":"Q9"}}
+{"id":"mwrrvsvc-aa6s","ts":1795348065005,"by":"gm-c41d07aa","type":"touch","files":["hooks/install.js"],"op":"edit","add":15,"del":14}
+{"id":"mwrrwli0-61c8","ts":1795348102104,"by":"cc-7f3a91c2","type":"touch","files":["ui/popover.js"],"op":"edit","add":47,"del":28}
+{"id":"mwrrwli1-i0o6","ts":1795348102105,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/popover.js"}
+{"id":"mwrrwxa7-zx88","ts":1795348117375,"by":"gm-c41d07aa","type":"touch","files":["hooks/install.js"],"op":"edit","add":61,"del":0}
+{"id":"mwrryc3u-wmdf","ts":1795348183242,"by":"cc-7f3a91c2","type":"touch","files":["ui/timeline.js"],"op":"edit","add":29,"del":29}
+{"id":"mwrryc3v-ag3r","ts":1795348183243,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/timeline.js"}
+{"id":"mwrryc3u-n5bk","ts":1795348183244,"by":"gm-c41d07aa","type":"touch","files":["hooks/lines.js"],"op":"edit","add":41,"del":17}
+{"id":"mwrryc3v-agzj","ts":1795348183245,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing hooks/lines.js"}
+{"id":"mwrrz4ni-rz86","ts":1795348220238,"by":"cc-7f3a91c2","type":"touch","files":["ui/timeline.js"],"op":"edit","add":17,"del":23}
+{"id":"mwrrz4ni-o9bu","ts":1795348220239,"by":"gm-c41d07aa","type":"item.add","item":{"kind":"bug","title":"Error chip shows the wrong card name","block":"hooks","detail":"Found while working nearby.","id":"B18"}}
+{"id":"mwrrzjbd-6vn9","ts":1795348239241,"by":"human","type":"item.update","item":"Q9","status":"done","answer":"Clean change. Pre-alpha, break freely."}
+{"id":"mwrrzwve-jz0g","ts":1795348256810,"by":"cc-7f3a91c2","type":"block.reserve","block":"theme","intent":"touches Side column"}
+{"id":"mwrrzwve-5jma","ts":1795348256811,"by":"cx-2b8e44d0","type":"msg.read","ids":["mwrrzjbd-6vn9"]}
+{"id":"mwrs0yjy-lurb","ts":1795348305646,"by":"cx-2b8e44d0","type":"touch","files":["ui/fonts/AlloVariable.woff2"],"op":"edit","add":13,"del":9}
+{"id":"mwrs1g62-ljiz","ts":1795348328474,"by":"cc-7f3a91c2","type":"touch","files":["ui/popover.js"],"op":"edit","add":7,"del":0}
+{"id":"mwrs1g63-8xk7","ts":1795348328475,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/popover.js"}
+{"id":"mwrs1g62-5azn","ts":1795348328476,"by":"gm-c41d07aa","type":"touch","files":["hooks/install.js"],"op":"edit","add":1,"del":29}
+{"id":"mwrs1g63-1k2w","ts":1795348328477,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing hooks/install.js"}
+{"id":"mwrs1vjo-tn1m","ts":1795348348404,"by":"cx-2b8e44d0","type":"touch","files":["ui/fonts/Allo-OFL.txt"],"op":"edit","add":32,"del":26}
+{"id":"mwrs2dm5-p98f","ts":1795348371821,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/hooks.test.ts"}
+{"id":"mwrs2dm6-wosx","ts":1795348371822,"by":"gm-c41d07aa","type":"test","ok":false,"summary":"1 failed in hooks.test.ts","blocks":["hooks"]}
+{"id":"mwrs2dm7-g9g2","ts":1795348371823,"by":"gm-c41d07aa","type":"agent.status","doing":"Fixing the failing test"}
+{"id":"mwrs3092-jhbl","ts":1795348401158,"by":"cc-7f3a91c2","type":"touch","files":["ui/inspector.js"],"op":"edit","add":3,"del":0}
+{"id":"mwrs3092-5lah","ts":1795348401159,"by":"cx-2b8e44d0","type":"touch","files":["ui/fonts/AlloVariable.woff2"],"op":"edit","add":58,"del":2}
+{"id":"mwrs3092-078d","ts":1795348401160,"by":"gm-c41d07aa","type":"touch","files":["hooks/lines.js"],"op":"edit","add":21,"del":2}
+{"id":"mwrs3093-icg0","ts":1795348401161,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing hooks/lines.js"}
+{"id":"mwrs3s8k-oloo","ts":1795348437428,"by":"cx-2b8e44d0","type":"touch","files":["ui/fonts/Allo-OFL.txt"],"op":"edit","add":30,"del":0}
+{"id":"mwrs44tp-lvik","ts":1795348453741,"by":"gm-c41d07aa","type":"item.add","item":{"kind":"bug","title":"Empty input answers 0 where the spec says blank","block":"hooks","detail":"Found while working nearby.","id":"B19"}}
+{"id":"mwrs4h96-woax","ts":1795348469850,"by":"cx-2b8e44d0","type":"touch","op":"run","cmd":"npx vitest run tests/graph/shell.test.ts"}
+{"id":"mwrs4h97-fpi6","ts":1795348469851,"by":"cx-2b8e44d0","type":"test","ok":true,"summary":"21 passed in shell.test.ts","blocks":["shell"]}
+{"id":"mwrs4z91-60ti","ts":1795348493173,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"cb1fd66ec9612fab469a71de0cd6d32e8d6b8d21","note":"rebased"}
+{"id":"mwrs5fpj-yhnd","ts":1795348514503,"by":"cx-2b8e44d0","type":"block.release","block":"shell","outcome":"landed","note":""}
+{"id":"mwrs5fpl-edrq","ts":1795348514505,"by":"cx-2b8e44d0","type":"agent.status","status":"review","doing":"Committed: Work on Page shell"}
+{"id":"mwrs5fpm-qtjn","ts":1795348514506,"by":"cx-2b8e44d0","type":"merge.ready","worktree":"agent-2","branch":"agent-2","commit":"fdb1a44c0ffae635165e14f34d8e5028f65901a7"}
+{"id":"mwrs5fpj-itjt","ts":1795348514507,"by":"gm-c41d07aa","type":"touch","files":["hooks/claude-code.js"],"op":"edit","add":55,"del":17}
+{"id":"mwrs5fpk-3noy","ts":1795348514508,"by":"gm-c41d07aa","type":"agent.status","doing":"Editing hooks/claude-code.js"}
+{"id":"mwrs5s1b-ys27","ts":1795348530479,"by":"cc-7f3a91c2","type":"touch","files":["ui/timeline.js"],"op":"edit","add":7,"del":1}
+{"id":"mwrs6bjs-wzw0","ts":1795348555768,"by":"cc-7f3a91c2","type":"touch","files":["ui/windows.js"],"op":"edit","add":36,"del":19}
+{"id":"mwrs6uvk-nqz9","ts":1795348580816,"by":"gm-c41d07aa","type":"touch","op":"run","cmd":"npx vitest run tests/graph/hooks.test.ts"}
+{"id":"mwrs6uvl-e6sg","ts":1795348580817,"by":"gm-c41d07aa","type":"test","ok":true,"summary":"31 passed in hooks.test.ts","blocks":["hooks"]}
+{"id":"mwrs7ws7-v9s7","ts":1795348629943,"by":"cc-7f3a91c2","type":"touch","files":["ui/inspector.js"],"op":"edit","add":2,"del":3}
+{"id":"mwrs7ws8-gpqq","ts":1795348629944,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/inspector.js"}
+{"id":"mwrs7ws7-c92j","ts":1795348629945,"by":"gm-c41d07aa","type":"block.release","block":"hooks","outcome":"landed","note":""}
+{"id":"mwrs7ws8-xbwk","ts":1795348629946,"by":"gm-c41d07aa","type":"item.update","item":"B17","status":"done"}
+{"id":"mwrs7ws9-r3nw","ts":1795348629947,"by":"gm-c41d07aa","type":"agent.status","status":"review","doing":"Committed: B17: Tooltip clips at the right edge on a phone"}
+{"id":"mwrs7wsa-hr5o","ts":1795348629948,"by":"gm-c41d07aa","type":"merge.ready","worktree":"agent-3","branch":"agent-3","commit":"1fb7254734e88460855add35db5438bfa06bc731"}
+{"id":"mwrs7ws7-d1g1","ts":1795348629949,"by":"human","type":"block.queue","block":"hooks","note":"Error chip shows the wrong card name"}
+{"id":"mwrs8dze-8b7z","ts":1795348652234,"by":"cx-2b8e44d0","type":"block.reserve","block":"hooks","intent":"Empty input answers 0 where the spec says blank"}
+{"id":"mwrs8dzf-rocy","ts":1795348652235,"by":"cx-2b8e44d0","type":"agent.status","status":"working","task":"Empty input answers 0 where the spec says blank","doing":"Reading README.md"}
+{"id":"mwrs8dzg-rcor","ts":1795348652236,"by":"cx-2b8e44d0","type":"item.update","item":"B19","status":"doing"}
+{"id":"mwrs8dzh-dww0","ts":1795348652237,"by":"cx-2b8e44d0","type":"touch","files":["README.md"],"op":"read"}
+{"id":"mwrs8voi-i83x","ts":1795348675170,"by":"cc-7f3a91c2","type":"touch","files":["ui/theme/core/storeKit.js"],"op":"edit","add":3,"del":20}
+{"id":"mwrs8voj-5kpv","ts":1795348675171,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/theme/core/storeKit.js"}
+{"id":"mwrs9afm-1ibc","ts":1795348694290,"by":"cx-2b8e44d0","type":"touch","files":["hooks/install.js"],"op":"edit","add":26,"del":3}
+{"id":"mwrs9afn-r7d9","ts":1795348694291,"by":"cx-2b8e44d0","type":"agent.status","doing":"Editing hooks/install.js"}
+{"id":"mwrsak5l-lee4","ts":1795348753545,"by":"cx-2b8e44d0","type":"touch","files":["hooks/lines.js"],"op":"edit","add":54,"del":17}
+{"id":"mwrsauie-9jx3","ts":1795348766966,"by":"cc-7f3a91c2","type":"touch","files":["ui/worktrees.js"],"op":"edit","add":4,"del":29}
+{"id":"mwrsauif-ge82","ts":1795348766967,"by":"cc-7f3a91c2","type":"agent.status","doing":"Editing ui/worktrees.js"}
+{"id":"mwrsb62l-4bg6","ts":1795348781949,"by":"gm-c41d07aa","type":"block.reserve","block":"cli","intent":"Work on Command line"}
+{"id":"mwrsb62m-30bg","ts":1795348781950,"by":"gm-c41d07aa","type":"agent.status","status":"working","task":"Work on Command line","doing":"Reading README.md"}
+{"id":"mwrsb62o-3dtb","ts":1795348781952,"by":"gm-c41d07aa","type":"touch","files":["README.md"],"op":"read"}

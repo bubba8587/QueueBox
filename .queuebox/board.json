@@ -1,0 +1,312 @@
+{
+  "schema": 1,
+  "name": "QueueBox",
+  "human": {
+    "name": "Author"
+  },
+  "staleAfterMin": 30,
+  "guard": {
+    "held": "deny",
+    "frozen": "deny",
+    "free": "reserve"
+  },
+  "districts": [
+    {
+      "id": "page",
+      "name": "Page"
+    },
+    {
+      "id": "engine",
+      "name": "Engine"
+    },
+    {
+      "id": "agents",
+      "name": "Agent side"
+    },
+    {
+      "id": "repo",
+      "name": "Repository"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "map",
+      "name": "Map and canvas",
+      "district": "page",
+      "about": "The map of tiles, drag and drop, tethers.",
+      "paths": [
+        "ui/map.js",
+        "ui/dnd.js",
+        "ui/tethers.js"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "map",
+        "tile",
+        "canvas",
+        "drag",
+        "pan",
+        "group",
+        "tidy"
+      ]
+    },
+    {
+      "id": "side",
+      "name": "Side column",
+      "district": "page",
+      "about": "Inbox, agent windows, worktree strip, merge queue, block drawer, timeline.",
+      "paths": [
+        "ui/windows.js",
+        "ui/inspector.js",
+        "ui/worktrees.js",
+        "ui/timeline.js",
+        "ui/popover.js",
+        "ui/itemview.js"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "inbox",
+        "window",
+        "drawer",
+        "inspector",
+        "timeline",
+        "worktree strip"
+      ]
+    },
+    {
+      "id": "shell",
+      "name": "Page shell",
+      "district": "page",
+      "about": "Wiring, styles, DOM helpers, the event source.",
+      "paths": [
+        "ui/app.js",
+        "ui/index.html",
+        "ui/styles.css",
+        "ui/dom.js",
+        "ui/source.js",
+        "ui/fonts/",
+        "ui/favicon.js",
+        "ui/newitem.js",
+        "ui/help.js"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "app",
+        "styles",
+        "sim"
+      ]
+    },
+    {
+      "id": "theme",
+      "name": "Theme kit",
+      "district": "page",
+      "about": "Solenoid's vendored theme kit; regenerated from Solenoid, not edited here.",
+      "paths": [
+        "ui/theme/"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "theme",
+        "palette"
+      ]
+    },
+    {
+      "id": "model",
+      "name": "Model and fold",
+      "district": "engine",
+      "about": "The event fold, checks, globs, board resolution.",
+      "paths": [
+        "core/model.js",
+        "core/glob.js",
+        "core/resolve.js",
+        "core/board-ops.js"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "model",
+        "fold",
+        "event",
+        "queue",
+        "item"
+      ]
+    },
+    {
+      "id": "git",
+      "name": "Worktrees and merges",
+      "district": "engine",
+      "about": "Reading worktrees from git, the merge forecast and queue checks.",
+      "paths": [
+        "core/worktrees.js",
+        "core/merges.js"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "worktree",
+        "merge",
+        "base",
+        "branch"
+      ]
+    },
+    {
+      "id": "store",
+      "name": "Store and server",
+      "district": "engine",
+      "about": "The log, its lock, identity, the daemon, the HTTP server.",
+      "paths": [
+        "core/store.js",
+        "core/daemon.js",
+        "core/identity.js",
+        "core/files.js",
+        "server.js",
+        "core/launch.js",
+        "core/ptyrun.py"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "store",
+        "lock",
+        "server",
+        "daemon",
+        "identity"
+      ]
+    },
+    {
+      "id": "cli",
+      "name": "Command line",
+      "district": "agents",
+      "about": "qb and its commands.",
+      "paths": [
+        "cli.js",
+        "qb",
+        "install.sh"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "cli",
+        "command",
+        "qb"
+      ]
+    },
+    {
+      "id": "hooks",
+      "name": "Hooks",
+      "district": "agents",
+      "about": "The Claude Code hooks and their installer.",
+      "paths": [
+        "hooks/"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "hook",
+        "claude code"
+      ]
+    },
+    {
+      "id": "adapters",
+      "name": "Adapters",
+      "district": "agents",
+      "about": "Backlog importers.",
+      "paths": [
+        "adapters/"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "import",
+        "backlog",
+        "checklist"
+      ]
+    },
+    {
+      "id": "tests",
+      "name": "Tests and scripts",
+      "district": "repo",
+      "about": "Unit tests, the browser smoke test, init drafter.",
+      "paths": [
+        "test/",
+        "scripts/"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "test",
+        "smoke",
+        "init"
+      ]
+    },
+    {
+      "id": "docs",
+      "name": "Docs and config",
+      "district": "repo",
+      "about": "README, package.json, examples, the board itself.",
+      "paths": [
+        "README.md",
+        "package.json",
+        ".gitignore",
+        "examples/",
+        ".queuebox/board.json",
+        "LICENSE",
+        ".queuebox/.gitignore"
+      ],
+      "docs": [
+        "README.md"
+      ],
+      "keywords": [
+        "readme",
+        "docs",
+        "example"
+      ]
+    },
+    {
+      "id": "decisions",
+      "name": "Decision tree",
+      "district": "repo",
+      "about": "The DTE decision tree (decisions/), the specs under it, the vendored DTE tool and its config, and CLAUDE.md. Never edit vendor/dte/ or tools/dte.py here: refresh them from the DTE repository.",
+      "paths": [
+        "decisions/",
+        "specs/",
+        "vendor/dte/",
+        "tools/",
+        "dte.cfg",
+        ".dteignore",
+        ".dtecoverage",
+        "CLAUDE.md"
+      ],
+      "docs": [
+        "CLAUDE.md",
+        "vendor/dte/PROTOCOL.md"
+      ],
+      "keywords": [
+        "decision",
+        "leaf",
+        "ring",
+        "spec",
+        "dte",
+        "ratify"
+      ]
+    }
+  ],
+  "sources": [],
+  "waitForContext": 10,
+  "autoApply": true
+}

@@ -1,0 +1,808 @@
+/* Allo (Josh Puckett, SIL OFL 1.1, ui/fonts/Allo-OFL.txt), vendored: the page's one font, variable in weight, optical
+   size and roundness. No monospace: figures are tabular everywhere, and where a reader compares characters (paths,
+   ids, code, timers) --font-mono is Allo with the disambiguation set (serifed I, tailed l, footed 1, slashed zero). */
+@font-face {
+  font-family: "Allo";
+  src: url("fonts/AlloVariable.woff2") format("woff2-variations"), url("fonts/AlloVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+:root { --font-sans: "Allo", system-ui, sans-serif; --font-mono: "Allo", system-ui, sans-serif; }
+/* Feature settings, not font-variant-numeric: the many `font:` shorthands below reset the latter. */
+body { font-optical-sizing: auto; font-feature-settings: "tnum"; }
+code, pre, kbd, .timer, .num, .wt-path, .it-sub, .paths { font-feature-settings: "tnum", "ss02"; }
+
+/* The repository as a map of blocks on Solenoid's canvas (a dot grid, districts as group bodies, blocks as tiles of
+   one size) beside a column of windows: what needs you, your own, one per agent. A timeline dock replays the session.
+   The look is Solenoid's palette system, whole and unedited: theme/theme.css holds its tokens, theme/controls.css its
+   controls, and the theme kit writes the palette, the accent, the status colors and every --slot-* at run time. This
+   sheet only names QueueBox's roles in those terms and lays the page out. */
+
+:root {
+  /* Status is Solenoid's three tokens (DESIGN.md, Status); status-colored text mixes them 70% toward the ink. */
+  --danger: var(--sol-error);
+  --ok: var(--sol-ok);
+  --warn: var(--sol-warn);
+  --human: var(--slot-gray, #8a8f98);
+  /* The accent toward the contrast pole at the ring rung: focus and selection (the Accent-Mix Ladder). */
+  --ring: color-mix(in srgb, var(--accent) var(--mix-ring), var(--ring-into));
+  --unit-w: 8rem;
+  --unit-h: 2.75rem;
+  --gap: 0.375rem;
+  --side: clamp(18.75rem, 24vw, 23.75rem);
+  --dock: clamp(16.25rem, 20vw, 21.25rem);
+  /* The one size knob. Every length on this sheet is in rem, so the whole page (type, controls, tiles, gaps, the
+     side column, the timeline, the drawer) grows or shrinks with it; the map's packer and the timeline read the
+     root font size, and the theme kit's own controls are zoomed by it below. 1 is the size Solenoid draws at. */
+  --ui-scale: 1.18;
+}
+:root {
+  /* The scale (author, 2026-11-22: sizing and spacing were all over the place). Every size on the page is one of
+     these: five type sizes, two control heights, three radii; spacing keeps to 0.125rem steps. */
+  --fs-1: 0.625rem;   /* the tiniest: key caps, activity tags */
+  --fs-2: 0.6875rem;  /* meta: ids, timers, counts, section labels, chips, small buttons */
+  --fs-3: 0.75rem;    /* body: text, buttons, rows */
+  --fs-4: 0.8125rem;  /* names: windows, popovers, the board */
+  --fs-5: 0.875rem;   /* the wordmark */
+  --fs-6: 1.25rem;    /* a block's heading */
+  --h-sm: 1.5rem;     /* controls inside a row: small buttons, chips, fields, a row's select */
+  --h-md: 1.75rem;    /* controls on their own: the top bar, buttons, selects, alerts */
+  --r-sm: 0.25rem;
+  --r-md: 0.375rem;
+  --r-lg: 0.5rem;
+  --pad: 0.625rem;    /* the inside of every panel: windows, the left column, popovers, the timeline */
+}
+html { font-size: calc(16px * var(--ui-scale)); }
+/* The vendored theme kit sizes its controls in px; scale them with the page rather than editing the kit. */
+.solenoid-apptools, .solenoid-settings__panel { zoom: var(--ui-scale); }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--app-bg);
+  color: var(--text);
+  font: 400 var(--fs-3)/1.4 var(--font-sans);
+  padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+button:disabled, input:disabled, select:disabled { cursor: default; opacity: 0.55; }
+:focus-visible { outline: 0.125rem solid var(--ring); outline-offset: 1px; }
+.ic { width: 0.875rem; height: 0.875rem; flex: none; display: inline-block; vertical-align: -0.125rem; }
+.timer, .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+/* Status words are neutral; the dot beside them carries the color. */
+.dot-ok, .dot-warn, .dot-danger, .dot-muted { width: 0.4375rem; height: 0.4375rem; border-radius: 50%; flex: none; display: inline-block; }
+.dot-ok { background: var(--ok); }
+.dot-warn { background: var(--warn); }
+.dot-danger { background: var(--danger); }
+.dot-muted { background: var(--text-muted); }
+
+/* ------------------------------------------------------------------ controls, in Solenoid's vocabulary
+   Round 1.75rem icon buttons and pills, as Solenoid's top bar draws them (theme/controls.css, .solenoid-apptools__btn):
+   a sunken fill and the button border at rest; hover lifts the fill and brings in the accent. Text buttons are its
+   Settings and palette-editor buttons; the one confirming action in a place is tinted with the accent. */
+.icon-btn {
+  width: var(--h-md); height: var(--h-md); display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; padding: 0; flex: none;
+  background: var(--btn-bg); border: 1px solid var(--btn-border); color: var(--text); cursor: pointer;
+}
+.icon-btn:hover:not(:disabled) { background: var(--btn-hover); border-color: var(--accent); color: var(--accent); }
+.btn {
+  height: var(--h-md); padding: 0 0.625rem; font: 400 var(--fs-3)/1 var(--font-sans); background: var(--btn-bg); border: 1px solid var(--btn-border);
+  border-radius: var(--r-md); color: var(--text); cursor: pointer; white-space: nowrap; flex: none;
+  display: inline-flex; align-items: center; gap: 0.375rem;
+}
+.btn.sm { height: var(--h-sm); padding: 0 0.5rem; font-size: var(--fs-2); border-radius: var(--r-md); }
+.btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.btn.confirm { background: color-mix(in srgb, var(--accent) 22%, var(--btn-bg)); border-color: var(--accent); color: var(--text-bright); }
+.btn.confirm:hover:not(:disabled) { background: color-mix(in srgb, var(--accent) 32%, var(--btn-bg)); color: var(--text-bright); }
+.btn .ic { width: 0.75rem; height: 0.75rem; }
+/* Fields: sunken, a 1px border, 0.25rem radius; focus is the accent edge alone, no glow or ring. */
+.field {
+  flex: 1 1 auto; min-width: 0; height: var(--h-sm); padding: 0 0.5rem; border-radius: var(--r-sm);
+  border: 1px solid var(--border); background: var(--surface-sunken); color: var(--text); font: 400 var(--fs-3) var(--font-sans); outline: none;
+}
+.field:focus, .field:focus-visible { border-color: var(--accent); outline: none; }
+.field::placeholder { color: var(--text-muted); }
+/* Selects are Solenoid's Settings select, in its wrap with the caret (dom.js select()). */
+.solenoid-settings__select { max-width: 100%; text-overflow: ellipsis; height: var(--h-md); }
+.in-find .solenoid-settings__select, .it-foot .solenoid-settings__select { height: var(--h-sm); }
+/* Segmented controls are pills: the button fill and border around, the chosen segment lifted toward the ink. */
+.seg { display: inline-flex; align-items: center; padding: 1px; gap: 1px; border-radius: 62.4375rem; background: var(--btn-bg); border: 1px solid var(--btn-border); }
+.seg button { border: 0; background: none; height: calc(var(--h-md) - 0.25rem); padding: 0 0.75rem; border-radius: 62.4375rem; font: 400 var(--fs-3)/1 var(--font-sans); color: var(--text-dim); cursor: pointer; }
+.seg button:hover { color: var(--accent); }
+.seg button[aria-pressed="true"] { background: color-mix(in srgb, var(--text) 10%, var(--surface-sunken)); color: var(--text); }
+
+/* ------------------------------------------------------------------ shell */
+.app {
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--side);
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  grid-template-areas: "top top" "alert alert" "map side" "time time";
+  column-gap: 0.625rem;
+  padding-block: 0.5rem 0.625rem;
+}
+.topbar { grid-area: top; display: flex; align-items: center; gap: 0.5rem 0.75rem; flex-wrap: wrap; padding-bottom: 0.5rem; position: relative; }
+.brand { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.wordmark { display: flex; align-items: center; gap: 0.5rem; font: 700 var(--fs-5)/1 var(--font-sans); color: var(--wordmark-color); }
+/* The [Q] mark: all of it in the accent, in Allo's heaviest weight, as on the tab. */
+.mark { font: 900 1.05em/1 var(--font-sans); color: var(--accent); letter-spacing: -0.03em; }
+.mark i { font-style: normal; }
+.board-name { font: 400 var(--fs-4)/1 var(--font-sans); color: var(--text-dim); white-space: nowrap; }
+.conn { display: inline-flex; align-items: center; gap: 0.375rem; font: 600 var(--fs-3)/1 var(--font-sans); color: var(--text-dim); white-space: nowrap; }
+.conn i { width: 0.4375rem; height: 0.4375rem; border-radius: 50%; background: var(--text-muted); }
+.conn.demo i { background: var(--slot-sky); }
+.conn.offline i, .conn.connecting i { background: var(--warn); }
+.conn.replay { color: var(--text-bright); }
+.conn.replay i { background: var(--text-bright); border-radius: 1px; }
+/* Counts are plain numbers with words, not chips; the two that filter are buttons that look the same until hovered. */
+.spacer { flex: 1 1 0; }
+/* A toggle in the top bar: a pill the height of the tool buttons, the switch's accent fill when on. */
+.tool {
+  height: var(--h-md); padding: 0 0.75rem 0 0.5rem; border-radius: 62.4375rem; border: 1px solid var(--btn-border); background: var(--btn-bg);
+  font: 400 var(--fs-3)/1 var(--font-sans); color: var(--text); display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;
+}
+.tool:hover { background: var(--btn-hover); border-color: var(--accent); color: var(--accent); }
+.tool .box { width: 0.625rem; height: 0.625rem; border-radius: var(--r-sm); box-shadow: inset 0 0 0 1.5px var(--text-muted); }
+.tool[aria-pressed="true"] .box { background: var(--accent); box-shadow: none; }
+.search {
+  display: flex; align-items: center; gap: 0.375rem; height: var(--h-md); padding: 0 0.5rem; border-radius: var(--r-sm);
+  background: var(--surface-sunken); border: 1px solid var(--border); color: var(--text-muted);
+}
+.search:focus-within { border-color: var(--accent); }
+.search input { border: 0; background: none; outline: none; width: 9.375rem; color: var(--text); font: 400 var(--fs-3) var(--font-sans); }
+.search input::placeholder { color: var(--text-muted); }
+/* At the bigger sizes the top bar keeps to one line on a laptop: the search and the counts give way first. */
+@media (min-width: 861px) {
+  .topbar { flex-wrap: nowrap; }
+  .search { flex: 0 20 auto; min-width: 0; }
+  .search input { width: 9.375rem; min-width: 2.5rem; flex: 1 1 auto; }
+  .brand, .topbar .seg, .topbar .tool, .solenoid-apptools, .solenoid-apptools__pill { flex: none; }
+  #board-name { overflow: hidden; text-overflow: ellipsis; }
+}
+.search kbd { font: 400 var(--fs-1) var(--font-mono); padding: 1px 0.25rem; border: 1px solid var(--border); border-radius: var(--r-sm); color: var(--text-muted); }
+
+/* ------------------------------------------------------------------ alerts: one strip */
+.alerts { grid-area: alert; display: flex; gap: 0.375rem; align-items: center; padding-bottom: 0.5rem; min-width: 0; overflow: hidden; }
+.alerts.open { flex-wrap: wrap; }
+.alerts:empty { display: none; }
+.alert {
+  display: inline-flex; align-items: center; gap: 0.5rem; min-width: 0; max-width: 32.5rem; height: var(--h-md); padding: 0 0.5rem; border-radius: var(--r-md);
+  cursor: pointer; flex: 0 1 auto; background: var(--surface); border: 1px solid var(--border); color: var(--text);
+}
+.alert:hover { border-color: var(--border-strong); }
+.alert .txt { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.alert .timer { color: var(--text-muted); font-size: var(--fs-2); }
+.alert.high { border-color: color-mix(in srgb, var(--danger) var(--mix-hairline), var(--border)); }
+.alert.away { cursor: default; max-width: min(47.5rem, 100%); }
+.alerts .more { flex: none; height: var(--h-md); border: 0; background: none; padding: 0 0.25rem; font: 600 var(--fs-3) var(--font-sans); color: var(--text-dim); white-space: nowrap; }
+.alerts .more:hover { color: var(--text); }
+
+/* ------------------------------------------------------------------ map */
+.map-wrap {
+  grid-area: map;
+  position: relative;
+  min-height: 0;
+  overflow: auto;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background-color: var(--canvas-bg);
+  background-image: radial-gradient(var(--canvas-dot) 1px, transparent 1.2px);
+  background-size: 1.25rem 1.25rem;
+  transition: box-shadow 0.2s;
+}
+/* Replaying, the map is framed, so a past board is never mistaken for the live one. */
+body.replaying .map-wrap { box-shadow: inset 0 0 0 0.125rem color-mix(in srgb, var(--text-bright) 55%, transparent); }
+.map { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; transform-origin: 0 0; position: relative; }
+/* Free: the person placed the districts; each sits where it was put. */
+.map.free .district:not(.nested) { position: absolute; }
+.district-label { cursor: grab; user-select: none; }
+.district.lifted { z-index: 5; box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 0.35); border-color: var(--border-strong); }
+body.dragging-tile .district.drop-ok { outline: 0.125rem solid var(--border-strong); outline-offset: 0.125rem; }
+.slot.drop-before::before { content: ''; position: absolute; left: -0.3125rem; top: 0.125rem; bottom: 0.125rem; width: 0.1875rem; border-radius: 0.125rem; background: var(--accent); z-index: 2; }
+/* Off phones the map is a canvas: it pans inside its frame instead of scrolling. A finger pans it and two fingers
+   pinch it; the browser takes neither. */
+@media (min-width: 861px) {
+  .map-wrap { overflow: hidden; cursor: grab; touch-action: none; overscroll-behavior: contain; }
+  .map-wrap.panning, .map-wrap.panning * { cursor: grabbing; user-select: none; }
+}
+.map-mini { position: absolute; left: 0.625rem; bottom: 0.625rem; z-index: 4; background: var(--overlay-bg); border: var(--overlay-border-width) solid var(--overlay-border); border-radius: var(--r-md); box-shadow: var(--overlay-shadow); overflow: hidden; cursor: pointer; box-sizing: content-box; }
+.map-mini[hidden] { display: none; }
+.map-mini i { position: absolute; background: var(--surface-raised); border: 1px solid var(--border); border-radius: 0.125rem; box-sizing: border-box; }
+.map-mini .mm-view { position: absolute; border: 1px solid var(--text-dim); border-radius: 0.125rem; background: color-mix(in srgb, var(--text) 6%, transparent); pointer-events: none; }
+/* Far out, a tile is its name and its color. */
+.map-wrap.far .tile-badges, .map-wrap.far .feet, .map-wrap.far .sk-time { display: none; }
+.map-ctrl { position: absolute; right: 0.625rem; bottom: 0.625rem; z-index: 4; display: flex; gap: 0.375rem; }
+@media (max-width: 860px) { .map-ctrl { display: none; } }
+.shelf { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0.75rem; max-width: 100%; }
+.district {
+  display: flex; flex-direction: column; gap: 0.375rem; max-width: 100%;
+  padding: 0.375rem 0.5rem 0.5rem; border-radius: var(--r-lg);
+  background: color-mix(in srgb, var(--surface) 45%, transparent);
+  border: 1px solid var(--border-subtle);
+}
+.district-label { font: 600 var(--fs-2)/1 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); padding: 0.25rem 1px 0; height: 0.75rem; }
+.district-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), var(--unit-w));
+  grid-auto-rows: var(--unit-h);
+  gap: var(--gap);
+  max-width: 100%;
+}
+.slot { position: relative; min-width: 0; }
+.slot > .tile, .slot > .socket { position: absolute; inset: 0; }
+
+/* ------------------------------------------------------------------ tiles */
+.tile, .dsum {
+  --tc: var(--text-muted);
+  --lc: var(--surface);
+  --lv: 0%;
+  position: relative;
+  display: flex; flex-direction: column; justify-content: center; gap: 0.25rem;
+  padding: 0 0.5rem;
+  border-radius: var(--r-md);
+  background: color-mix(in oklab, var(--lc) var(--lv), var(--surface));
+  border: 1px solid var(--border);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  overflow: hidden;
+  transition: border-color 0.15s, opacity 0.2s, background-color 0.3s;
+}
+.tile:hover, .dsum:hover { border-color: var(--border-strong); }
+/* A folded district: one card the size of a tile, carrying its blocks' badges and holders. */
+.dsum { display: none; height: var(--unit-h); width: var(--unit-w); cursor: default; }
+.district.collapsed .dsum { display: flex; }
+.district.collapsed .district-grid { display: none; }
+.d-kids { display: flex; flex-direction: column; gap: 0.375rem; }
+.d-kids:empty, .district.collapsed .d-kids { display: none; }
+.district.nested { background: color-mix(in srgb, var(--surface) 70%, transparent); max-width: none; }
+.district-grid:empty { display: none; }
+.dsum.selected { border-color: transparent; box-shadow: 0 0 0 0.125rem var(--ring); }
+.dsum.dim { opacity: 0.4; }
+.dsum.match { border-color: var(--accent); }
+.dsum.conflict { border-color: var(--danger); }
+.district-label { display: flex; align-items: center; gap: 0.25rem; }
+.d-fold { width: 0.875rem; height: 0.875rem; padding: 0; margin: -0.125rem 0 -0.125rem -0.25rem; border: 0; border-radius: var(--r-sm); background: none; color: var(--text-muted); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.d-fold:hover { color: var(--text-bright); background: var(--btn-hover); }
+.d-fold .ic { width: 0.6875rem; height: 0.6875rem; transition: transform 0.15s; }
+.district.collapsed .d-fold .ic { transform: rotate(-90deg); }
+.d-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.d-more { width: 1rem; height: 0.875rem; padding: 0; margin: -0.125rem -0.25rem -0.125rem auto; border: 0; border-radius: var(--r-sm); background: none; color: var(--text-muted); display: inline-flex; align-items: center; justify-content: center; flex: none; opacity: 0; }
+.district:hover .d-more, .d-more:focus-visible, .d-more[aria-expanded="true"] { opacity: 1; }
+.d-more:hover { color: var(--text-bright); background: var(--btn-hover); }
+.d-more .ic { width: 0.75rem; height: 0.75rem; }
+@media (hover: none) { .d-more { opacity: 1; } }
+.map-menu {
+  position: fixed; z-index: 60; min-width: 12.5rem; padding: 0.25rem; display: flex; flex-direction: column; gap: 1px;
+  background: var(--raised, var(--surface)); border: 1px solid var(--border); border-radius: var(--r-lg);
+  box-shadow: 0 0.625rem 1.75rem rgb(0 0 0 / 0.35);
+}
+.map-menu-item {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.125rem; padding: 0.375rem 0.5rem; border: 0; border-radius: var(--r-md);
+  background: none; color: var(--text); text-align: left; font: 400 var(--fs-3)/1.2 var(--font-sans);
+}
+.map-menu-item:hover:not(:disabled), .map-menu-item:focus-visible { background: var(--btn-hover); color: var(--text-bright); outline: none; }
+.mm-hint { font-size: var(--fs-2); color: var(--text-dim); }
+@media (max-width: 860px) { .district.collapsed .dsum { width: auto; } }
+/* A tinted tile (Heat, Branches, a focused worktree) takes an edge of its own color, the accent-mix ladder's edge rung. */
+.tile.tinted { border-color: color-mix(in oklab, var(--lc) var(--mix-edge), var(--border)); }
+.tile.tinted:hover { border-color: color-mix(in oklab, var(--lc) var(--mix-emphasis), var(--border)); }
+/* Selection: the ring rung of the accent, with its glow (DESIGN.md, the Accent-Mix Ladder). */
+.tile.selected, .socket.selected { border-color: transparent; box-shadow: 0 0 0 0.125rem var(--ring), 0 0.25rem 0.875rem color-mix(in srgb, var(--accent) var(--mix-glow), transparent); }
+.tile-name {
+  font: 600 var(--fs-3)/1.2 var(--font-sans); color: var(--text-bright);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 0.375rem;
+}
+/* A name never runs under the discs: it stops where they start (each disc after the first adds 0.6875rem). */
+.tile:has(.feet:not(:empty)) .tile-name { padding-right: calc(0.75rem + var(--feet, 1) * 0.75rem); }
+.tile-badges { display: flex; gap: 0.5rem; align-items: center; height: 0.8125rem; overflow: hidden; color: var(--text-dim); }
+.tile-badges:empty { display: none; }
+.badge { display: inline-flex; align-items: center; gap: 0.25rem; font: 400 var(--fs-2)/1 var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--text-dim); }
+.badge .ic { width: 0.6875rem; height: 0.6875rem; vertical-align: 0; color: var(--text-muted); }
+.badge.danger { color: color-mix(in srgb, var(--danger) 70%, var(--text)); }
+.badge.danger .ic { color: var(--danger); }
+.badge.you::before { content: ""; width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--warn); margin-right: 1px; }
+.badge.you .ic { display: none; }
+.badge.ok { color: var(--text); }
+.badge.ok .ic { color: var(--ok); }
+.badge.timer { margin-left: auto; color: var(--text-muted); }
+.feet { position: absolute; right: 0.3125rem; bottom: 0.3125rem; display: flex; flex-direction: row-reverse; }
+.feet:empty { display: none; }
+.feet i {
+  width: 0.9375rem; height: 0.9375rem; border-radius: 50%; display: grid; place-items: center; margin-left: -0.25rem;
+  background: var(--fc); color: var(--fci); font: 700 0.5312rem/1 var(--font-sans); font-style: normal; box-shadow: 0 0 0 1.5px var(--surface);
+}
+.tile .pulse { position: absolute; right: 0.375rem; top: 0.375rem; width: 0.3125rem; height: 0.3125rem; border-radius: 50%; background: var(--tc); animation: blink 1.4s ease-in-out infinite; }
+[data-lens="work"] .tile .pulse, [data-lens="issues"] .tile .pulse { background: var(--text-dim); }
+@keyframes blink { 50% { opacity: 0.25; } }
+.tile.frozen { cursor: not-allowed; border-style: dashed; }
+.tile.frozen .tile-name { color: var(--text-dim); }
+.tile.conflict { border-color: color-mix(in srgb, var(--danger) var(--mix-edge), var(--border)); }
+[data-lens="work"] .tile.conflict { background-color: color-mix(in srgb, var(--danger) 9%, var(--surface)); }
+.tile.dim { opacity: 0.28; }
+.tile.match { border-color: var(--accent); }
+.tile.dragging { opacity: 0.3; }
+/* An item row drags as itself, at its own size from where it was grabbed, and leaves its outline behind. */
+.q-item[data-drag-item] { cursor: grab; }
+.q-item.ghost { width: auto; height: auto; transform: none; }
+.q-item.dragging { background: none; border-style: dashed; border-color: var(--border-strong); }
+.q-item.dragging > * { visibility: hidden; }
+.tile.unmapped { border-style: dashed; }
+.tile.unmapped .tile-name { color: var(--text-dim); }
+
+/* The slot a reserved tile leaves: hatched in its holder's color, the name and holder on solid plates. */
+.socket {
+  --sc: var(--text-muted);
+  --sci: #1a1a1a;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+  padding: 0.25rem 0.375rem; border-radius: var(--r-md); overflow: hidden; cursor: pointer;
+  border: 1px dashed color-mix(in srgb, var(--sc) var(--mix-emphasis), var(--border));
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--sc) 20%, transparent) 0 0.25rem, color-mix(in srgb, var(--sc) 6%, transparent) 0.25rem 0.5625rem);
+}
+.socket .sk-name, .socket .sk-who, .socket .sk-time { background: var(--canvas-bg); border-radius: var(--r-sm); padding: 1px 0.25rem; }
+.socket .sk-name { max-width: 100%; font: 600 var(--fs-3)/1.2 var(--font-sans); color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.socket .sk-foot { display: flex; align-items: center; justify-content: space-between; gap: 0.25rem; width: 100%; min-width: 0; }
+.socket .sk-who { display: inline-flex; align-items: center; gap: 0.25rem; min-width: 0; padding-left: 1px; }
+.socket .sk-agent { font: 600 var(--fs-2)/1.2 var(--font-sans); color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.socket .dot { width: 0.8125rem; height: 0.8125rem; border-radius: 50%; display: grid; place-items: center; font: 700 0.5rem/1 var(--font-sans); background: var(--sc); color: var(--sci); flex: none; }
+.socket .sk-time { font-size: var(--fs-2); color: var(--text-dim); }
+.socket .sk-time .timer { font-size: var(--fs-2); }
+.socket.queued .sk-agent { color: var(--text-dim); }
+.socket.stale { border-style: dotted; }
+
+/* ------------------------------------------------------------------ the side column */
+.side { grid-area: side; min-height: 0; overflow: auto; display: flex; flex-direction: column; gap: 0.5rem; padding-bottom: 0.125rem; }
+.agents { display: flex; flex-direction: column; gap: 0.5rem; }
+.win {
+  --ac: var(--slot-gray);
+  --aci: #fff;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  display: flex; flex-direction: column;
+  min-width: 0;
+  transition: box-shadow 0.15s, opacity 0.3s;
+}
+/* Inset: the side column scrolls, so a ring outside the window would be cut at its left and right (B23). */
+.win.drop-ok { box-shadow: inset 0 0 0 0.125rem color-mix(in srgb, var(--ac) var(--mix-ring), var(--ring-into)); }
+.win.gone { opacity: 0.55; }
+.win.flash { box-shadow: 0 0 0 0.125rem var(--text-bright); }
+.win-head { display: flex; align-items: center; gap: 0.5rem; min-width: 0; padding: 0.5rem var(--pad); min-height: 2.75rem; }
+.disc {
+  width: 1.25rem; height: 1.25rem; border-radius: 50%; flex: none; display: grid; place-items: center;
+  background: var(--ac); color: var(--aci); font: 700 var(--fs-2)/1 var(--font-sans);
+}
+.disc.plain { background: var(--surface-raised); color: var(--text-dim); box-shadow: inset 0 0 0 1px var(--border-strong); }
+.disc.plain.danger { color: var(--danger); }
+.disc .ic { width: 0.75rem; height: 0.75rem; }
+/* The name is the last thing to give way: the line count shrinks away first. */
+.win-name { flex: 0 0 auto; min-width: 0; max-width: 9rem; font: 600 var(--fs-4)/1.2 var(--font-sans); color: var(--text-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* A head's count stays beside its title; its buttons gather at the right edge. */
+.win-head > button:first-of-type { margin-left: auto; }
+.win-count { font: 600 var(--fs-3) var(--font-mono); color: var(--text-dim); }
+.win-lines { flex: 0 1 auto; min-width: 0; overflow: hidden; font: 400 var(--fs-2) var(--font-mono); font-variant-numeric: tabular-nums; color: var(--text-dim); white-space: nowrap; }
+.state { display: inline-flex; align-items: center; gap: 0.375rem; white-space: nowrap; font: 600 var(--fs-2)/1 var(--font-sans); color: var(--text); }
+.state::before { content: ""; width: 0.4375rem; height: 0.4375rem; border-radius: 50%; background: var(--text-muted); flex: none; }
+.state .timer { font-weight: 400; color: var(--text-dim); }
+.state.working::before { background: var(--ok); animation: blink 1.6s ease-in-out infinite; }
+.state.working .timer { color: var(--text); }
+.state.question::before, .state.permission::before, .state.review::before { background: var(--warn); }
+.state.quiet::before, .state.stale::before { background: none; box-shadow: inset 0 0 0 1.5px var(--warn); }
+.state.blocked::before { background: var(--danger); }
+.state.idle, .state.done, .state.gone { color: var(--text-dim); }
+/* What the agent is doing this second (from its hooks), tinted in its color; kept in the roster too. */
+.act-tag { flex: none; white-space: nowrap; font: 600 var(--fs-1)/1 var(--font-sans); padding: 0.25rem 0.375rem; border-radius: 999px; background: color-mix(in oklab, var(--ac) 22%, transparent); color: var(--text); }
+.act-tag:empty { display: none; }
+/* Idle with nothing to do: the window steps back and its disc goes hollow, so it reads at a glance. */
+.win.idle-free { opacity: 0.72; }
+.win.idle-free:hover, .win.idle-free:focus-within { opacity: 1; }
+.win.idle-free .disc { background: none; box-shadow: inset 0 0 0 1.5px var(--ac); color: var(--text); }
+.state.gone::before { background: none; box-shadow: inset 0 0 0 1.5px var(--text-muted); }
+.win-body { display: flex; flex-direction: column; gap: 0.375rem; padding: 0 var(--pad) var(--pad); min-width: 0; }
+.win-body:empty { display: none; }
+.win-task { font: 400 var(--fs-3)/1.35 var(--font-sans); color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.win-doing { display: flex; align-items: center; gap: 0.375rem; min-width: 0; font: 400 var(--fs-2)/1.4 var(--font-mono); color: var(--text-dim); }
+.win-doing[hidden] { display: none; }
+.win-doing-text { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* In the doing line the tag is a quiet lead-in, not a header badge: the line's own height, the sans face. */
+.win-doing .act-tag { padding: 0.125rem 0.375rem; }
+/* The line count never breaks mid-number: it keeps its width now that the tag has left the header. */
+.win-lines { flex: none; }
+/* Subagents: one quiet line each under the agent's doing, a dot in its color (hollow once ended, red if failed). */
+.subs { list-style: none; margin: 0.125rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.0625rem; }
+.sub { display: flex; align-items: center; gap: 0.375rem; min-width: 0; font: 400 var(--fs-2)/1.45 var(--font-sans); color: var(--text-dim); transition: opacity 1s; }
+.sub-dot { width: 0.375rem; height: 0.375rem; border-radius: 50%; flex: none; background: var(--ac, var(--text-muted)); }
+.sub.done .sub-dot { background: none; box-shadow: inset 0 0 0 1.5px var(--ac, var(--text-muted)); }
+.sub.failed .sub-dot { background: var(--danger); }
+.sub-desc { flex: 1 1 auto; min-width: 0; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sub.done .sub-desc { color: var(--text-dim); }
+.sub .timer, .sub-end { flex: none; font: 400 var(--fs-2) var(--font-mono); color: var(--text-muted); }
+.sub.failed .sub-end { color: color-mix(in srgb, var(--danger) 70%, var(--text)); }
+.tray {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(7.375rem, 1fr)); grid-auto-rows: minmax(2.5rem, auto); gap: 0.375rem;
+  margin-top: 0.125rem;
+}
+.tray:empty { display: none; }
+.tray .tile { height: 100%; }
+.tray[data-label]::before {
+  content: attr(data-label); grid-column: 1 / -1; align-self: end; height: 0.75rem;
+  font: 600 var(--fs-2)/1 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted);
+}
+.tray[data-label] { grid-auto-rows: minmax(2.5rem, auto); grid-template-rows: 0.875rem; }
+/* Up next: the team's queue, no one's disc. Empty, it says how it works; a drag over it outlines it. */
+.q-item {
+  /* Two lines: what it is (icon, id, the title with room to read), then where and what to do (its block, its acts). */
+  grid-column: 1 / -1; display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto auto; align-items: center; column-gap: 0.375rem; row-gap: 0.375rem;
+  min-width: 0; padding: 0.5rem; border: 1px solid var(--border); border-radius: var(--r-md); background: var(--surface-raised);
+}
+.q-item > .ic { grid-row: 1; color: var(--text-muted); }
+.q-item .q-id { grid-row: 1; font: 400 var(--fs-2) var(--font-mono); color: var(--text-dim); }
+.q-item .q-title { grid-row: 1; grid-column: 3 / -1; min-width: 0; color: var(--text-bright); font-weight: 600; line-height: 1.3; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow-wrap: anywhere; }
+.q-item .q-block { grid-row: 2; grid-column: 1 / 4; justify-self: start; min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; height: var(--h-sm); padding: 0 0.5rem; border: 1px solid var(--btn-border); border-radius: 62.4375rem; background: var(--btn-bg); color: var(--text-dim); font: 400 var(--fs-2) var(--font-sans); cursor: pointer; }
+.q-item .q-noblock { grid-row: 2; grid-column: 1 / 4; justify-self: start; font: 400 var(--fs-2) var(--font-sans); color: var(--text-dim); }
+.upnext-ask { margin-top: 0.375rem; }
+.q-item .q-block:hover { color: var(--text); border-color: var(--border-strong); background: var(--btn-hover); }
+.q-item .icon-btn { grid-row: 2; grid-column: 5; }
+/* Who the board would hand it to, and why (T55): a quiet line under the row's acts. */
+/* A row's open button reads the item whole, in a popover; it sits at the end of the title's line. */
+.q-item .q-title { grid-column: 3 / 5; }
+.q-item .q-open { grid-row: 1; grid-column: 5; align-self: start; width: var(--h-sm); height: var(--h-sm); }
+.q-item .q-open .ic { width: 0.75rem; height: 0.75rem; }
+/* More / Less on an item's id line: the title past two lines, its detail and its acts, in place. */
+.it-more { margin-left: 0.5rem; padding: 0 0.25rem; border: 0; border-radius: var(--r-sm); background: none; color: var(--text-dim); font: 600 var(--fs-2)/1.4 var(--font-sans); text-decoration: underline dotted; text-underline-offset: 0.15em; cursor: pointer; }
+.it-more:hover { color: var(--text); background: var(--btn-hover); }
+.item.open .it-title { -webkit-line-clamp: unset; }
+.pop-title { font-weight: 600; color: var(--text-bright); }
+.pop-list { margin: 0; padding-left: 1rem; display: flex; flex-direction: column; gap: 0.125rem; color: var(--text-dim); font-size: var(--fs-2); }
+.q-item .q-why { grid-row: 3; grid-column: 1 / -1; min-width: 0; color: var(--text-dim); font: 400 var(--fs-2)/1.35 var(--font-sans); overflow-wrap: anywhere; }
+.win-return { align-self: flex-start; }
+.win-acts { display: flex; gap: 0.375rem; flex-wrap: wrap; padding: 0.25rem 0; }
+.it-look { margin-top: 0.375rem; }
+.it-acts { display: flex; gap: 0.375rem; flex-wrap: wrap; margin-top: 0.375rem; }
+.q-item .q-send { grid-row: 2; grid-column: 5; }
+.q-item .q-dest { grid-row: 2; grid-column: 4; justify-self: end; width: 7rem; height: var(--h-sm); padding: 0 0.25rem; border: 1px solid var(--btn-border); border-radius: var(--r-md); background: var(--btn-bg); color: var(--text-dim); font: 400 var(--fs-2) var(--font-sans); }
+.upnext-empty { margin: 0.125rem 0 0; font: 400 var(--fs-2)/1.4 var(--font-sans); color: var(--text-dim); }
+.win.upnext.has-queue .upnext-empty { display: none; }
+body.dragging-tile .win.upnext { outline: 1px dashed var(--border-strong); outline-offset: -1px; }
+body.dragging-tile .win.upnext.drop-ok { outline: 0.125rem solid var(--text-bright); outline-offset: -0.125rem; }
+.win-more { width: var(--h-sm); height: var(--h-sm); display: grid; place-items: center; border: 0; border-radius: var(--r-md); background: none; color: var(--text-dim); padding: 0; flex: none; }
+.win-more:hover { background: color-mix(in srgb, var(--text) 8%, transparent); color: var(--text); }
+.win-more .ic { transition: transform 0.15s; }
+.win.open .win-more .ic { transform: rotate(180deg); }
+.win-details { display: flex; flex-direction: column; gap: 0.375rem; padding-top: 0.25rem; border-top: 1px solid var(--border-subtle); margin-top: 0.125rem; }
+.msg { display: flex; gap: 0.375rem; align-items: center; }
+.msg .field { height: var(--h-md); }
+.feed { list-style: none; margin: 0; padding: 0.125rem 0 0; display: flex; flex-direction: column; gap: 0.125rem; }
+.feed li { display: grid; grid-template-columns: 2.125rem 0.8125rem minmax(0, 1fr); gap: 0.375rem; align-items: center; font: 400 var(--fs-2) var(--font-mono); color: var(--text-dim); }
+.feed time { font: 400 var(--fs-2) var(--font-mono); font-variant-numeric: tabular-nums; color: var(--text-muted); }
+.feed .ic { width: 0.75rem; height: 0.75rem; color: var(--text-muted); }
+.feed .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.feed .k-test-ok .ic { color: var(--ok); }
+.feed .k-test-fail .ic, .feed .k-bug .ic { color: var(--danger); }
+.feed .k-ask .ic { color: var(--warn); }
+.feed .k-reserve .ic, .feed .k-release .ic { color: var(--ac); }
+.unread { font: 400 var(--fs-2) var(--font-mono); color: var(--text-dim); white-space: nowrap; }
+.side-empty { padding: var(--pad); border: 1px dashed var(--border-strong); border-radius: var(--r-lg); color: var(--text-dim); line-height: 1.5; }
+.side-empty code { font: 400 var(--fs-2) var(--font-mono); }
+/* Many agents: each window is a line, its tray shows only when it holds something, the details on demand. */
+.side.roster .agents { gap: 0.25rem; }
+.side.roster .agents .win-head { min-height: 1.875rem; padding-block: 0.25rem; }
+.side.roster .agents .win:not(.open) .win-doing { display: none; }
+.side.roster .agents .win:not(.open) .win-task { font-size: var(--fs-3); color: var(--text-dim); }
+
+/* The inbox: one row per thing that waits on the person, the act beside it. */
+.win.inbox { border-color: color-mix(in srgb, var(--warn) var(--mix-edge), var(--border)); }
+/* Under load (T57): Needs you stays on top while the side column scrolls, and Up next scrolls inside a capped height,
+   so a long queue never pushes the agents out of reach. */
+.side > .win.inbox { position: sticky; top: 0; z-index: 2; box-shadow: 0 0.5rem 0 var(--app-bg); }
+/* A head-sized button that is text, not a control, still sits on the row height. */
+.in-done-head { min-height: var(--h-sm); }
+/* The window's body scrolls, not the tray: a height-capped grid would squeeze its rows to their minimum. */
+.win.upnext > .win-body { max-height: 45vh; overflow: auto; }
+.q-more { justify-self: start; align-self: start; margin-top: 0.125rem; }
+.ib-list { display: flex; flex-direction: column; }
+.ib { padding: 0.5rem var(--pad); border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 0.375rem; }
+.ib-row { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+/* An Auto-Apply row (T59) is told, not asked: dimmer ink and no status color, so it never reads as waiting on the person. */
+.ib-row.ib-quiet .ib-what { color: var(--text-dim); }
+.ib-row.ib-quiet .disc { opacity: 0.7; }
+.ib-row .icon-btn[data-act=open] { flex: none; width: var(--h-sm); height: var(--h-sm); }
+.ib-row .icon-btn[data-act=open] .ic { width: 0.75rem; height: 0.75rem; }
+.ib-row .disc { width: 1.125rem; height: 1.125rem; font-size: 0.5938rem; }
+.ib-who { font: 600 var(--fs-3)/1.2 var(--font-sans); color: var(--text-bright); white-space: nowrap; flex: none; }
+/* One line per row; the whole question opens in a popover (the row's note button). */
+.ib-what { flex: 1 1 auto; min-width: 0; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ib-row .timer { font-size: var(--fs-2); color: var(--text-dim); flex: none; }
+.ib-form { display: flex; gap: 0.375rem; padding-left: 1.625rem; }
+
+/* The merge queue. */
+.mq-list { list-style: none; margin: 0; padding: 0 0.25rem 0.25rem; display: flex; flex-direction: column; gap: 1px; }
+.mq-row {
+  --ac: var(--slot-gray); --aci: #fff;
+  display: grid; grid-template-columns: 0.75rem 0.875rem 1.125rem minmax(0, max-content) minmax(0, 1fr) auto; align-items: center; gap: 0.375rem;
+  padding: 0.25rem 0.25rem; border-radius: var(--r-md); cursor: pointer; min-width: 0; min-height: 1.875rem;
+}
+.mq-row:hover, .mq-row.focus { background: var(--surface-raised); }
+.mq-row.over-top { box-shadow: inset 0 0.125rem 0 var(--text-bright); }
+.mq-row.over-bottom { box-shadow: inset 0 -0.125rem 0 var(--text-bright); }
+.mq-grip { width: 0.75rem; height: 1.125rem; cursor: grab; color: var(--text-muted); display: grid; place-items: center; border: 0; background: none; padding: 0; }
+.mq-grip .ic { width: 0.625rem; height: 0.875rem; }
+.mq-grip:hover { color: var(--text); }
+.mq-pos { font: 600 var(--fs-2) var(--font-mono); color: var(--text-dim); text-align: center; display: inline-flex; justify-content: center; }
+.mq-pos .ic { width: 0.75rem; height: 0.75rem; color: var(--ok); }
+.mq-row .disc { width: 1.125rem; height: 1.125rem; font-size: 0.5938rem; }
+.mq-name { font: 600 var(--fs-3) var(--font-sans); color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mq-verdict { display: inline-flex; align-items: center; gap: 0.375rem; min-width: 0; font: 400 var(--fs-3) var(--font-sans); color: var(--text); white-space: nowrap; overflow: hidden; }
+.mq-verdict span { overflow: hidden; text-overflow: ellipsis; }
+/* A row's reasons show under it while its worktree is focused. */
+.mq-why { grid-column: 3 / -1; display: none; font: 400 var(--fs-2)/1.4 var(--font-mono); color: var(--text-dim); white-space: pre-line; padding-bottom: 0.125rem; }
+.mq-row.focus .mq-why { display: block; }
+.mq-row.lvl-done { opacity: 0.6; }
+.mq-row.lvl-done .mq-verdict { color: var(--text-dim); }
+
+/* ------------------------------------------------------------------ worktrees */
+.wt-bar {
+  position: sticky; top: 0; z-index: 3; display: flex; flex-direction: column; gap: 0.375rem;
+  /* Solenoid's Opaque-Chrome Rule: chrome over the canvas is a solid panel, never a see-through blur. */
+  padding: 0.5rem 0.625rem; background: var(--panel-bg, var(--surface)); border-bottom: 1px solid var(--border-subtle);
+}
+.wt-tabs { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.wt-tab {
+  --ac: var(--slot-gray); --aci: #fff;
+  display: inline-flex; align-items: center; gap: 0.375rem; height: var(--h-md); padding: 0 0.5rem 0 0.25rem; border-radius: var(--r-md);
+  border: 1px solid transparent; background: none; color: var(--text-dim); font: 600 var(--fs-3)/1 var(--font-sans); white-space: nowrap; flex: none;
+}
+.wt-tab.all { padding-left: 0.5rem; }
+.wt-tab:hover { background: var(--btn-hover); color: var(--text); }
+.wt-tab[aria-pressed="true"] { background: color-mix(in srgb, var(--text) 10%, var(--surface-sunken)); border-color: var(--btn-border); color: var(--text-bright); }
+.wt-tab .disc { width: 1.125rem; height: 1.125rem; font-size: 0.5938rem; }
+.wt-tab .disc .ic { width: 0.6875rem; height: 0.6875rem; }
+.wt-meta { font: 400 var(--fs-2) var(--font-mono); color: var(--text-dim); }
+.wt-dirty { width: 0.375rem; height: 0.375rem; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--text-dim); }
+.wt-conflict { color: var(--danger); display: inline-flex; }
+.wt-conflict .ic { width: 0.75rem; height: 0.75rem; }
+.wt-q { font: 600 var(--fs-2) var(--font-mono); color: var(--text-dim); }
+.wt-detail { display: flex; align-items: center; gap: 0.5rem 0.625rem; flex-wrap: wrap; min-width: 0; padding: 0.375rem 0.25rem 1px; }
+.wt-path { font: 400 var(--fs-3) var(--font-mono); color: var(--text); cursor: copy; min-width: 0; overflow-wrap: anywhere; }
+.wt-path:hover { color: var(--text-bright); text-decoration: underline dotted; }
+.wt-branch { display: inline-flex; align-items: center; gap: 0.25rem; font: 400 var(--fs-3) var(--font-mono); color: var(--text-dim); }
+.wt-branch .ic { width: 0.75rem; height: 0.75rem; }
+.wt-last .timer, .wt-detail .num { font-size: var(--fs-2); color: var(--text-dim); }
+.wt-verdict { display: inline-flex; align-items: center; gap: 0.375rem; font: 400 var(--fs-3) var(--font-sans); }
+.wt-detail .spacer { flex: 1 1 0; }
+.wt-detail a.btn { text-decoration: none; }
+.wt-open { display: inline-flex; gap: 0.375rem; align-items: center; }
+
+/* ------------------------------------------------------------------ tethers: only for what you point at */
+.tethers { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 5; overflow: visible; }
+.tethers path { fill: none; stroke-width: 1.6; stroke-dasharray: 2 4; opacity: 0.9; }
+.tethers path.working { animation: flow 1.2s linear infinite; }
+.tethers circle { stroke: var(--canvas-bg); stroke-width: 1.5; }
+@keyframes flow { to { stroke-dashoffset: -12; } }
+
+/* ------------------------------------------------------------------ dragging */
+.ghost {
+  position: fixed; z-index: 50; pointer-events: none; width: 8.75rem; height: 2.75rem;
+  transform: translate(-50%, -60%); box-shadow: var(--overlay-shadow); border-color: var(--overlay-border);
+}
+body.dragging-tile, body.dragging-tile * { cursor: grabbing !important; user-select: none; }
+.map-wrap.drop-ok { box-shadow: inset 0 0 0 0.125rem var(--border-strong); }
+
+/* ------------------------------------------------------------------ timeline */
+.timeline {
+  grid-area: time; margin-top: 0.5rem; min-width: 0;
+  border: 1px solid var(--border); border-radius: var(--r-lg); background: var(--surface);
+  display: flex; flex-direction: column;
+}
+.tl-head { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem var(--pad); }
+.tl-fold { margin-left: auto; }
+.tl-readout + .tl-fold { margin-left: 0; }
+.tl-fold .ic { transition: transform 0.2s; }
+.timeline.folded .tl-fold .ic { transform: rotate(180deg); }
+.tl-time { font: 600 var(--fs-3) var(--font-mono); color: var(--text-bright); font-variant-numeric: tabular-nums; }
+.tl-readout { flex: 1; min-width: 0; font: 400 var(--fs-2) var(--font-sans); color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: right; }
+.tl-head .seg button { height: calc(var(--h-sm) - 0.25rem); padding: 0 0.5rem; font-size: var(--fs-2); }
+/* A crowd of lanes scrolls inside the dock instead of pushing the map off the screen. */
+.tl-body { overflow-x: auto; overflow-y: auto; max-height: min(11.875rem, 26vh); }
+/* A height the viewer set with the grip (T60): exactly that, lanes past it scroll. */
+.timeline[style*="--tl-h"] .tl-body { height: var(--tl-h); max-height: none; }
+.timeline { position: relative; }
+.tl-grip { position: absolute; left: 50%; top: -0.4375rem; transform: translateX(-50%); width: 3rem; height: 0.875rem; cursor: ns-resize; z-index: 2; display: grid; place-items: center; border-radius: var(--r-sm); touch-action: none; }
+.tl-grip::before { content: ""; width: 2rem; height: 0.25rem; border-radius: 62.4375rem; background: var(--border-strong); }
+.tl-grip:hover::before, .tl-grip:focus-visible::before, .timeline.resizing .tl-grip::before { background: var(--text-dim); }
+.timeline.folded .tl-grip { display: none; }
+.timeline.resizing, .timeline.resizing * { user-select: none; cursor: ns-resize; }
+.tl-svg { display: block; width: 100%; min-width: 640px; height: auto; user-select: none; touch-action: none; cursor: ew-resize; }
+.tl-svg .lane-label { font: 600 11px var(--font-sans); fill: var(--text-dim); }
+.tl-svg .lane { fill: color-mix(in srgb, var(--text) 3%, transparent); }
+.tl-svg .tick { stroke: var(--border); stroke-width: 1; }
+.tl-svg .tick-label { font: 400 10px var(--font-mono); fill: var(--text-muted); }
+.tl-svg .hold text { font: 600 9.5px var(--font-sans); pointer-events: none; fill: var(--text); }
+.tl-svg .hold.live text { fill: var(--text-bright); }
+.tl-svg .mk-fail { stroke: var(--danger); stroke-width: 1.8; stroke-linecap: round; fill: none; }
+.tl-svg .mk-ask { fill: var(--warn); }
+.tl-svg .head-line { stroke: var(--text-bright); stroke-width: 1.5; }
+.tl-svg .head-knob { fill: var(--text-bright); }
+.tl-svg .now-line { stroke: var(--text-dim); stroke-width: 1; stroke-dasharray: 2 3; }
+.tl-svg .past { fill: color-mix(in srgb, var(--surface) 65%, transparent); }
+
+/* ------------------------------------------------------------------ inspector: the block dock */
+/* Off phones it is a column of the page, left of the map, flat and opaque, a neutral frame like the map's. It takes
+   no space until a block is picked or the Items list is open, and folds away again on close. Phones keep it a sheet
+   that slides up over the page. */
+@media (min-width: 861px) {
+  body.docked .app { grid-template-columns: var(--dock) minmax(0, 1fr) var(--side); grid-template-areas: "top top top" "alert alert alert" "dock map side" "time time time"; }
+  body:not(.docked) .inspector { display: none !important; }
+  .inspector { grid-area: dock; min-height: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); }
+  .scrim { display: none !important; }
+}
+.in-all { overflow: auto; min-height: 0; padding: var(--pad); display: flex; flex-direction: column; }
+.in-all[hidden] { display: none; }
+.in-all-top { display: flex; align-items: center; gap: 0.5rem; min-height: 2rem; }
+/* The Items column heads like a window (T65): its disc, its name, its count, its close at the right edge. */
+.in-all-top .icon-btn { margin-left: auto; }
+.in-all-bar { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.375rem; }
+.in-all-bar .chips[hidden] + .btn { margin-left: auto; }
+.in-hint { margin: 0.75rem 0 0; color: var(--text-dim); font-size: var(--fs-2); line-height: 1.45; text-wrap-style: pretty; }
+.item.fresh .it-title::before { content: ""; display: inline-block; width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--accent); margin-right: 0.375rem; vertical-align: 0.0625rem; }
+@media (max-width: 860px) {
+  .inspector {
+    position: fixed; z-index: 30; top: calc(var(--top-h, 3rem) + 0.25rem); bottom: 0.625rem; right: max(1rem, env(safe-area-inset-right, 0px));
+    width: min(25rem, calc(100vw - 2rem));
+    background: var(--overlay-bg); border: var(--overlay-border-width) solid var(--overlay-border); border-radius: var(--r-lg); box-shadow: var(--overlay-shadow);
+    display: flex; flex-direction: column; overflow: hidden;
+    transform: translateX(calc(100% + 2.5rem)); transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+  .inspector.open { transform: none; }
+}
+.in-head { padding: var(--pad); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.5rem; }
+.in-top { display: flex; align-items: flex-start; gap: 0.5rem; }
+.in-district { font: 600 var(--fs-2)/1 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.in-name { font: 600 var(--fs-6)/1.2 var(--font-sans); color: var(--text-bright); text-wrap-style: balance; flex: 1; margin: 0.125rem 0 0; }
+.in-intent { margin: 0; color: var(--text); line-height: 1.45; text-wrap-style: pretty; }
+.in-state { display: flex; align-items: center; gap: 0.375rem 0.625rem; flex-wrap: wrap; }
+.holder { --hc: var(--slot-gray); --hci: #fff; display: inline-flex; align-items: center; gap: 0.375rem; font-weight: 600; color: var(--text-bright); }
+.holder .dot { width: 1.125rem; height: 1.125rem; border-radius: 50%; background: var(--hc); color: var(--hci); display: grid; place-items: center; font: 700 0.5938rem var(--font-sans); }
+.holder .timer { font-weight: 400; color: var(--text-dim); }
+.holder .ic { color: var(--text-dim); }
+.in-actions { display: flex; gap: 0.375rem; flex-wrap: wrap; align-items: center; }
+.in-body { overflow: auto; padding: 0 var(--pad) var(--pad); display: flex; flex-direction: column; }
+.in-sec { padding-top: var(--pad); display: flex; flex-direction: column; gap: 0.375rem; }
+.in-sec h3 { margin: 0; display: flex; justify-content: space-between; align-items: baseline; font: 600 var(--fs-2)/1 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.in-sec h3 .num { letter-spacing: 0; }
+.chips { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+.chip { height: var(--h-sm); border: 1px solid var(--btn-border); background: var(--btn-bg); border-radius: 62.4375rem; padding: 0 0.5rem; font: 400 var(--fs-2) var(--font-sans); color: var(--text-dim); cursor: pointer; }
+.chip:hover { color: var(--accent); border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: color-mix(in srgb, var(--text) 10%, var(--surface-sunken)); color: var(--text-bright); }
+.items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.item { display: grid; grid-template-columns: 0.875rem minmax(0, 1fr) auto; gap: 0.5rem; align-items: start; padding: 0.375rem 0.25rem; border-radius: var(--r-sm); }
+.item:hover { background: var(--surface-raised); }
+.item .ic { margin-top: 1px; color: var(--text-muted); }
+.item.k-bug .ic { color: var(--danger); }
+.item.k-decision .ic, .item.k-question .ic { color: var(--warn); }
+.item.s-done .it-title { text-decoration: line-through; color: var(--text-muted); }
+.it-title { font: 400 var(--fs-3)/1.35 var(--font-sans); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; }
+.item.open .it-title, .it-title:has(+ .it-detail) { -webkit-line-clamp: unset; }
+/* A block's long item lists (T57): the filter and sort, the true count with Show More, and the folded Done section. */
+.in-find { display: flex; gap: 0.375rem; align-items: center; margin: 0.25rem 0 0.375rem; }
+.in-find .field { flex: 1; min-width: 0; }
+.in-more { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin: 0.25rem 0 0.5rem; padding: 0 0.25rem; color: var(--text-dim); font: 400 var(--fs-2) var(--font-sans); }
+.in-done-head { display: flex; align-items: center; gap: 0.375rem; width: 100%; margin: 0.5rem 0 0.25rem; padding: 0.25rem; border: 0; background: none; color: var(--text-muted); font: 600 var(--fs-2)/1 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
+.in-done-head .ic { transform: rotate(-90deg); transition: transform 0.15s; }
+.in-done-head[aria-expanded="true"] .ic { transform: none; }
+.in-done-head .num { margin-left: auto; letter-spacing: 0; text-transform: none; font-weight: 400; }
+.item.wide { grid-template-columns: 0.875rem minmax(0, 1fr); }
+.it-foot { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; min-height: var(--h-sm); }
+.it-foot .it-status { line-height: var(--h-sm); }
+.it-sub { font: 400 var(--fs-2)/1.4 var(--font-mono); color: var(--text-dim); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: pre-line; }
+.it-detail { color: var(--text-dim); line-height: 1.45; margin-top: 0.25rem; text-wrap-style: pretty; }
+.it-status { font: 400 var(--fs-2)/var(--h-sm) var(--font-sans); color: var(--text-dim); white-space: nowrap; }
+.item.queued { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.add-item { display: flex; gap: 0.375rem; align-items: center; }
+.add-item .field { height: var(--h-md); }
+.paths { margin: 0; padding: 0.5rem 0.5rem; border-radius: var(--r-md); background: var(--surface-sunken); border: 1px solid var(--border-subtle); font: 400 var(--fs-2)/1.55 var(--font-mono); color: var(--text-dim); white-space: pre-wrap; overflow-wrap: break-word; }
+.docs { display: flex; flex-direction: column; gap: 1px; font: 400 var(--fs-3)/1.5 var(--font-mono); color: var(--text-dim); overflow-wrap: anywhere; }
+.acts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.125rem; }
+.acts li { display: grid; grid-template-columns: 2.125rem 0.5rem minmax(0, 1fr); gap: 0.375rem; align-items: center; font: 400 var(--fs-2) var(--font-mono); color: var(--text-dim); }
+.acts time { font: 400 var(--fs-2) var(--font-mono); color: var(--text-muted); }
+.acts i { width: 0.4375rem; height: 0.4375rem; border-radius: 50%; background: var(--fc, var(--text-muted)); }
+.acts .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.scrim { position: fixed; inset: 0; z-index: 29; display: none; }
+
+/* toasts */
+.toasts { position: fixed; z-index: 60; left: 50%; bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: flex; flex-direction: column; gap: 0.375rem; align-items: center; pointer-events: none; }
+.toast { pointer-events: auto; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; background: var(--overlay-bg); color: var(--text-bright); border: var(--overlay-border-width) solid var(--overlay-border); padding: 0.375rem 0.375rem 0.375rem 0.75rem; border-radius: var(--r-lg); font: 600 var(--fs-3) var(--font-sans); box-shadow: var(--overlay-shadow); max-width: min(32.5rem, calc(100vw - 2rem)); transition: opacity 0.3s, transform 0.3s; text-wrap-style: balance; }
+.toast.error { border-color: color-mix(in srgb, var(--danger) var(--mix-edge), var(--border)); }
+.toast.out { opacity: 0; transform: translateY(0.375rem); }
+.toast-text { min-width: 0; }
+.toast-close { flex: none; width: var(--h-sm); height: var(--h-sm); display: grid; place-items: center; padding: 0; border: 0; border-radius: var(--r-md); background: none; color: var(--text-dim); }
+.toast-close:hover { background: var(--btn-hover); color: var(--text); }
+.toast-close .ic { width: 0.75rem; height: 0.75rem; }
+.toast-act { flex: none; }
+.boot { grid-column: 1 / -1; padding: 2.5rem 0; color: var(--text-dim); }
+
+/* timers past their thresholds: the number stays readable, a dot says how late */
+.timer.late, .timer.over { color: var(--text-bright) !important; }
+.timer.late::before, .timer.over::before { content: ""; display: inline-block; width: 0.3125rem; height: 0.3125rem; border-radius: 50%; margin-right: 0.25rem; vertical-align: 1px; background: var(--warn); }
+.timer.over::before { background: var(--danger); }
+
+/* ------------------------------------------------------------------ narrower screens */
+@media (max-width: 860px) {
+  html, body { height: auto; }
+  :root { --unit-w: calc((100vw - 2rem - 2 * 0.5625rem - 2 * 0.5rem - 2 * 0.375rem - 0.125rem) / 3); --unit-h: 2.75rem; }
+  .app { height: auto; grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "top" "alert" "side" "map" "time"; }
+  .topbar { gap: 0.5rem; }
+  .topbar .spacer { display: block; }
+  .seg#lens { order: 4; }
+  #active-only { order: 5; }
+  .search { order: 6; flex: 1 1 7.5rem; }
+  .search input { width: 100%; }
+  .search kbd { display: none; }
+  .alerts { flex-wrap: wrap; }
+  .alert { max-width: 100%; }
+  .map-wrap { overflow: visible; }
+  .map { padding: 0.5rem; gap: 0.625rem; align-items: stretch; }
+  .shelf { gap: 0.625rem; }
+  .district { width: 100%; }
+  .district-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wt-bar { position: static; }
+  .wt-tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -0.625rem; padding: 0 0.625rem; }
+  .wt-tabs::-webkit-scrollbar { display: none; }
+  .side { overflow: visible; padding-bottom: 0.5rem; }
+  .tethers { display: none; }
+  .inspector { top: auto; left: max(0.5rem, env(safe-area-inset-left, 0px)); right: max(0.5rem, env(safe-area-inset-right, 0px)); bottom: 0; width: auto; height: 84%; border-radius: 0.75rem 0.75rem 0 0; transform: translateY(105%); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .inspector.open { transform: none; }
+  .scrim.on { display: block; background: rgba(0, 0, 0, 0.4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ------------------------------------------------------------------ popover
+   A question (or any long text) opened from a row: placed beside the side column, on the map's side, by
+   ui/popover.js. The overlay tokens are the theme's, so it reads like Solenoid's own popovers. */
+.popover {
+  position: fixed; z-index: 60; width: min(24rem, calc(100vw - 1rem)); max-height: calc(100vh - 1rem); overflow: auto;
+  display: flex; flex-direction: column; gap: 0.5rem; padding: var(--pad);
+  background: var(--overlay-bg, var(--surface-raised, var(--surface))); color: var(--text);
+  border: 1px solid var(--overlay-border, var(--border)); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-pop, 0 0.5rem 1.75rem rgb(0 0 0 / 0.22));
+}
+.pop-head h3 { margin: 0; font: 600 var(--fs-4)/1.3 var(--font-sans); color: var(--text-bright); }
+.pop-body { display: flex; flex-direction: column; gap: 0.375rem; }
+.pop-meta { margin: 0; font-size: var(--fs-2); color: var(--text-dim); }
+.pop-text { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.45; }
+.pop-label { font-size: var(--fs-2); color: var(--text-dim); }
+.pop-field { width: 100%; resize: vertical; min-height: 4.5rem; height: auto; padding: 0.375rem 0.5rem; font: inherit; line-height: 1.4; }
+.pop-foot { display: flex; gap: 0.375rem; justify-content: flex-end; }
+/* New Item: the popover's look, opened under its top-bar button. */
+.new-item-row { display: flex; gap: 0.375rem; min-width: 0; }
+.new-item-row > :last-child { flex: 1 1 auto; min-width: 0; }
+.new-item .field { width: 100%; }
+.new-item input.field { height: var(--h-md); }
+
+/* Changes (T61): an unchanged block steps back; a changed one carries a bar of agent segments along its bottom. */
+.tile.unchanged { opacity: 0.4; }
+.tile .chg-bar { position: absolute; left: 0.375rem; right: 0.375rem; bottom: 0.1875rem; height: 0.25rem; display: flex; gap: 1px; border-radius: 1px; pointer-events: none; }
+.tile .chg-bar.overlap { gap: 0.125rem; background: var(--danger); }
+.chg-bar .seg { position: relative; min-width: 0.25rem; flex-basis: 0; background: var(--sc); border-radius: 1px; }
+.chg-bar .seg.uncommitted { background: var(--surface); box-shadow: inset 0 0 0 1px var(--sc); }
+.chg-bar .seg.queued::after { content: ""; position: absolute; right: 1px; top: -0.3125rem; width: 0.25rem; height: 0.125rem; border: solid var(--sc); border-width: 0 0 1.5px 1.5px; transform: rotate(-45deg); }
+.badge.chg-total { font-variant-numeric: tabular-nums; color: var(--text); }
+/* The drawer's Changes section: per agent a line (its dot shows the stage), then its files with +/-. */
+.in-changes .chg-who { display: flex; align-items: center; gap: 0.375rem; margin-top: 0.375rem; font: 600 0.75rem var(--font-sans); color: var(--text-bright); }
+.in-changes .chg-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; flex: none; background: var(--sc); }
+.in-changes .chg-dot.uncommitted { background: none; box-shadow: inset 0 0 0 1.5px var(--sc); }
+.in-changes .chg-stage { font-weight: 400; color: var(--text-dim); }
+.in-changes .num { margin-left: auto; font: 400 0.6875rem var(--font-mono); color: var(--text-dim); font-variant-numeric: tabular-nums; }
+.in-changes .chg-files { list-style: none; margin: 0.125rem 0 0; padding: 0 0 0 0.875rem; display: flex; flex-direction: column; gap: 1px; }
+.in-changes .chg-files li { display: flex; align-items: baseline; gap: 0.375rem; min-width: 0; font: 400 0.6875rem var(--font-mono); color: var(--text); }
+.in-changes .chg-path { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.in-changes .chg-files li.overlap .chg-path { color: color-mix(in srgb, var(--danger) 70%, var(--text)); }
+.in-changes .chg-flag { flex: none; font-family: var(--font-sans); color: var(--danger); }

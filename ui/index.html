@@ -1,0 +1,52 @@
+<title>QueueBox</title>
+<link rel="icon" id="favicon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='900' font-size='19' letter-spacing='-1' fill='%236ea8ff'%3E%5BQ%5D%3C/text%3E%3C/svg%3E">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="ui/theme/theme.css">
+<link rel="stylesheet" href="ui/theme/controls.css">
+<link rel="stylesheet" href="ui/theme/kit.css">
+<link rel="preload" href="ui/fonts/AlloVariable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="ui/styles.css">
+<script>
+  // The saved light or dark mode before the first paint (the theme kit applies the rest once its module loads).
+  try {
+    const mode = JSON.parse(localStorage.getItem('solenoid.theme') || '{}').mode === 'light' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = mode;
+    document.documentElement.style.colorScheme = mode;
+  } catch {}
+</script>
+<style>
+  /* Only until the stylesheets arrive: the palette's own window color (--app-bg) wins once they do. */
+  body { background: var(--app-bg, #141414); }
+  :root[data-theme="light"] body { background: var(--app-bg, #f4f5f7); }
+</style>
+<div class="app" id="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="wordmark"><span class="mark" aria-hidden="true"><i>[</i>Q<i>]</i></span>QueueBox</span>
+      <span class="board-name" id="board-name"></span>
+    </div>
+    <span class="conn" id="conn"><i></i><span>Connecting</span></span>
+    <div class="spacer"></div>
+    <div class="seg" id="lens" role="group" aria-label="Map lens">
+      <button type="button" data-lens="work" aria-pressed="true">Work</button>
+      <button type="button" data-lens="heat" aria-pressed="false">Heat</button>
+      <button type="button" data-lens="changes" aria-pressed="false">Changes</button>
+    </div>
+    <button class="tool" id="active-only" type="button" aria-pressed="false" title="Hide blocks with nothing going on"><span class="box"></span>Active</button>
+    <button class="tool" id="items-btn" type="button" aria-pressed="false" title="Every open item on the board">Items</button>
+    <button class="tool" id="new-item" type="button" aria-haspopup="dialog" aria-expanded="false" title="File a bug or task (N)">New Item</button>
+    <label class="search"><span id="search-ic"></span><input id="search" type="search" placeholder="Search" aria-label="Find a block or a file path" autocomplete="off" spellcheck="false"><kbd>/</kbd></label>
+    <div id="app-tools"></div>
+  </header>
+  <div class="alerts" id="alerts" aria-live="polite"></div>
+  <main class="map-wrap" id="map-wrap" data-drop="map" aria-label="Blocks">
+    <div class="wt-bar" id="wt-bar" hidden></div>
+    <div class="map" id="map"><p class="boot">Loading</p></div>
+  </main>
+  <aside class="side" id="side" aria-label="Agents"></aside>
+  <aside class="inspector" id="inspector" aria-label="Block"></aside>
+  <section class="timeline" id="timeline" aria-label="Timeline"></section>
+</div>
+<div class="scrim" id="scrim"></div>
+<svg class="tethers" id="tethers" aria-hidden="true"></svg>
+<script type="module" src="ui/app.js"></script>
