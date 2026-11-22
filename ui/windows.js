@@ -189,7 +189,7 @@ export function createSide(ctx, root) {
   function queueWindow() {
     const count = h('span', { class: 'win-count' });
     const tray = h('div', { class: 'tray' });
-    const hint = h('p', { class: 'upnext-empty' }, 'Nothing queued. Drop a block here, or Queue in its details; the next free agent takes it.');
+    const hint = h('p', { class: 'upnext-empty' }, 'Nothing queued yet. Drop a block here, or press Queue in its details, and the next free agent picks it up.');
     const disc = h('span', { class: 'disc plain' });
     setHtml(disc, icon('queue'));
     // Start an agent in the main checkout to take the top of the queue (T25); each worktree has its own in the strip.
@@ -612,7 +612,7 @@ export function createSide(ctx, root) {
       if (agentsHost.children[i] !== el) agentsHost.insertBefore(el, agentsHost.children[i] || null);
     });
     empty.hidden = agents.length > 0 || ctx.mode === 'snapshot';
-    if (!agents.length) setHtml(empty, 'No agents yet. Start Claude Code in this repository and it shows up here on its own. Other agents join with <code>qb join</code>.');
+    if (!agents.length) setHtml(empty, 'No agents yet. Start Claude Code in this repository and it shows up here by itself; any other agent joins with <code>qb join</code>.');
   }
 
   // One row per thing the person can act on, with the act beside it.

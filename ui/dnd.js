@@ -58,7 +58,7 @@ export function enableDnd(ctx) {
 
   function begin(e) {
     if (ctx.replayTs) {
-      ctx.toast('Back to live to move blocks.');
+      ctx.toast('You’re looking at the past. Go back to Live to move blocks.');
       return cancel();
     }
     if (press.item) {
@@ -70,7 +70,7 @@ export function enableDnd(ctx) {
     // Unmapped files are no block to move, but their queued items are work to hand out: that tile drags while it's queued.
     if (!st || (press.id.startsWith('_') && !(press.id === UNMAPPED && st.queued))) return cancel();
     if (st.frozen) {
-      ctx.toast('Frozen. Unfreeze it in its details first.');
+      ctx.toast('That block is frozen. Unfreeze it in its details, then try again.');
       return cancel();
     }
     lift(e);

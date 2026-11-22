@@ -214,7 +214,7 @@ ctx.selectQuiet = (id) => {
 
 async function commit(list, ok) {
   if (ctx.replayTs) {
-    toast('Back to live to change the board.');
+    toast('You’re looking at the past. Go back to Live to change the board.');
     return false;
   }
   try {
@@ -253,14 +253,14 @@ ctx.act = {
     }
     list.push({ type: 'block.reserve', agent, block, intent: b.intent || queuedIntent(ctx.live, b.queued) });
     if (agent !== HUMAN) list.push({ type: 'msg', auto: true, to: agent, text: `Assigned to you: ${nameOf(block)} (${block}). \`qb show ${block}\` lists its docs and open items.` });
-    return commit(list, agent === HUMAN ? `You reserved ${nameOf(block)}. Agents stay out.` : `Gave ${nameOf(block)} to ${agentName(ctx.live, agent)}.`);
+    return commit(list, agent === HUMAN ? `${nameOf(block)} is yours now; agents will stay out.` : `${nameOf(block)} is ${agentName(ctx.live, agent)}’s now.`);
   },
   release(block) {
     const b = ctx.live.blocks[block];
     if (!b.holder) return Promise.resolve(false);
     const list = [{ type: 'block.release', agent: b.holder, block, outcome: 'parked', note: `released by ${humanName()}` }];
     if (b.holder !== HUMAN) list.push({ type: 'msg', auto: true, to: b.holder, text: `Took ${nameOf(block)} (${block}) back. Stop editing there.` });
-    return commit(list, `${nameOf(block)} is free.`);
+    return commit(list, `${nameOf(block)} is free for anyone now.`);
   },
   queue(block) {
     const b = ctx.live.blocks[block];
@@ -270,18 +270,18 @@ ctx.act = {
       if (b.holder !== HUMAN) list.push({ type: 'msg', auto: true, to: b.holder, text: `Moved ${nameOf(block)} (${block}) back to the queue. Stop editing there.` });
     }
     list.push({ type: 'block.queue', block, note: b.intent || '' });
-    return commit(list, `${nameOf(block)} is up next.`);
+    return commit(list, `${nameOf(block)} is up next; the next free agent picks it up.`);
   },
   unqueue: (block) => commit([{ type: 'block.unqueue', block }], `${nameOf(block)} is off the queue.`),
   queueItem: (it) => commit([{ type: 'block.queue', block: it.block, item: it.id }], `${it.id} is up next, with ${nameOf(it.block)}.`),
   unqueueItem: (it) => commit([{ type: 'block.unqueue', block: it.block, item: it.id }], `${it.id} is off the queue.`),
   freeze: (block, on) => commit([{ type: 'block.freeze', block, on }], on ? `Froze ${nameOf(block)}.` : `Unfroze ${nameOf(block)}.`),
-  addItem: (item) => commit([{ type: 'item.add', item }], `Filed it in ${nameOf(item.block)}.`),
+  addItem: (item) => commit([{ type: 'item.add', item }], `Filed in ${nameOf(item.block)}. Thanks!`),
   // Up next's box (B31): a task with no block, queued as it's filed; whoever takes it files it properly.
-  queueText: (title) => commit([{ type: 'item.add', queue: true, item: { kind: 'task', title } }], 'In Up next. Whoever takes it files it in its block.'),
+  queueText: (title) => commit([{ type: 'item.add', queue: true, item: { kind: 'task', title } }], 'Added to Up next. Whoever picks it up files it in the right block.'),
   updateItem: (id, patch, said) => commit([{ type: 'item.update', item: id, ...patch }], said),
   deleteItem: (id) => commit([{ type: 'item.delete', item: id }], `Deleted ${id}.`),
-  answer: (id, text) => commit([{ type: 'item.update', item: id, answer: text, status: 'done' }], 'Answered. It lands in the agent’s inbox.'),
+  answer: (id, text) => commit([{ type: 'item.update', item: id, answer: text, status: 'done' }], 'Answer sent. It reaches the agent on its next step.'),
   // An agent's suggested distribution, applied by the person: each item goes to its agent, who gets its block when
   // the block is free, or the item queued with the block when someone else has it; each agent hears what it got.
   applySuggestion(id) {
@@ -302,7 +302,7 @@ ctx.act = {
   message: (agent, text) => {
     const name = agentName(ctx.live, agent);
     const soon = readsSoon(ctx.live, agent, Date.now(), ctx.sessions);
-    return commit([{ type: 'msg', to: agent, text }], soon ? `Sent to ${name}.` : `On the board for ${name}: delivered when ${name} next runs.`);
+    return commit([{ type: 'msg', to: agent, text }], soon ? `Sent to ${name}.` : `Message left for ${name}. It reaches ${name} the next time it runs.`);
   },
   mergeReady(wt) {
     if (!wt.ahead) {
@@ -648,7 +648,7 @@ async function setNotify(on) {
     }
   }
   if (perm === 'granted') storageSet('queuebox.notify', true);
-  else toast('The browser blocked notifications for this page.');
+  else toast('Your browser is blocking notifications for this page. Allow them in its site settings to get them.');
   return undefined;
 }
 
@@ -847,7 +847,7 @@ search.addEventListener('keydown', (e) => {
         const b = ctx.live.blocks[only];
         toast(`${search.value.trim()} is in ${nameOf(only)}${b.holder ? `, reserved by ${agentName(ctx.live, b.holder)}` : ', free'}.`);
         ctx.select(only);
-      } else toast('No block claims that path.');
+      } else toast('No block covers that path yet; it shows under Unmapped files.');
     } else if (ctx.search.matches.size === 1) ctx.select(only);
   }
 });
@@ -927,7 +927,7 @@ function reloadWhenFree() {
   }
   if (!reloadOffered) {
     reloadOffered = true;
-    toast('The board has new code. It reloads once your draft is sent.', 'info', { action: { label: 'Reload Now', run: () => location.reload() } });
+    toast('QueueBox was updated. It reloads as soon as your draft is sent.', 'info', { action: { label: 'Reload Now', run: () => location.reload() } });
   }
 }
 setInterval(reloadWhenFree, 3000);
