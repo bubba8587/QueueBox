@@ -126,7 +126,16 @@ button:disabled, input:disabled, select:disabled { cursor: default; opacity: 0.5
   column-gap: 0.625rem;
   padding-block: 0.5rem 0.625rem;
 }
-.topbar { grid-area: top; display: flex; align-items: center; gap: 0.5rem 0.75rem; flex-wrap: wrap; padding-bottom: 0.5rem; position: relative; }
+/* The top bar is Solenoid's (T76): a full-width panel the height of its toolbar, a hairline under it, and the accent as a
+   2px edge along its bottom over the popover lift, so the brand's color rides the chrome's edge rather than its body. */
+.topbar {
+  grid-area: top; display: flex; align-items: center; gap: 0.5rem 0.75rem; flex-wrap: wrap; position: relative; z-index: 2;
+  min-height: 2.75rem; box-sizing: border-box;
+  margin: -0.5rem calc(-1 * max(1rem, env(safe-area-inset-right, 0px))) 0.625rem calc(-1 * max(1rem, env(safe-area-inset-left, 0px)));
+  padding: 0.25rem max(1rem, env(safe-area-inset-right, 0px)) 0.25rem max(1rem, env(safe-area-inset-left, 0px));
+  background: var(--panel-bg); border-bottom: 1px solid var(--panel-border);
+  box-shadow: 0 2px 0 0 var(--accent), var(--shadow-pop);
+}
 .brand { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
 .wordmark { display: flex; align-items: center; gap: 0.5rem; font: 700 var(--fs-5)/1 var(--font-sans); color: var(--wordmark-color); }
 /* The [Q] mark: all of it in the accent, in Allo's heaviest weight, as on the tab. */
