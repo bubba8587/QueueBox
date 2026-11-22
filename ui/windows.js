@@ -20,13 +20,13 @@ const LINED_SHOWN = 5;
 const APPLIED_SHOWN_MS = 10 * 60_000;
 
 // What an agent's state is, in the words the person acts on: a question to answer, a permission to grant
-// (in its terminal), a finished turn to review; else working, quiet, gone quiet or idle.
+// (in its terminal); else working, quiet, gone quiet or idle.
 export function agentState(st, a, now) {
   let p = presence(st, a.id, now);
   let since = presenceSince(st, a.id, now);
   if (p === 'waiting') p = openQuestions(st, a.id).length ? 'question' : 'permission';
-  // A finished turn with nothing reserved and nothing assigned is idle, not a turn to review mid-task.
-  if ((p === 'review' || p === 'idle') && isIdleFree(st, a.id, now)) p = 'idle';
+  // A finished turn is idle, whatever it has lined up: the board wakes it for that work, so nothing waits on the person.
+  if (p === 'review') p = 'idle';
   if (p === 'working' && now - a.lastSeen > QUIET_MS) {
     p = 'quiet';
     since = a.lastSeen;
@@ -159,6 +159,7 @@ export function createSide(ctx, root) {
       title: `Question from ${agentName(st, q.by)}`,
       html,
       field: { label: 'Your answer', placeholder: 'It lands in their inbox on the board.' },
+      quick: ['yes', 'nah', 'NO WAY', 'IDK', 'IDC'],
       actions: [{ label: 'Answer', kind: 'confirm', run: (text) => ctx.act.answer(id, text) }],
     });
   }

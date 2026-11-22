@@ -36,7 +36,21 @@ export function openPopover(spec) {
         run(spec.actions[0]);
       }
     });
-    el.append(h('label', { class: 'pop-label', for: id }, spec.field.label || 'Answer'), field);
+    el.append(h('label', { class: 'pop-label', for: id }, spec.field.label || 'Answer'));
+    // Quick replies (T80): one press sends that answer with the first action, as if it were typed and sent.
+    if (spec.quick?.length) {
+      const chips = h('div', { class: 'chips', role: 'group', 'aria-label': 'Quick replies' });
+      for (const text of spec.quick) {
+        const b = h('button', { class: 'chip', type: 'button' }, text);
+        b.addEventListener('click', () => {
+          field.value = text;
+          run(spec.actions[0]);
+        });
+        chips.append(b);
+      }
+      el.append(chips);
+    }
+    el.append(field);
   }
   const foot = h('div', { class: 'pop-foot' });
   const run = async (action) => {
