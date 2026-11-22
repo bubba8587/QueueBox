@@ -1,7 +1,7 @@
 // The board page: folds the log into state, renders the map, the windows, the timeline and the
 // inspector from it, and turns what the person does (drag a tile, answer a question) into events.
 
-import { HUMAN, apply, reduce, alerts, presence, needsHuman, blockMeta, agentName, clock, queuedIntent, readsSoon, suggestionPlan, undoApplyEvents } from '../core/model.js';
+import { HUMAN, apply, reduce, alerts, presence, needsHuman, isIdleFree, blockMeta, agentName, clock, queuedIntent, readsSoon, suggestionPlan, undoApplyEvents } from '../core/model.js';
 import { blockForPath } from '../core/glob.js';
 import { connect } from './source.js';
 import { createMap } from './map.js';
@@ -355,6 +355,36 @@ function askTree(name, text, done) {
 
 let raf = 0;
 ctx.render = () => render();
+// The canvas says so when nobody is working (T87): every agent on the board idle with nothing in hand, or no agents
+// at all, with the two ways to get going. Its x hides it until an agent works again.
+const idleCard = h('div', { class: 'idle-card', hidden: true, role: 'status' });
+$('map-wrap').append(idleCard);
+let idleHidden = false;
+idleCard.addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-idle]');
+  if (!b) return;
+  if (b.dataset.idle === 'new') openNewItem(ctx, $('new-item'));
+  else if (b.dataset.idle === 'start') ctx.startAgent?.('');
+  else if (b.dataset.idle === 'close') {
+    idleHidden = true;
+    idleCard.hidden = true;
+  }
+});
+function paintIdleCard() {
+  const st = ctx.view;
+  const now = ctx.viewNow;
+  const agents = Object.values(st.agents).filter((a) => a.id !== HUMAN && !a.leftAt && presence(st, a.id, now) !== 'stale');
+  const idle = agents.every((a) => isIdleFree(st, a.id, now));
+  if (!idle) idleHidden = false;
+  const show = ctx.mode === 'live' && !ctx.replayTs && idle && !idleHidden;
+  idleCard.hidden = !show;
+  if (!show) return;
+  const words = agents.length ? 'All agents are idle! Want to get something done?' : 'No agents on the board yet. Want to start one?';
+  if (idleCard.dataset.words === words) return;
+  idleCard.dataset.words = words;
+  setHtml(idleCard, `<p>${esc(words)}</p><div class="idle-acts">${agents.length ? '<button class="btn sm" type="button" data-idle="new">New Item</button>' : ''}<button class="btn sm confirm" type="button" data-idle="start" title="Start a Claude Code session in the main checkout that takes the next queued work">Start an Agent</button><button class="icon-btn" type="button" data-idle="close" aria-label="Hide this" title="Hide">${icon('close')}</button></div>`);
+}
+
 function render() {
   if (!raf) raf = requestAnimationFrame(doRender);
 }
@@ -378,6 +408,7 @@ function doRender() {
   document.body.classList.toggle('replaying', !!ctx.replayTs);
   side.update();
   trees.update();
+  paintIdleCard();
   const moved = placeTiles();
   ctx.map.paint();
   paintTop();
