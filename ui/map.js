@@ -600,12 +600,15 @@ export function createMap(ctx, root) {
     zoomAt(zoom * f, r.left + r.width / 2, r.top + barH + (r.height - barH) / 2);
   }
 
-  // The minimap, after Solenoid's: shown only while some of the map is off screen, it draws each district and the
-  // part in view; pressing or dragging on it brings that point to the middle.
+  // The minimap, after Solenoid's: shown only while some of the map is off screen. A frame of fixed size (the same
+  // shape whatever the layout) shows the districts and their tiles, reserved tiles in their holder's color, and the
+  // part in view. It is scaled to hold both the map and the view, so the view's rectangle is always whole. Pressing
+  // or dragging on it brings that point to the middle.
   const mini = h('div', { class: 'map-mini', hidden: true, 'aria-hidden': 'true' });
   const miniView = h('div', { class: 'mm-view' });
   wrap.append(mini);
-  let miniScale = 1;
+  const miniMap = { scale: 1, ox: 0, oy: 0 };
+  // The size of everything shown, in map units, for Fit.
   function contentSize() {
     let w = 0;
     let hh = 0;
@@ -617,32 +620,62 @@ export function createMap(ctx, root) {
     const pad = 12 * uiScale();
     return { w: w + pad, h: hh + pad };
   }
+  // An element's box in map units (unzoomed, from the map's top-left), whatever positions it.
+  function mapBox(el, rootRect) {
+    const r = el.getBoundingClientRect();
+    return { x: (r.left - rootRect.left) / zoom, y: (r.top - rootRect.top) / zoom, w: r.width / zoom, h: r.height / zoom };
+  }
   function paintMini() {
-    if (phone() || !Number.isFinite(zoom)) return void (mini.hidden = true);
-    const { w, h: hh } = contentSize();
+    if (phone() || !Number.isFinite(zoom) || zoom <= 0) return void (mini.hidden = true);
+    const rootRect = root.getBoundingClientRect();
+    const shown = districts.filter((d) => !d.el.hidden && d.el.offsetParent);
+    const boxes = shown.map((d) => ({ d, ...mapBox(d.el, rootRect) }));
+    if (!boxes.length) return void (mini.hidden = true);
+    const pad = 12 * uiScale();
+    const w = Math.max(...boxes.map((b) => b.x + b.w)) + pad;
+    const hh = Math.max(...boxes.map((b) => b.y + b.h)) + pad;
     const barH = wrap.querySelector('.wt-bar:not([hidden])')?.offsetHeight || 0;
     const W = wrap.clientWidth;
     const H = wrap.clientHeight - barH;
     const inView = pan.x >= -1 && pan.y >= -1 && pan.x + w * zoom <= W + 1 && pan.y + hh * zoom <= H + 1;
-    mini.hidden = inView || !w;
+    mini.hidden = inView;
     if (mini.hidden) return;
-    const MW = 160 * uiScale();
-    const MH = 100 * uiScale();
-    miniScale = Math.min(MW / w, MH / hh);
-    mini.style.width = `${Math.round(w * miniScale)}px`;
-    mini.style.height = `${Math.round(hh * miniScale)}px`;
-    const boxes = districts.filter((d) => !d.up && !d.el.hidden).map((d) => `<i style="left:${(d.el.offsetLeft * miniScale).toFixed(1)}px;top:${(d.el.offsetTop * miniScale).toFixed(1)}px;width:${(d.el.offsetWidth * miniScale).toFixed(1)}px;height:${(d.el.offsetHeight * miniScale).toFixed(1)}px"></i>`);
-    setHtml(mini, boxes.join(''));
-    // The part in view, in map units: the frame's rectangle taken back through the camera.
-    const vx = -pan.x / zoom;
-    const vy = -pan.y / zoom;
-    Object.assign(miniView.style, { left: `${vx * miniScale}px`, top: `${vy * miniScale}px`, width: `${(W / zoom) * miniScale}px`, height: `${(H / zoom) * miniScale}px` });
+    // The view in map units, and the world the frame shows: the map and the view together.
+    const view = { x: -pan.x / zoom, y: -pan.y / zoom, w: W / zoom, h: H / zoom };
+    const x0 = Math.min(0, view.x);
+    const y0 = Math.min(0, view.y);
+    const x1 = Math.max(w, view.x + view.w);
+    const y1 = Math.max(hh, view.y + view.h);
+    const MW = 168 * uiScale();
+    const MH = 104 * uiScale();
+    const scale = Math.min(MW / (x1 - x0), MH / (y1 - y0));
+    miniMap.scale = scale;
+    miniMap.ox = (MW - (x1 - x0) * scale) / 2 - x0 * scale;
+    miniMap.oy = (MH - (y1 - y0) * scale) / 2 - y0 * scale;
+    mini.style.width = `${Math.round(MW)}px`;
+    mini.style.height = `${Math.round(MH)}px`;
+    const at = (b) => `left:${(miniMap.ox + b.x * scale).toFixed(1)}px;top:${(miniMap.oy + b.y * scale).toFixed(1)}px;width:${Math.max(1, b.w * scale).toFixed(1)}px;height:${Math.max(1, b.h * scale).toFixed(1)}px`;
+    const st = ctx.view;
+    const parts = [];
+    for (const b of boxes) {
+      parts.push(`<i class="mm-d" style="${at(b)}"></i>`);
+      if (collapsed.has(b.d.id)) continue;
+      for (const id of b.d.own) {
+        const slot = slots.get(id);
+        if (!slot || slot.hidden || !slot.offsetParent) continue;
+        const holder = st?.blocks[id]?.holder;
+        const color = holder ? colorOf(st, holder) : '';
+        parts.push(`<i class="mm-t${holder ? ' held' : ''}" style="${at(mapBox(slot, rootRect))}${color ? `;--mc:${color}` : ''}"></i>`);
+      }
+    }
+    setHtml(mini, parts.join(''));
+    Object.assign(miniView.style, { left: `${miniMap.ox + view.x * scale}px`, top: `${miniMap.oy + view.y * scale}px`, width: `${view.w * scale}px`, height: `${view.h * scale}px` });
     mini.append(miniView);
   }
   function miniGo(e) {
     const r = mini.getBoundingClientRect();
-    const mx = (e.clientX - r.left) / miniScale;
-    const my = (e.clientY - r.top) / miniScale;
+    const mx = (e.clientX - r.left - miniMap.ox) / miniMap.scale;
+    const my = (e.clientY - r.top - miniMap.oy) / miniMap.scale;
     const barH = wrap.querySelector('.wt-bar:not([hidden])')?.offsetHeight || 0;
     pan.x = wrap.clientWidth / 2 - mx * zoom;
     pan.y = (wrap.clientHeight - barH) / 2 - my * zoom;

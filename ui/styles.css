@@ -243,7 +243,11 @@ body.dragging-tile .district.drop-ok { outline: 0.125rem solid var(--border-stro
 }
 .map-mini { position: absolute; left: 0.625rem; bottom: 0.625rem; z-index: 4; background: var(--overlay-bg); border: var(--overlay-border-width) solid var(--overlay-border); border-radius: var(--r-md); box-shadow: var(--overlay-shadow); overflow: hidden; cursor: pointer; box-sizing: content-box; }
 .map-mini[hidden] { display: none; }
-.map-mini i { position: absolute; background: var(--surface-raised); border: 1px solid var(--border); border-radius: 0.125rem; box-sizing: border-box; }
+.map-mini i { position: absolute; box-sizing: border-box; border-radius: 1px; }
+/* A district is its frame; its tiles are small cells, a reserved one in its holder's color. */
+.map-mini .mm-d { border: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 50%, transparent); }
+.map-mini .mm-t { background: var(--border-strong); }
+.map-mini .mm-t.held { background: var(--mc); }
 .map-mini .mm-view { position: absolute; border: 1px solid var(--text-dim); border-radius: 0.125rem; background: color-mix(in srgb, var(--text) 6%, transparent); pointer-events: none; }
 /* Far out, a tile is its name and its color. */
 .map-wrap.far .tile-badges, .map-wrap.far .feet, .map-wrap.far .sk-time { display: none; }
