@@ -6,7 +6,7 @@
 
 import { agentsInBlock, changesByBlock } from '../core/merges.js';
 import { UNMAPPED, HUMAN, blockMeta, itemCounts, heat, recentToucher, footprints, isStale, agentName, presence } from '../core/model.js';
-import { h, icon, setHtml, toggle, initials, esc, timer, storageGet, storageSet, escapeLayer, ESC, toast } from './dom.js';
+import { h, icon, setHtml, toggle, initials, agentFace, esc, timer, storageGet, storageSet, escapeLayer, ESC, toast } from './dom.js';
 
 // The camera's zoom, after Solenoid's viewPresets: the wheel lands on 10% steps between these, a trackpad's small
 // deltas piling up toward the next one; Fit and the buttons are unsnapped.
@@ -1017,7 +1017,7 @@ export function createMap(ctx, root) {
 
       const toucher = recentToucher(b, now, HOUR);
       const feet = lens === 'heat' ? footprints(b, now, 45 * 60_000).slice(0, 4) : [];
-      setHtml(feetEl, feet.map((a) => `<i style="--fc:${colorOf(st, a)};--fci:${inkOf(st, a)}" title="Passed through">${esc(initials(agentName(st, a)))}</i>`).join(''));
+      setHtml(feetEl, feet.map((a) => `<i style="--fc:${colorOf(st, a)};--fci:${inkOf(st, a)}" title="Passed through">${agentFace(st.agents[a])}</i>`).join(''));
       paintChanges(st, tile, chg, lens === 'changes');
       tile.style.setProperty('--feet', String(feet.length));
       tile.style.setProperty('--tc', toucher && lens === 'heat' ? colorOf(st, toucher) : 'var(--text-muted)');
@@ -1093,7 +1093,7 @@ export function createMap(ctx, root) {
     if (g.frozen) parts.push(`<span class="badge" title="Frozen">${icon('lock')}${g.frozen}</span>`);
     setHtml(badgesEl, parts.join(''));
     const holders = [...g.holders];
-    setHtml(feetEl, holders.slice(0, 4).map((a) => `<i style="--fc:${colorOf(st, a)};--fci:${inkOf(st, a)}" title="Reserves a block here">${esc(initials(agentName(st, a)))}</i>`).join(''));
+    setHtml(feetEl, holders.slice(0, 4).map((a) => `<i style="--fc:${colorOf(st, a)};--fci:${inkOf(st, a)}" title="Reserves a block here">${agentFace(st.agents[a])}</i>`).join(''));
     d.sum.style.setProperty('--lv', `${Math.round(g.lv)}%`);
     d.sum.style.setProperty('--lc', g.lc || 'var(--surface)');
     toggle(d.sum, 'conflict', g.conflict > 0);
@@ -1135,7 +1135,7 @@ export function createMap(ctx, root) {
       socket.classList.add('held');
       toggle(socket, 'stale', isStale(st, b.holder, now));
       socket.title = 'Reserved';
-      setHtml(who, `<span class="dot">${esc(initials(a?.name))}</span><span class="sk-agent">${esc(a?.name || '')}</span>`);
+      setHtml(who, `<span class="dot">${agentFace(a)}</span><span class="sk-agent">${esc(a?.name || '')}</span>`);
       setHtml(time, timer(b.since, { warn: 2 * HOUR }, now));
     } else {
       socket.style.removeProperty('--sc');

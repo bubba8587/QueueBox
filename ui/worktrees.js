@@ -4,7 +4,7 @@
 
 import { HUMAN, agentName } from '../core/model.js';
 import { blocksOf, agentsInBlock, worktreeLabel } from '../core/merges.js';
-import { icon, setHtml, esc, timer, initials, copyText, storageGet, storageSet } from './dom.js';
+import { icon, setHtml, esc, timer, initials, agentFace, copyText, storageGet, storageSet } from './dom.js';
 import { colorOf, inkOf } from './map.js';
 import { ICONS } from './theme/index.js';
 
@@ -118,7 +118,7 @@ export function createWorktrees(ctx, bar, mergeHost) {
       // One agent colors the tab; several share it, each with a disc.
       const agents = wt.agents || [];
       const style = agents.length === 1 ? `--ac:${colorOf(st, agents[0])};--aci:${inkOf(st, agents[0])}` : '';
-      const disc = agents.length ? agents.slice(0, 3).map((a) => `<span class="disc" style="--ac:${colorOf(st, a)};--aci:${inkOf(st, a)}">${esc(initials(agentName(st, a)))}</span>`).join('') : `<span class="disc plain">${icon('branch')}</span>`;
+      const disc = agents.length ? agents.slice(0, 3).map((a) => `<span class="disc" style="--ac:${colorOf(st, a)};--aci:${inkOf(st, a)}">${agentFace(st.agents[a])}</span>`).join('') : `<span class="disc plain">${icon('branch')}</span>`;
       const meta = [wt.ahead ? `↑${wt.ahead}` : '', wt.behind ? `↓${wt.behind}` : ''].filter(Boolean).join(' ');
       const pos = order.indexOf(wt.name);
       const hurt = wt.conflicts.length ? `Conflicts with ${snap.base}` : clashing.has(wt.name) ? 'Conflicts with another branch' : '';

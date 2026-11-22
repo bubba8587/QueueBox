@@ -2,7 +2,7 @@
 // happened in it lately. Actions here write events, the same ones `qb` writes.
 
 import { HUMAN, UNMAPPED, blockMeta, agentName, presence, clock, footprints } from '../core/model.js';
-import { h, icon, esc, timer, dur, initials, setHtml, selectWrap, escapeLayer, ESC, storageGet, storageSet } from './dom.js';
+import { h, icon, esc, timer, dur, initials, agentFace, setHtml, selectWrap, escapeLayer, ESC, storageGet, storageSet } from './dom.js';
 import { colorOf, inkOf } from './map.js';
 import { changesByBlock } from '../core/merges.js';
 import { openNewItem } from './newitem.js';
@@ -292,7 +292,7 @@ export function createInspector(ctx, root, scrim) {
     if (b.holder) {
       const a = st.agents[b.holder];
       const chip = h('span', { class: 'holder', style: { '--hc': colorOf(st, b.holder), '--hci': inkOf(st, b.holder) } });
-      setHtml(chip, `<span class="dot">${esc(initials(a?.name))}</span>${esc(a?.name || b.holder)} ${timer(b.since, {}, now)}`);
+      setHtml(chip, `<span class="dot">${agentFace(a)}</span>${esc(a?.name || b.holder)} ${timer(b.since, {}, now)}`);
       stateLine.append(chip);
     } else if (b.queued) {
       stateLine.append(h('span', { class: 'holder', html: `${icon('queue')}Up next${b.queued.items?.length ? `, ${b.queued.items.length} item${b.queued.items.length === 1 ? '' : 's'}` : ''} ${timer(b.queued.ts, {}, now)}` }));

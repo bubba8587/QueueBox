@@ -42,6 +42,14 @@ export function toggle(el, cls, on) {
   if (el.classList.contains(cls) !== !!on) el.classList.toggle(cls, !!on);
 }
 
+// An agent's picture (T93): its kind's icon; the person keeps their initials.
+export function agentFace(a) {
+  if (!a || a.id === 'human' || a.kind === 'human') return esc(initials(a?.name));
+  const k = String(a.kind || '').toLowerCase();
+  const name = /claude/.test(k) ? 'kindClaude' : /codex/.test(k) ? 'kindCodex' : /gemini/.test(k) ? 'kindGemini' : /aider/.test(k) ? 'kindAider' : k === 'worktree' ? 'branch' : 'run';
+  return icon(name, 'face');
+}
+
 export function initials(name) {
   const parts = String(name || '?').trim().split(/\s+/);
   return (parts.length > 1 ? parts[0][0] + parts[1][0] : parts[0].slice(0, 1)).toUpperCase();
@@ -85,6 +93,11 @@ const P = {
   grip: '<circle cx="6" cy="4" r="1.2"/><circle cx="10" cy="4" r="1.2"/><circle cx="6" cy="8" r="1.2"/><circle cx="10" cy="8" r="1.2"/><circle cx="6" cy="12" r="1.2"/><circle cx="10" cy="12" r="1.2"/>',
   tidy: '<rect x="2.6" y="2.6" width="4.6" height="4.6" rx="1"/><rect x="8.8" y="2.6" width="4.6" height="4.6" rx="1"/><rect x="2.6" y="8.8" width="4.6" height="4.6" rx="1"/><rect x="8.8" y="8.8" width="4.6" height="4.6" rx="1" fill="none" stroke="currentColor" stroke-width="1.2"/>',
   fit: '<path d="M2.8 6V3.6c0-.4.4-.8.8-.8H6M10 2.8h2.4c.4 0 .8.4.8.8V6M13.2 10v2.4c0 .4-.4.8-.8.8H10M6 13.2H3.6c-.4 0-.8-.4-.8-.8V10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+  // Agent kinds (T93): plain glyphs, not the makers' logos.
+  kindClaude: '<path d="M8 1.6v4.2M8 10.2v4.2M1.6 8h4.2M10.2 8h4.2M3.5 3.5l3 3M9.5 9.5l3 3M12.5 3.5l-3 3M6.5 9.5l-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  kindCodex: '<path d="M8 1.8 13.4 4.9v6.2L8 14.2 2.6 11.1V4.9Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.7"/>',
+  kindGemini: '<path d="M8 1.5c.6 3.4 3 5.9 6.5 6.5-3.5.6-5.9 3.1-6.5 6.5-.6-3.4-3-5.9-6.5-6.5 3.5-.6 5.9-3.1 6.5-6.5Z"/>',
+  kindAider: '<path d="M2.6 3.4h8.8v6.2H6.6l-2.6 2.4V9.6H2.6Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M12.8 6.2h.6v6.2H12v2l-2.2-2h-2.3" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>',
   dots: '<circle cx="3.6" cy="8" r="1.4"/><circle cx="8" cy="8" r="1.4"/><circle cx="12.4" cy="8" r="1.4"/>',
   mail: '<rect x="2.4" y="3.8" width="11.2" height="8.4" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m2.8 4.6 5.2 4 5.2-4" fill="none" stroke="currentColor" stroke-width="1.4"/>',
 };

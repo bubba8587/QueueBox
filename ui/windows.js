@@ -2,7 +2,7 @@
 // and the blocks they keep), then a window per agent. Windows are drop targets; their trays are where tiles go.
 
 import { HUMAN, presence, presenceSince, openQuestions, activityOf, isIdleFree, readsSoon, blockMeta, agentName, clock, queueEntries, queuePlan, blockedItems } from '../core/model.js';
-import { h, icon, setHtml, setText, toggle, esc, timer, initials, dur, toast } from './dom.js';
+import { h, icon, setHtml, setText, toggle, esc, timer, initials, agentFace, dur, toast } from './dom.js';
 import { colorOf, inkOf } from './map.js';
 import { itemHtml } from './itemview.js';
 import { openPopover, refreshPopover } from './popover.js';
@@ -619,7 +619,7 @@ export function createSide(ctx, root) {
   function paintInbox(st, now, agents) {
     const rows = [];
     for (const { a, p, since } of agents) {
-      const who = `<span class="disc" style="--ac:${colorOf(st, a.id)};--aci:${inkOf(st, a.id)}">${esc(initials(a.name))}</span><span class="ib-who">${esc(a.name)}</span>`;
+      const who = `<span class="disc" style="--ac:${colorOf(st, a.id)};--aci:${inkOf(st, a.id)}">${agentFace(a)}</span><span class="ib-who">${esc(a.name)}</span>`;
       const t = timer(since, { warn: 5 * MIN, over: 15 * MIN }, now);
       if (p === 'question') {
         // Every open question gets its own row and answer field, each timed from when it was asked.
@@ -663,7 +663,7 @@ export function createSide(ctx, root) {
     // An agent's suggested distribution of work: one line, opened whole in the popover to apply or dismiss.
     for (const sug of Object.values(st.items)) {
       if (sug.kind !== 'suggestion' || sug.status !== 'open') continue;
-      const who = `<span class="disc" style="--ac:${colorOf(st, sug.by)};--aci:${inkOf(st, sug.by)}">${esc(initials(agentName(st, sug.by)))}</span><span class="ib-who">${esc(agentName(st, sug.by))}</span>`;
+      const who = `<span class="disc" style="--ac:${colorOf(st, sug.by)};--aci:${inkOf(st, sug.by)}">${agentFace(st.agents[sug.by])}</span><span class="ib-who">${esc(agentName(st, sug.by))}</span>`;
       const t = timer(sug.createdAt, {}, now);
       rows.push({ key: `s:${sug.id}`, html: `<div class="ib-row">${who}<span class="ib-what">suggests: ${esc(sug.title)}</span>${t}<button class="icon-btn" type="button" data-act="suggestion" data-arg="${esc(sug.id)}" data-pop="s:${esc(sug.id)}" aria-haspopup="dialog" aria-expanded="false" aria-label="Review suggestion ${esc(sug.id)}" title="Review and apply"${ctx.replayTs ? ' disabled' : ''}>${icon('note')}</button></div>` });
     }
@@ -721,7 +721,7 @@ export function createSide(ctx, root) {
     w.wakeBtn.title = 'Wake: hand it what waits for it on the board';
     w.msgBtn.setAttribute('aria-label', `Message ${a.name}`);
     w.msgBtn.title = 'Message';
-    setText(w.disc, initials(a.name));
+    setHtml(w.disc, agentFace(a));
     setText(w.name, a.name);
     // One count of lines: the worktree's, against the base, when git knows it and the agent has it to itself;
     // in a shared worktree, what its own edits reported.
