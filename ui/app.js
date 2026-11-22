@@ -365,6 +365,7 @@ idleCard.addEventListener('click', (e) => {
   if (!b) return;
   if (b.dataset.idle === 'new') openNewItem(ctx, $('new-item'));
   else if (b.dataset.idle === 'start') ctx.startAgent?.('');
+  else if (b.dataset.idle === 'help') openHelp(document.querySelector('button[aria-label="Help"]') || b);
   else if (b.dataset.idle === 'close') {
     idleHidden = true;
     idleCard.hidden = true;
@@ -379,10 +380,12 @@ function paintIdleCard() {
   const show = ctx.mode === 'live' && !ctx.replayTs && idle && !idleHidden;
   idleCard.hidden = !show;
   if (!show) return;
-  const words = agents.length ? 'All agents are idle! Want to get something done?' : 'No agents on the board yet. Want to start one?';
+  // A board that has never had an agent gets a welcome and the three ways in (T88).
+  const fresh = !agents.length && !ctx.events.some((e) => e.type === 'agent.join');
+  const words = fresh ? 'Welcome to QueueBox. Start an agent, file a first item, or open Help to see how the board works.' : agents.length ? 'All agents are idle! Want to get something done?' : 'No agents on the board yet. Want to start one?';
   if (idleCard.dataset.words === words) return;
   idleCard.dataset.words = words;
-  setHtml(idleCard, `<p>${esc(words)}</p><div class="idle-acts">${agents.length ? '<button class="btn sm" type="button" data-idle="new">New Item</button>' : ''}<button class="btn sm confirm" type="button" data-idle="start" title="Start a Claude Code session in the main checkout that takes the next queued work">Start an Agent</button><button class="icon-btn" type="button" data-idle="close" aria-label="Hide this" title="Hide">${icon('close')}</button></div>`);
+  setHtml(idleCard, `<p>${esc(words)}</p><div class="idle-acts">${fresh ? '<button class="btn sm" type="button" data-idle="help">Help</button>' : ''}${agents.length || fresh ? '<button class="btn sm" type="button" data-idle="new">New Item</button>' : ''}<button class="btn sm confirm" type="button" data-idle="start" title="Start a Claude Code session in the main checkout that takes the next queued work">Start an Agent</button><button class="icon-btn" type="button" data-idle="close" aria-label="Hide this" title="Hide">${icon('close')}</button></div>`);
 }
 
 function render() {
@@ -857,6 +860,12 @@ document.addEventListener('keydown', (e) => {
 });
 document.addEventListener('keydown', (e) => {
   const typing = e.target.closest?.('input,textarea,select');
+  // ? opens Help (T89).
+  if (e.key === '?' && !typing && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    e.preventDefault();
+    openHelp(document.querySelector('button[aria-label="Help"]'));
+    return;
+  }
   if (e.key === '/' && !typing) {
     e.preventDefault();
     search.focus();
@@ -932,9 +941,13 @@ async function boot() {
       onReset: (events) => setBoard(ctx.board, events),
       onEvents: (list) => {
         for (const e of list) {
+          // A block landing is worth a word (T90): who, which block. Only as it happens, never on a reload or replay.
+          const landed = e.type === 'block.release' && e.outcome === 'landed' && !ctx.replayTs && ctx.live.blocks[e.block]?.holder;
+          const who = landed ? ctx.live.blocks[e.block].holder : null;
           ctx.events.push(e);
           index(e);
           apply(ctx.live, e);
+          if (who) toast(`${agentName(ctx.live, who)} landed ${nameOf(e.block)}.`);
         }
         render();
       },

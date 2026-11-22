@@ -23,6 +23,7 @@ const ACTS = [
 ];
 
 const KEYS = [
+  ['?', 'This help'],
   ['/', 'Find a block or a file path'],
   ['N', 'File a new item'],
   ['T', 'Tidy the map'],
