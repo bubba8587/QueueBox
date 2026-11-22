@@ -1,7 +1,7 @@
 // The board page: folds the log into state, renders the map, the windows, the timeline and the
 // inspector from it, and turns what the person does (drag a tile, answer a question) into events.
 
-import { HUMAN, apply, reduce, alerts, presence, needsHuman, isIdleFree, blockMeta, agentName, clock, queuedIntent, readsSoon, suggestionPlan, undoApplyEvents } from '../core/model.js';
+import { HUMAN, apply, reduce, alerts, presence, needsHuman, isIdleFree, queueEntries, blockMeta, agentName, clock, queuedIntent, readsSoon, suggestionPlan, undoApplyEvents } from '../core/model.js';
 import { blockForPath } from '../core/glob.js';
 import { connect } from './source.js';
 import { createMap } from './map.js';
@@ -355,6 +355,21 @@ function askTree(name, text, done) {
 
 let raf = 0;
 ctx.render = () => render();
+// A small celebration (T92): the queue running dry, or the last open item in a block done, as it happens.
+function celebrate(queuedBefore, doneIn) {
+  if (queuedBefore > 0 && !queueEntries(ctx.live).length) {
+    toast('The queue is clear. Nice work, everyone.');
+    const up = document.querySelector('.win.upnext');
+    up?.classList.remove('cheer');
+    void up?.offsetWidth;
+    up?.classList.add('cheer');
+  }
+  for (const block of doneIn) {
+    const items = Object.values(ctx.live.items).filter((it) => it.block === block && it.kind !== 'suggestion' && it.kind !== 'note');
+    if (items.length > 1 && items.every((it) => it.status === 'done' || it.status === 'wontfix')) toast(`Every item in ${nameOf(block)} is done.`);
+  }
+}
+
 // The canvas says so when nobody is working (T87): every agent on the board idle with nothing in hand, or no agents
 // at all, with the two ways to get going. Its x hides it until an agent works again.
 const idleCard = h('div', { class: 'idle-card', hidden: true, role: 'status' });
@@ -940,6 +955,8 @@ async function boot() {
       onBoard: (board) => setBoard(board, ctx.events),
       onReset: (events) => setBoard(ctx.board, events),
       onEvents: (list) => {
+        const queuedBefore = queueEntries(ctx.live).length;
+        const doneIn = new Set();
         for (const e of list) {
           // A block landing is worth a word (T90): who, which block. Only as it happens, never on a reload or replay.
           const landed = e.type === 'block.release' && e.outcome === 'landed' && !ctx.replayTs && ctx.live.blocks[e.block]?.holder;
@@ -948,7 +965,10 @@ async function boot() {
           index(e);
           apply(ctx.live, e);
           if (who) toast(`${agentName(ctx.live, who)} landed ${nameOf(e.block)}.`);
+          if (e.type === 'item.update' && e.status === 'done' && ctx.live.items[e.item]?.block) doneIn.add(ctx.live.items[e.item].block);
         }
+        // Taking something off the queue by hand empties it too, but that's no achievement.
+        if (!ctx.replayTs) celebrate(list.some((e) => e.type === 'block.unqueue') ? 0 : queuedBefore, doneIn);
         render();
       },
       onWorktrees: (snap) => {
