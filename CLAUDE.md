@@ -1,7 +1,7 @@
 <!-- dte:A1,A2,A3 -->
 # Working in QueueBox
 
-Read `README.md` first: it says what QueueBox is and how it is built. This repository has its own QueueBox board (`qb`); the hooks brief you at session start.
+Read `README.md` first for what QueueBox is, then `docs/reference.md` for how it is built and used. This repository has its own QueueBox board (`qb`); the hooks brief you at session start.
 
 ## Everything goes on the board
 

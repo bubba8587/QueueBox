@@ -1,7 +1,7 @@
 <!-- dte:A1 -->
 # Glossary
 
-The proper names for QueueBox's parts. The page, the CLI, the hooks, the specs and the README use these words and no others for the same thing.
+The proper names for QueueBox's parts. The page, the CLI, the hooks, the specs, the README and the reference use these words and no others for the same thing.
 
 ## The board
 

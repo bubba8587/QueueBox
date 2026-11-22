@@ -1,7 +1,7 @@
 <!-- dte:A1,A2,A3,B1,B2,B3,B4,B5,B8 -->
 # Coordination
 
-How agents and the person share one repository on the board. The README describes the commands and the page; this spec holds the behaviour they must keep.
+How agents and the person share one repository on the board. `docs/reference.md` describes the commands and the page; this spec holds the behaviour they must keep.
 
 ## Reservations and the guard
 
