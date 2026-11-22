@@ -1788,7 +1788,8 @@ test('the stream tells a page which version of its code the server has', async (
       req.on('error', (e) => (e.code === 'ECONNRESET' ? null : reject(e)));
     });
     const v = JSON.parse(/event: version\ndata: (.*)\n/.exec(text)[1]).v;
-    assert.match(v, /^\d+$/);
+    // The install's commit (T83), or its package version outside git.
+    assert.match(v, /^([0-9a-f]{40}|v[\d.]+)$/);
     assert.equal(v, server.version());
   } finally {
     if (server) await new Promise((resolve) => server.close(resolve));
@@ -2351,4 +2352,31 @@ test('an idle agent with work lined up from before its turn ended is woken to ta
   assert.match(first[0].reasons[0].text, /B1 \(Lined-up bug\)/);
   assert.deepEqual(planWakes(st, s, now + 60_000, memory, { settleMs: 0 }), [], 'the same lined-up work does not wake it again within 10 minutes');
   assert.equal(planWakes(st, s, now + 11 * 60_000, memory, { settleMs: 0 }).length, 1);
+});
+
+test('the page reloads onto a commit, not a save: the code stamp is the install\'s git HEAD (T83)', async () => {
+  const { codeStampOf } = await import('../server.js');
+  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'qb-stamp-')));
+  const git = (...a) => execFileSync('git', a, { cwd: root, encoding: 'utf8' }).trim();
+  fs.writeFileSync(path.join(root, 'package.json'), JSON.stringify({ version: '9.9.9' }));
+  assert.equal(codeStampOf(root), 'v9.9.9');
+  git('init', '-q');
+  fs.writeFileSync(path.join(root, 'a.js'), '1');
+  git('add', '.');
+  git('-c', 'user.email=t@t', '-c', 'user.name=t', 'commit', '-qm', 'one');
+  const one = git('rev-parse', 'HEAD');
+  assert.equal(codeStampOf(root), one);
+  // A save is not a version.
+  fs.writeFileSync(path.join(root, 'a.js'), '2');
+  assert.equal(codeStampOf(root), one);
+  git('-c', 'user.email=t@t', '-c', 'user.name=t', 'commit', '-qam', 'two');
+  const two = git('rev-parse', 'HEAD');
+  assert.notEqual(two, one);
+  assert.equal(codeStampOf(root), two);
+  // Packed refs, and a detached HEAD.
+  git('pack-refs', '--all');
+  assert.equal(codeStampOf(root), two);
+  git('checkout', '-q', one);
+  assert.equal(codeStampOf(root), one);
+  fs.rmSync(root, { recursive: true, force: true });
 });

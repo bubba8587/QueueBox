@@ -279,25 +279,11 @@ export async function serve({ port = 4477, host = '127.0.0.1', open = false, qui
   }
   every(autoApply, 2000);
 
-  // The page's own code: a stamp of the newest file under ui/ and core/, sent to each page as 'version' when it
-  // connects and again when that code changes (half a second after the last change, since a commit touches several
-  // files), so an open page can reload itself onto new code (T33).
-  const codeStamp = () => {
-    let newest = 0;
-    const walk = (dir) => {
-      for (const d of fs.readdirSync(dir, { withFileTypes: true })) {
-        const f = path.join(dir, d.name);
-        if (d.isDirectory()) walk(f);
-        else if (/\.(js|css|html|svg)$/.test(d.name)) newest = Math.max(newest, fs.statSync(f).mtimeMs);
-      }
-    };
-    try {
-      for (const dir of ['ui', 'core']) walk(path.join(HERE, dir));
-    } catch {
-      // A file moved while walking: the next look settles it.
-    }
-    return String(Math.round(newest));
-  };
+  // The page's own code: the QueueBox install's committed version (its git HEAD, else package.json's version), sent to
+  // each page as 'version' when it connects and again when it changes, so an open page reloads itself onto new code
+  // (T33). Saving a file changes nothing: only a commit does, so pages never flash on every save or load half-saved
+  // code (T83).
+  const codeStamp = () => codeStampOf(HERE);
   let version = codeStamp();
   let versionSeen = version;
   let versionTimer = null;
@@ -673,6 +659,40 @@ export function openBrowser(url) {
 }
 
 // Of several agents sharing a worktree, the one whose own edits touched a file last.
+// A QueueBox install's committed version: its git HEAD, read from the .git files (no git process, no index lock;
+// a linked worktree and packed refs included), else package.json's version.
+export function codeStampOf(dir) {
+  try {
+    let gitDir = path.join(dir, '.git');
+    if (fs.statSync(gitDir).isFile()) gitDir = path.resolve(dir, /gitdir:\s*(.+)/.exec(fs.readFileSync(gitDir, 'utf8'))[1].trim());
+    const head = fs.readFileSync(path.join(gitDir, 'HEAD'), 'utf8').trim();
+    if (!head.startsWith('ref:')) return head;
+    const ref = head.slice(4).trim();
+    let common = gitDir;
+    try {
+      common = path.resolve(gitDir, fs.readFileSync(path.join(gitDir, 'commondir'), 'utf8').trim());
+    } catch {
+      // Not a linked worktree: refs are here.
+    }
+    for (const base of [gitDir, common]) {
+      try {
+        return fs.readFileSync(path.join(base, ref), 'utf8').trim();
+      } catch {
+        // Not a loose ref here.
+      }
+    }
+    const line = fs.readFileSync(path.join(common, 'packed-refs'), 'utf8').split('\n').find((l) => l.endsWith(` ${ref}`));
+    if (line) return line.split(' ')[0];
+  } catch {
+    // Not a git checkout: the package's version.
+  }
+  try {
+    return `v${JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8')).version}`;
+  } catch {
+    return 'v0';
+  }
+}
+
 export function changeOwner(state, ids, file) {
   const last = lastEditor(state, ids, file);
   if (last) return last;
