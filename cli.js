@@ -23,6 +23,9 @@ const BOARD_SCHEMA = 1;
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
+// A finished turn reads as idle, as on the page: the board wakes it for whatever it has lined up.
+const shownPresence = (state, id, now) => (p => (p === 'review' ? 'idle' : p))(presence(state, id, now));
+
 // ---------------------------------------------------------------------------------------------
 // Arguments
 
@@ -340,7 +343,7 @@ const commands = {
     const a = ctx.state.agents[ctx.me];
     if (!a) return out(ctx, `You (${ctx.me}) haven't joined. \`qb join --name <name> --task "<task>"\`.`, null);
     const lines = [
-      `${a.name} (${a.id}) is ${presence(ctx.state, a.id, ctx.now)}.${a.task ? ` Task: ${a.task}` : ''}`,
+      `${a.name} (${a.id}) is ${shownPresence(ctx.state, a.id, ctx.now)}.${a.task ? ` Task: ${a.task}` : ''}`,
       a.held.length ? `Holding: ${a.held.map((id) => `${blockMeta(ctx.state, id).name} (${id})`).join(', ')}` : 'Holding nothing.',
       a.watching.length ? `Watching: ${a.watching.join(', ')}` : '',
       a.inbox.length ? `${a.inbox.length} unread message${a.inbox.length > 1 ? 's' : ''}: \`qb inbox\`` : '',
@@ -506,7 +509,7 @@ const commands = {
     const rows = Object.values(ctx.state.agents).filter((a) => a.id !== HUMAN && !a.leftAt);
     out(
       ctx,
-      rows.length ? rows.map((a) => `${a.name.padEnd(10)} ${a.id.padEnd(12)} ${presence(ctx.state, a.id, ctx.now).padEnd(8)} ${activityOf(ctx.state, a.id, ctx.now).padEnd(11)} ${a.held.join(', ') || '-'}  ${a.doing || a.task}`).join('\n') : 'No agents on the board.',
+      rows.length ? rows.map((a) => `${a.name.padEnd(10)} ${a.id.padEnd(12)} ${shownPresence(ctx.state, a.id, ctx.now).padEnd(8)} ${activityOf(ctx.state, a.id, ctx.now).padEnd(11)} ${a.held.join(', ') || '-'}  ${a.doing || a.task}`).join('\n') : 'No agents on the board.',
       rows,
     );
   },
@@ -885,7 +888,7 @@ export function summary(state, now, me = null) {
   const tagWidth = Math.max(0, ...agents.map((a) => activityOf(state, a.id, now).length));
   for (const a of agents) {
     const who = `${a.name}${a.id === me ? ' (you)' : ''}`.padEnd(width);
-    const p = presence(state, a.id, now).padEnd(8);
+    const p = shownPresence(state, a.id, now).padEnd(8);
     const doingNow = activityOf(state, a.id, now).padEnd(tagWidth);
     const holds = a.held.length ? a.held.join(', ') : '-';
     lines.push(`  ${who}  ${p}  ${doingNow}${tagWidth ? '  ' : ''}${holds}${a.doing || a.task ? `\n  ${' '.repeat(width)}  ${a.doing || a.task}` : ''}`);

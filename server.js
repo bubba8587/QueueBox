@@ -211,7 +211,7 @@ export async function serve({ port = 4477, host = '127.0.0.1', open = false, qui
       failed = err.message;
     }
     const name = store.state().agents[plan.agent]?.name || plan.agent;
-    const why = plan.reasons.map((r) => ({ inbox: 'messages', given: 'items given', blocks: 'blocks given', queue: `queued ${plan.claim?.take?.[0] || plan.claim?.block}`, nudge: 'planning', person: 'the person asked' })[r.kind]).join(', ');
+    const why = plan.reasons.map((r) => ({ inbox: 'messages', given: 'items given', lined: 'its lined-up work', blocks: 'blocks given', queue: `queued ${plan.claim?.take?.[0] || plan.claim?.block}`, nudge: 'planning', person: 'the person asked' })[r.kind]).join(', ');
     const text = failed ? `Couldn't wake ${name} (${why}): ${failed}` : `Woke ${name}: ${why}.`;
     store.commit([makeEvent(store.state(), 'note', HUMAN, { text, wake: { agent: plan.agent, session: plan.session.id, why: plan.reasons.map((r) => r.kind), ok: !failed } })]);
     poll();

@@ -147,6 +147,19 @@ export function planWakes(state, sessions, now, memory, { cli = 'qb', settleMs =
     if (a.inbox.length) reasons.push({ kind: 'inbox', text: `${a.inbox.length} message${a.inbox.length === 1 ? '' : 's'} for you on the board (an answer, or a note from the person or a teammate): read them with \`${cli} inbox\`.` });
     const given = Object.values(state.items).filter((it) => it.assignee === id && it.kind !== 'suggestion' && ['open', 'doing', 'blocked'].includes(it.status) && (it.history.at(-1)?.ts || it.createdAt) > since);
     if (given.length) reasons.push({ kind: 'given', text: `The person gave you ${given.map((it) => `${it.id} (${it.title})`).join(', ')}.` });
+    // Work it already has lined up (given before its turn ended) and hasn't finished: it finished a turn, not the
+    // work, so it is woken to take the next one. The same lined-up set wakes it at most every 10 minutes, in case it
+    // ends turns without taking any (Finish and stop, or the switch, keeps it asleep).
+    if (!given.length && nudgeOn && !a.finishing) {
+      const lined = Object.values(state.items).filter((it) => it.assignee === id && it.kind !== 'suggestion' && (it.status === 'open' || it.status === 'doing'));
+      const key = lined.map((it) => it.id).sort().join(',');
+      memory.lined ||= new Map();
+      const last = memory.lined.get(id);
+      if (lined.length && !(last && last.key === key && now - last.ts < 10 * 60_000)) {
+        memory.lined.set(id, { key, ts: now });
+        reasons.push({ kind: 'lined', text: `You have work lined up: ${lined.map((it) => `${it.id} (${it.title})`).join(', ')}. Take the next one (\`${cli} item <id> doing\`), and mark each done when it lands.` });
+      }
+    }
     // Only blocks someone else reserved for it (the person giving it one), never its own reservations (B28).
     const blocks = a.held.filter((b) => (state.blocks[b]?.since || 0) > since && state.blocks[b]?.by !== id);
     if (blocks.length) reasons.push({ kind: 'blocks', text: `The person reserved ${blocks.join(', ')} for you.` });

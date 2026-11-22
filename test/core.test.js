@@ -2333,3 +2333,22 @@ test('qb names a queued item with no block as such, not "in null" (B33)', async 
   assert.match(line, /T2 in engine/);
   assert.doesNotMatch(line, /null/);
 });
+
+test('an idle agent with work lined up from before its turn ended is woken to take it, at most every 10 minutes for the same work', async () => {
+  const { planWakes } = await import('../core/launch.js');
+  let st = createState({ name: 't', districts: [{ id: 'd', name: 'D' }], blocks: [{ id: 'b', name: 'B', district: 'd', paths: ['b/'] }] });
+  const t0 = Date.now() - 600_000;
+  st = apply(st, makeEvent(st, 'agent.join', 'cc-a', { agent: { id: 'cc-a' } }, t0));
+  st = apply(st, makeEvent(st, 'item.add', HUMAN, { item: { kind: 'bug', title: 'Lined-up bug', block: 'b', id: 'B1' } }, t0 + 1));
+  st = apply(st, makeEvent(st, 'item.update', HUMAN, { item: 'B1', assignee: 'cc-a', status: 'open' }, t0 + 2));
+  // Its turn ends after the item was given: no 'given' reason, but it still has the work.
+  st = apply(st, makeEvent(st, 'agent.status', 'cc-a', { status: 'review' }, t0 + 3));
+  const memory = { woken: new Map(), nudged: new Set() };
+  const s = [{ kind: 'pty', status: 'idle', agent: 'cc-a', sock: 'x', id: 'pty:cc-a' }];
+  const now = Date.now();
+  const first = planWakes(st, s, now, memory, { settleMs: 0 });
+  assert.deepEqual(first.map((p) => p.reasons.map((r) => r.kind)), [['lined']]);
+  assert.match(first[0].reasons[0].text, /B1 \(Lined-up bug\)/);
+  assert.deepEqual(planWakes(st, s, now + 60_000, memory, { settleMs: 0 }), [], 'the same lined-up work does not wake it again within 10 minutes');
+  assert.equal(planWakes(st, s, now + 11 * 60_000, memory, { settleMs: 0 }).length, 1);
+});
