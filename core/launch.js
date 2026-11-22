@@ -140,7 +140,7 @@ export function planWakes(state, sessions, now, memory, { cli = 'qb', settleMs =
     if (hasWork) memory.nudged.delete(id);
     if ((s.kind !== 'background' && s.kind !== 'pty') || s.status !== 'idle') continue;
     const p = presence(state, id, now);
-    if (p !== 'review' && p !== 'idle' && p !== 'waiting' && p !== 'stale') continue;
+    if (p !== 'review' && p !== 'idle' && p !== 'waiting' && p !== 'stale' && p !== 'blocked') continue;
     if (now - (memory.woken.get(id) || 0) < settleMs) continue;
     const since = a.statusSince || 0;
     const reasons = [];

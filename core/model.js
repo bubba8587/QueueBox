@@ -674,9 +674,17 @@ function quietLimit(state, a) {
 
 // Whether the agent is waiting on the human right now: a question, a permission prompt, or a finished turn.
 export function needsHuman(state, agentId, now) {
-  // A permission prompt or an open question; a finished turn is the board's to manage, not the person's (B11).
-  return presence(state, agentId, now) === 'waiting';
+  // A permission prompt, an open question, or blocked (T85); a finished turn is the board's to manage, not the
+  // person's (B11).
+  const p = presence(state, agentId, now);
+  return p === 'waiting' || p === 'blocked';
 }
+
+// The items assigned to an agent that are marked blocked, oldest first (T85).
+export function blockedItems(state, agentId) {
+  return Object.values(state.items).filter((it) => it.assignee === agentId && it.status === 'blocked' && it.kind !== 'suggestion').sort((x, y) => blockedAt(x) - blockedAt(y));
+}
+const blockedAt = (it) => (it.history || []).findLast((h) => h.status === 'blocked')?.ts || it.createdAt || 0;
 
 // What an agent's window shows as its state.
 export function presence(state, agentId, now) {
@@ -686,6 +694,8 @@ export function presence(state, agentId, now) {
   if (a.leftAt) return 'gone';
   if (now - a.lastSeen > quietLimit(state, a)) return 'stale';
   if (openQuestions(state, agentId).length) return 'waiting';
+  // Blocked (T85): it said so, or, between turns with nothing in progress, its work is marked blocked.
+  if (a.status !== 'working' && a.status !== 'waiting' && blockedItems(state, agentId).length && !Object.values(state.items).some((it) => it.assignee === agentId && it.status === 'doing')) return 'blocked';
   return a.status;
 }
 
@@ -731,6 +741,7 @@ export function presenceSince(state, agentId, now) {
   if (p === 'stale') return a.lastSeen;
   const asked = openQuestions(state, agentId).map((q) => q.createdAt);
   if (p === 'waiting' && asked.length) return Math.min(...asked);
+  if (p === 'blocked' && a.status !== 'blocked') return blockedAt(blockedItems(state, agentId)[0]);
   return a.statusSince || a.joinedAt;
 }
 

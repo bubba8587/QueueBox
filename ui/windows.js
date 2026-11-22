@@ -1,7 +1,7 @@
 // The side column, most urgent first: what needs the person (the inbox), the person's own window (their queue
 // and the blocks they keep), then a window per agent. Windows are drop targets; their trays are where tiles go.
 
-import { HUMAN, presence, presenceSince, openQuestions, activityOf, isIdleFree, readsSoon, blockMeta, agentName, clock, queueEntries, queuePlan } from '../core/model.js';
+import { HUMAN, presence, presenceSince, openQuestions, activityOf, isIdleFree, readsSoon, blockMeta, agentName, clock, queueEntries, queuePlan, blockedItems } from '../core/model.js';
 import { h, icon, setHtml, setText, toggle, esc, timer, initials, dur, toast } from './dom.js';
 import { colorOf, inkOf } from './map.js';
 import { itemHtml } from './itemview.js';
@@ -56,6 +56,7 @@ export function createSide(ctx, root) {
     else if (act === 'open') openQuestion(b, arg);
     else if (act === 'suggestion') openSuggestion(b, arg);
     else if (act === 'undo-apply') ctx.act.undoApply?.(arg);
+    else if (act === 'block') ctx.select(arg);
   });
 
   // A suggestion whole: who would take which item, in which block, and why; applied or dismissed by the person.
@@ -627,6 +628,15 @@ export function createSide(ctx, root) {
           // One line; the whole question and the answer field open in the popover, from its own button.
           rows.push({ key: `q:${q.id}`, html: `<div class="ib-row">${who}<span class="ib-what">${esc(q.title)}</span>${qt}<button class="icon-btn" type="button" data-act="open" data-arg="${esc(q.id)}" data-pop="q:${esc(q.id)}" aria-haspopup="dialog" aria-expanded="false" aria-label="Read and answer ${esc(q.id)}" title="Read and answer"${ctx.replayTs ? ' disabled' : ''}>${icon('note')}</button></div>` });
         }
+      } else if (p === 'blocked') {
+        // Blocked (T85): each blocked item, with what it waits on (its last note), the block to open, and a message box.
+        const items = blockedItems(st, a.id);
+        if (!items.length) rows.push({ key: `k:${a.id}`, html: `<div class="ib-row">${who}<span class="ib-what">Blocked${a.doing ? `: ${esc(a.doing)}` : ''}</span>${t}${actBtn('message', a.id, 'mail', `Message ${a.name}`)}</div>` });
+        for (const it of items) {
+          const why = (it.history || []).findLast((x) => x.status === 'blocked' && x.note)?.note || it.title;
+          const kt = timer((it.history || []).findLast((x) => x.status === 'blocked')?.ts || since, { warn: 5 * MIN, over: 15 * MIN }, now);
+          rows.push({ key: `k:${a.id}:${it.id}`, html: `<div class="ib-row">${who}<span class="ib-what">${esc(it.id)} blocked: ${esc(why)}</span>${kt}${it.block ? `<button class="btn sm" type="button" data-act="block" data-arg="${esc(it.block)}">Show</button>` : ''}${actBtn('message', a.id, 'mail', `Message ${a.name}`)}</div>` });
+        }
       } else if (p === 'permission') {
         // Granted in its terminal; from here the person can read what it said last and message it (B12).
         rows.push({ key: `p:${a.id}`, html: `<div class="ib-row">${who}<span class="ib-what">${esc(a.doing || 'Waiting for permission')}</span>${t}${a.last ? actBtn('read', a.id, 'note', `Read what ${a.name} said last`) : ''}${actBtn('message', a.id, 'mail', `Message ${a.name}`)}</div>` });
@@ -700,7 +710,7 @@ export function createSide(ctx, root) {
     w.el.style.setProperty('--ac', colorOf(st, a.id));
     w.el.style.setProperty('--aci', inkOf(st, a.id));
     toggle(w.el, 'gone', p === 'gone');
-    toggle(w.el, 'needs', p === 'question' || p === 'permission');
+    toggle(w.el, 'needs', p === 'question' || p === 'permission' || p === 'blocked');
     // Read when it has said something; Wake once its turn is over (the server says why when it can't); Message always.
     w.readBtn.hidden = !a.last;
     w.readBtn.setAttribute('aria-label', `Read what ${a.name} said last`);
@@ -726,7 +736,7 @@ export function createSide(ctx, root) {
     w.tag.title = act ? 'Right now' : '';
     const t =
       p === 'working' ? timer(since, { watch: true }, now)
-      : p === 'question' || p === 'permission' || p === 'review' ? timer(since, { warn: 5 * MIN, over: 15 * MIN }, now)
+      : p === 'question' || p === 'permission' || p === 'review' || p === 'blocked' ? timer(since, { warn: 5 * MIN, over: 15 * MIN }, now)
       : p === 'quiet' ? timer(since, { warn: 10 * MIN }, now)
       : p === 'stale' ? timer(since, { over: 2 * 60 * MIN }, now)
       : timer(since, {}, now);

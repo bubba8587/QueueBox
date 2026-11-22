@@ -2380,3 +2380,24 @@ test('the page reloads onto a commit, not a save: the code stamp is the install\
   assert.equal(codeStampOf(root), one);
   fs.rmSync(root, { recursive: true, force: true });
 });
+
+test('an agent whose work is blocked shows as blocked and needs the person; one at work does not (T85)', async () => {
+  const { blockedItems } = await import('../core/model.js');
+  const st = createState(BOARD);
+  run(st, 'agent.join', 'cc-aa000000', { agent: { id: 'cc-aa000000', name: 'Ann' } }, 1);
+  run(st, 'item.add', HUMAN, { item: { id: 'T1', kind: 'task', title: 'Push the repo', block: 'tables', assignee: 'cc-aa000000' } }, 2);
+  run(st, 'agent.status', 'cc-aa000000', { status: 'review' }, 3);
+  assert.equal(presence(st, 'cc-aa000000', at(4)), 'review');
+  run(st, 'item.update', 'cc-aa000000', { item: 'T1', status: 'blocked', note: 'waiting on the author' }, 5);
+  assert.equal(presence(st, 'cc-aa000000', at(6)), 'blocked');
+  assert.equal(needsHuman(st, 'cc-aa000000', at(6)), true);
+  assert.deepEqual(blockedItems(st, 'cc-aa000000').map((it) => it.id), ['T1']);
+  // At work on something else, it isn't blocked.
+  run(st, 'agent.status', 'cc-aa000000', { status: 'working' }, 7);
+  assert.equal(presence(st, 'cc-aa000000', at(8)), 'working');
+  // Saying so is enough too.
+  run(st, 'item.update', 'cc-aa000000', { item: 'T1', status: 'done' }, 9);
+  run(st, 'agent.status', 'cc-aa000000', { status: 'blocked' }, 10);
+  assert.equal(presence(st, 'cc-aa000000', at(11)), 'blocked');
+  assert.equal(needsHuman(st, 'cc-aa000000', at(11)), true);
+});
